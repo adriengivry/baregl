@@ -1,0 +1,8 @@
+.vs/
+.vscode/
+/bin/
+/obj/
+*.aps
+*.vcxproj*
+*.sln
+*.vcxitems*
