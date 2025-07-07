@@ -12,7 +12,7 @@ project "4-geometry"
 	}
 
 	includedirs {
-		depsdir .. "_glm/glm/include",
+		depsdir .. "_glm/glm",
 		depsdir .. "_glfw/glfw/include",
 		"%{wks.location}../../include",
 	}
