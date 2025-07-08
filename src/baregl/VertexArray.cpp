@@ -66,8 +66,8 @@ namespace baregl
 		BAREGL_ASSERT(!IsValid(), "Vertex array layout already set");
 
 		Bind();
-		p_indexBuffer.Bind();
-		p_vertexBuffer.Bind();
+		p_indexBuffer.Bind(types::EBufferType::INDEX);
+		p_vertexBuffer.Bind(types::EBufferType::VERTEX);
 
 		uint32_t attributeIndex = 0;
 

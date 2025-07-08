@@ -18,14 +18,13 @@ namespace baregl
 	/**
 	* Represents a buffer, used to store data on the GPU
 	*/
-	class Buffer
+	class Buffer final
 	{
 	public:
 		/**
 		* Creates a buffer
-		* @param p_type
 		*/
-		Buffer(types::EBufferType p_type);
+		Buffer();
 
 		/**
 		* Destroys the buffer
@@ -64,14 +63,18 @@ namespace baregl
 
 		/**
 		* Binds the buffer
+		* @param p_type Type of the buffer to bind
 		* @param p_index (Optional) Index to bind the buffer to
 		*/
-		void Bind(std::optional<uint32_t> p_index = std::nullopt) const;
+		void Bind(
+			types::EBufferType p_type,
+			std::optional<uint32_t> p_index = std::nullopt
+		);
 
 		/**
 		* Unbinds the buffer
 		*/
-		void Unbind() const;
+		void Unbind();
 
 		/**
 		* Returns the ID of the buffer
@@ -80,7 +83,7 @@ namespace baregl
 
 	protected:
 		uint32_t m_id = 0;
-		types::EBufferType m_type = types::EBufferType::UNKNOWN;
 		uint64_t m_allocatedBytes = 0;
+		std::optional<types::EBufferType> m_boundAs = std::nullopt;
 	};
 }

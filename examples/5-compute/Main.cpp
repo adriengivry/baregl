@@ -42,7 +42,7 @@ int main(int, char**)
 	std::vector<Particle> particles(k_particleCount); // Heap allocated, due to its size.
 
 	// Storage buffer for particles
-	baregl::Buffer particleBuffer(baregl::types::EBufferType::SHADER_STORAGE);
+	baregl::Buffer particleBuffer;
 	particleBuffer.Allocate(particles.size() * sizeof(Particle), baregl::types::EAccessSpecifier::DYNAMIC_DRAW);
 	particleBuffer.Upload(particles.data());
 
@@ -55,11 +55,11 @@ int main(int, char**)
 	};
 	constexpr uint32_t quadIndices[] = { 0, 1, 2, 0, 2, 3 };
 
-	baregl::Buffer vb(baregl::types::EBufferType::VERTEX);
+	baregl::Buffer vb;
 	vb.Allocate(sizeof(quadVertices), baregl::types::EAccessSpecifier::STATIC_DRAW);
 	vb.Upload(quadVertices);
 
-	baregl::Buffer ib(baregl::types::EBufferType::INDEX);
+	baregl::Buffer ib;
 	ib.Allocate(sizeof(quadIndices), baregl::types::EAccessSpecifier::STATIC_DRAW);
 	ib.Upload(quadIndices);
 
@@ -215,7 +215,7 @@ void main() {
 
 		// Compute shader dispatch
 		computeProgram.Bind();
-		particleBuffer.Bind(0);
+		particleBuffer.Bind(baregl::types::EBufferType::SHADER_STORAGE, 0);
 		computeProgram.SetUniform("u_DeltaTime", deltaTime);
 		computeProgram.SetUniform("u_Time", currentTime);
 		constexpr uint32_t k_workGroupSize = 64;
@@ -225,7 +225,7 @@ void main() {
 
 		// Render particles
 		renderProgram.Bind();
-		particleBuffer.Bind(0);
+		particleBuffer.Bind(baregl::types::EBufferType::SHADER_STORAGE, 0);
 		va.Bind();
 		backend.DrawElementsInstanced(baregl::types::EPrimitiveMode::TRIANGLES, 6, k_particleCount);
 		va.Unbind();

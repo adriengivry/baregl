@@ -36,11 +36,11 @@ int main(int, char**)
 	const uint32_t indices[] = { 0, 1, 2 };
 
 	// Buffers
-	baregl::Buffer vb(baregl::types::EBufferType::VERTEX);
+	baregl::Buffer vb;
 	vb.Allocate(sizeof(vertices), baregl::types::EAccessSpecifier::STATIC_DRAW);
 	vb.Upload(vertices);
 
-	baregl::Buffer ib(baregl::types::EBufferType::INDEX);
+	baregl::Buffer ib;
 	ib.Allocate(sizeof(indices), baregl::types::EAccessSpecifier::STATIC_DRAW);
 	ib.Upload(indices);
 

@@ -73,11 +73,11 @@ int main()
 	};
 
 	// Buffers
-	baregl::Buffer vb(baregl::types::EBufferType::VERTEX);
+	baregl::Buffer vb;
 	vb.Allocate(sizeof(vertices), baregl::types::EAccessSpecifier::STATIC_DRAW);
 	vb.Upload(vertices);
 
-	baregl::Buffer ib(baregl::types::EBufferType::INDEX);
+	baregl::Buffer ib;
 	ib.Allocate(sizeof(indices), baregl::types::EAccessSpecifier::STATIC_DRAW);
 	ib.Upload(indices);
 

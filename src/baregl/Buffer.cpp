@@ -11,8 +11,7 @@
 
 namespace baregl
 {
-	Buffer::Buffer(types::EBufferType p_type) :
-		m_type{ p_type }
+	Buffer::Buffer()
 	{
 		glCreateBuffers(1, &m_id);
 	}
@@ -42,31 +41,36 @@ namespace baregl
 		);
 	}
 
-	void Buffer::Bind(std::optional<uint32_t> p_index) const
+	void Buffer::Bind(
+		types::EBufferType p_type,
+		std::optional<uint32_t> p_index
+	)
 	{
 		BAREGL_ASSERT(IsValid(), "Cannot bind an invalid buffer");
 
 		if (p_index.has_value())
 		{
-			glBindBufferBase(utils::EnumToValue<GLenum>(m_type), p_index.value(), m_id);
+			glBindBufferBase(utils::EnumToValue<GLenum>(p_type), p_index.value(), m_id);
 		}
 		else
 		{
-			glBindBuffer(utils::EnumToValue<GLenum>(m_type), m_id);
+			glBindBuffer(utils::EnumToValue<GLenum>(p_type), m_id);
 		}
+
+		m_boundAs = p_type;
 	}
 
-	void Buffer::Unbind() const
+	void Buffer::Unbind()
 	{
 		BAREGL_ASSERT(IsValid(), "Cannot unbind an invalid buffer");
-		glBindBuffer(utils::EnumToValue<GLenum>(m_type), 0);
+		BAREGL_ASSERT(m_boundAs.has_value(), "Cannot unbind a buffer that is not bound");
+		glBindBuffer(utils::EnumToValue<GLenum>(m_boundAs.value()), 0);
+		m_boundAs.reset();
 	}
 
 	bool Buffer::IsValid() const
 	{
-		return
-			m_id != 0 &&
-			m_type != types::EBufferType::UNKNOWN;
+		return m_id != 0;
 	}
 
 	bool Buffer::IsEmpty() const
