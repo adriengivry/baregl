@@ -5,8 +5,8 @@
 */
 
 #include <baregl/debug/Assert.h>
-#include <baregl/details/glad/glad.h>
-#include <baregl/details/Types.h>
+#include <baregl/detail/glad/glad.h>
+#include <baregl/detail/Types.h>
 #include <baregl/Renderbuffer.h>
 
 namespace baregl
@@ -29,11 +29,6 @@ namespace baregl
 	void Renderbuffer::Unbind() const
 	{
 		glBindRenderbuffer(GL_RENDERBUFFER, 0);
-	}
-
-	uint32_t Renderbuffer::GetID() const
-	{
-		return m_id;
 	}
 
 	void Renderbuffer::Allocate(uint16_t p_width, uint16_t p_height, types::EInternalFormat p_format)

@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <baregl/detail/NativeObject.h>
 #include <baregl/types/EGraphicsBackend.h>
 #include <baregl/types/EShaderType.h>
 #include <baregl/data/ShaderCompilationResult.h>
@@ -15,7 +16,7 @@ namespace baregl
 	/**
 	* Represents a part of a shader program that is responsible for a specific stage (vertex, fragment, geometry, etc.).
 	*/
-	class ShaderStage final
+	class ShaderStage final : public detail::NativeObject
 	{
 	public:
 		/**
@@ -43,17 +44,11 @@ namespace baregl
 		data::ShaderCompilationResult Compile() const;
 
 		/**
-		* Returns the ID of the shader stage.
-		*/
-		uint32_t GetID() const;
-
-		/**
 		* Returns the type of shader stage.
 		*/
 		types::EShaderType GetType() const;
 
 	private:
-		uint32_t m_id;
 		types::EShaderType m_type;
 	};
 }

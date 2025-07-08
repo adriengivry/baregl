@@ -5,8 +5,8 @@
 */
 
 #include <baregl/debug/Assert.h>
-#include <baregl/details/glad/glad.h>
-#include <baregl/details/Types.h>
+#include <baregl/detail/glad/glad.h>
+#include <baregl/detail/Types.h>
 #include <baregl/Buffer.h>
 
 namespace baregl
@@ -82,11 +82,5 @@ namespace baregl
 	{
 		BAREGL_ASSERT(IsValid(), "Cannot get size of an invalid buffer");
 		return m_allocatedBytes;
-	}
-
-	uint32_t Buffer::GetID() const
-	{
-		BAREGL_ASSERT(IsValid(), "Cannot get ID of an invalid buffer");
-		return m_id;
 	}
 }

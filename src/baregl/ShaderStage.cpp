@@ -7,14 +7,14 @@
 #include <algorithm>
 
 #include <baregl/debug/Log.h>
-#include <baregl/details/glad/glad.h>
-#include <baregl/details/Types.h>
+#include <baregl/detail/glad/glad.h>
+#include <baregl/detail/Types.h>
 #include <baregl/ShaderStage.h>
 
 namespace baregl
 {
 	ShaderStage::ShaderStage(types::EShaderType p_type) :
-		m_id{ glCreateShader(utils::EnumToValue<GLenum>(p_type)) },
+		detail::NativeObject(glCreateShader(utils::EnumToValue<GLenum>(p_type))),
 		m_type{ p_type }
 	{
 	}
@@ -54,11 +54,6 @@ namespace baregl
 		return {
 			.success = true
 		};
-	}
-
-	uint32_t ShaderStage::GetID() const
-	{
-		return m_id;
 	}
 
 	types::EShaderType ShaderStage::GetType() const

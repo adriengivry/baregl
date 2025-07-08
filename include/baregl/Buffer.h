@@ -6,19 +6,20 @@
 
 #pragma once
 
-#include <optional>
-
-#include <baregl/types/EGraphicsBackend.h>
+#include <baregl/data/BufferMemoryRange.h>
+#include <baregl/detail/NativeObject.h>
 #include <baregl/types/EAccessSpecifier.h>
 #include <baregl/types/EBufferType.h>
-#include <baregl/data/BufferMemoryRange.h>
+#include <baregl/types/EGraphicsBackend.h>
+
+#include <optional>
 
 namespace baregl
 {
 	/**
 	* Represents a buffer, used to store data on the GPU
 	*/
-	class Buffer final
+	class Buffer final : public detail::NativeObject
 	{
 	public:
 		/**
@@ -76,13 +77,7 @@ namespace baregl
 		*/
 		void Unbind();
 
-		/**
-		* Returns the ID of the buffer
-		*/
-		uint32_t GetID() const;
-
 	protected:
-		uint32_t m_id = 0;
 		uint64_t m_allocatedBytes = 0;
 		std::optional<types::EBufferType> m_boundAs = std::nullopt;
 	};

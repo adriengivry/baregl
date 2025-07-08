@@ -6,8 +6,8 @@
 
 #include <baregl/debug/Assert.h>
 #include <baregl/debug/Log.h>
-#include <baregl/details/glad/glad.h>
-#include <baregl/details/Types.h>
+#include <baregl/detail/glad/glad.h>
+#include <baregl/detail/Types.h>
 #include <baregl/Framebuffer.h>
 #include <baregl/Renderbuffer.h>
 
@@ -178,11 +178,6 @@ namespace baregl
 		{
 			glNamedFramebufferReadBuffer(m_id, GL_NONE);
 		}
-	}
-
-	uint32_t Framebuffer::GetID() const
-	{
-		return m_id;
 	}
 
 	std::pair<uint16_t, uint16_t> Framebuffer::GetSize(

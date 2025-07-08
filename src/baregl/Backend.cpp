@@ -8,8 +8,8 @@
 
 #include <baregl/debug/Log.h>
 #include <baregl/debug/Assert.h>
-#include <baregl/details/Types.h>
-#include <baregl/details/glad/glad.h>
+#include <baregl/detail/Types.h>
+#include <baregl/detail/glad/glad.h>
 #include <baregl/Backend.h>
 #include <baregl/math/Conversions.h>
 #include <baregl/utils/BitmaskOperators.h>

@@ -5,8 +5,8 @@
 */
 
 #include <baregl/debug/Assert.h>
-#include <baregl/details/glad/glad.h>
-#include <baregl/details/Types.h>
+#include <baregl/detail/glad/glad.h>
+#include <baregl/detail/Types.h>
 #include <baregl/VertexArray.h>
 
 namespace
@@ -122,10 +122,5 @@ namespace baregl
 	void VertexArray::Unbind() const
 	{
 		glBindVertexArray(0);
-	}
-
-	uint32_t VertexArray::GetID() const
-	{
-		return m_id;
 	}
 }

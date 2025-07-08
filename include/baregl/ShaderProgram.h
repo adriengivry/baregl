@@ -6,19 +6,19 @@
 
 #pragma once
 
-#include <optional>
-#include <unordered_map>
-
 #include <baregl/math/Mat3.h>
 #include <baregl/math/Mat4.h>
 #include <baregl/math/Vec2.h>
 #include <baregl/math/Vec3.h>
 #include <baregl/math/Vec4.h>
-
-#include <baregl/ShaderStage.h>
-#include <baregl/types/EGraphicsBackend.h>
-#include <baregl/data/UniformInfo.h>
+#include <baregl/detail/NativeObject.h>
 #include <baregl/data/ShaderLinkingResult.h>
+#include <baregl/data/UniformInfo.h>
+#include <baregl/types/EGraphicsBackend.h>
+#include <baregl/ShaderStage.h>
+
+#include <optional>
+#include <unordered_map>
 
 namespace baregl
 {
@@ -35,7 +35,7 @@ namespace baregl
 	/**
 	* Represents a shader program, used to link shader stages together.
 	*/
-	class ShaderProgram final
+	class ShaderProgram final : public detail::NativeObject
 	{
 	public:
 		/**
@@ -82,11 +82,6 @@ namespace baregl
 		void Unbind() const;
 
 		/**
-		* Returns the ID of the program.
-		*/
-		uint32_t GetID() const;
-
-		/**
 		* Sends a uniform value associated with the given name to the GPU.
 		* @param p_name
 		* @param p_value
@@ -119,7 +114,6 @@ namespace baregl
 		const std::unordered_map<std::string, data::UniformInfo>& GetUniforms() const;
 
 	private:
-		const uint32_t m_id;
 		std::unordered_map<std::string, data::UniformInfo> m_uniforms;
 		std::unordered_map<std::string, uint32_t> m_uniformsLocationCache;
 		std::vector<std::reference_wrapper<const ShaderStage>> m_attachedShaders;

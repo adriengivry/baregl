@@ -4,8 +4,8 @@
 * @licence: MIT
 */
 
-#include <baregl/details/glad/glad.h>
-#include <baregl/details/Types.h>
+#include <baregl/detail/glad/glad.h>
+#include <baregl/detail/Types.h>
 #include <baregl/TextureHandle.h>
 
 namespace baregl
@@ -16,7 +16,7 @@ namespace baregl
 	}
 
 	TextureHandle::TextureHandle(types::ETextureType p_type, uint32_t p_id) : 
-		m_id{ p_id },
+		detail::NativeObject(p_id),
 		m_type{ utils::EnumToValue<GLenum>(p_type) }
 	{
 	}
@@ -36,11 +36,6 @@ namespace baregl
 	void TextureHandle::Unbind() const
 	{
 		glBindTexture(m_type, 0);
-	}
-
-	uint32_t TextureHandle::GetID() const
-	{
-		return m_id;
 	}
 
 	types::ETextureType TextureHandle::GetType() const

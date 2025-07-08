@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <baregl/details/glad/glad.h>
+#include <baregl/detail/glad/glad.h>
 #include <baregl/types/EAccessSpecifier.h>
 #include <baregl/types/EBlendingEquation.h>
 #include <baregl/types/EBlendingFactor.h>

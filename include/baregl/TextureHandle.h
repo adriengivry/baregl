@@ -8,6 +8,7 @@
 
 #include <optional>
 
+#include <baregl/detail/NativeObject.h>
 #include <baregl/types/EGraphicsBackend.h>
 #include <baregl/types/ETextureType.h>
 
@@ -16,7 +17,7 @@ namespace baregl
 	/**
 	* Represents a texture handle, acts as a view to the texture.
 	*/
-	class TextureHandle
+	class TextureHandle : public detail::NativeObject
 	{
 	public:
 		/**
@@ -31,12 +32,6 @@ namespace baregl
 		void Unbind() const;
 
 		/**
-		* Returns the ID associated with the texture.
-		* @return The texture ID.
-		*/
-		uint32_t GetID() const;
-
-		/**
 		* Returns the texture type
 		*/
 		types::ETextureType GetType() const;
@@ -46,7 +41,6 @@ namespace baregl
 		TextureHandle(types::ETextureType p_type, uint32_t p_id);
 
 	protected:
-		uint32_t m_id;
 		const uint32_t m_type;
 	};
 }

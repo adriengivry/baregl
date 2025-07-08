@@ -6,23 +6,24 @@
 
 #pragma once
 
-#include <memory>
-#include <variant>
-#include <optional>
-#include <unordered_map>
-
-#include <baregl/Texture.h>
 #include <baregl/Renderbuffer.h>
-#include <baregl/types/ERenderingCapability.h>
-#include <baregl/types/EPrimitiveMode.h>
-#include <baregl/types/ERasterizationMode.h>
+#include <baregl/Texture.h>
+#include <baregl/detail/NativeObject.h>
 #include <baregl/types/EComparaisonAlgorithm.h>
-#include <baregl/types/EOperation.h>
 #include <baregl/types/ECullFace.h>
+#include <baregl/types/EFramebufferAttachment.h>
+#include <baregl/types/EGraphicsBackend.h>
+#include <baregl/types/EOperation.h>
 #include <baregl/types/EPixelDataFormat.h>
 #include <baregl/types/EPixelDataType.h>
-#include <baregl/types/EGraphicsBackend.h>
-#include <baregl/types/EFramebufferAttachment.h>
+#include <baregl/types/EPrimitiveMode.h>
+#include <baregl/types/ERasterizationMode.h>
+#include <baregl/types/ERenderingCapability.h>
+
+#include <memory>
+#include <optional>
+#include <unordered_map>
+#include <variant>
 
 namespace baregl
 {
@@ -34,7 +35,7 @@ namespace baregl
 	/**
 	* Represents a framebuffer, used to store render data for the graphics backend to use.
 	*/
-	class Framebuffer
+	class Framebuffer : public detail::NativeObject
 	{
 	public:
 		template<typename T>
@@ -122,11 +123,6 @@ namespace baregl
 		void SetTargetReadBuffer(std::optional<uint32_t> p_index);
 
 		/**
-		* Returns the ID the buffer.
-		*/
-		uint32_t GetID() const;
-
-		/**
 		* Returns the size of the given attachment.
 		* @param p_attachment
 		*/
@@ -167,7 +163,6 @@ namespace baregl
 		const std::string& GetDebugName() const;
 
 	protected:
-		uint32_t m_id = 0;
 		bool m_valid = false;
 		std::string m_debugName;
 		std::unordered_map<uint32_t, FramebufferAttachment> m_attachments;

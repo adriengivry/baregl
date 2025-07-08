@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <baregl/detail/NativeObject.h>
 #include <baregl/types/EInternalFormat.h>
 #include <baregl/types/EGraphicsBackend.h>
 
@@ -14,7 +15,7 @@ namespace baregl
 	/**
 	* Represents a renderbuffer, used to store render data for the graphics backend to use.
 	*/
-	class Renderbuffer final
+	class Renderbuffer final : public detail::NativeObject
 	{
 	public:
 		/**
@@ -36,11 +37,6 @@ namespace baregl
 		* Unbind the framebuffer
 		*/
 		void Unbind() const;
-
-		/**
-		* Returns the ID of the render buffer object
-		*/
-		uint32_t GetID() const;
 
 		/**
 		* Uploads the buffer configuration to the GPU
@@ -73,7 +69,6 @@ namespace baregl
 		uint16_t GetHeight() const;
 
 	private:
-		uint32_t m_id = 0;
 		uint16_t m_width = 0;
 		uint16_t m_height = 0;
 		types::EInternalFormat m_format = types::EInternalFormat::RGBA;

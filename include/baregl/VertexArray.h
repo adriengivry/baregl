@@ -7,6 +7,7 @@
 #pragma once
 
 #include <baregl/Buffer.h>
+#include <baregl/detail/NativeObject.h>
 #include <baregl/types/EDataType.h>
 #include <baregl/types/EGraphicsBackend.h>
 #include <baregl/data/VertexAttribute.h>
@@ -16,7 +17,7 @@ namespace baregl
 	/**
 	* Represents a vertex array, used to describe a vertex layout to the graphics backend.
 	*/
-	class VertexArray final
+	class VertexArray final : public detail::NativeObject
 	{
 	public:
 		/**
@@ -61,13 +62,7 @@ namespace baregl
 		*/
 		void Unbind() const;
 
-		/**
-		* Returns the vertex array ID.
-		*/
-		uint32_t GetID() const;
-
 	private:
-		uint32_t m_id = 0;
 		uint32_t m_attributeCount = 0;
 	};
 }

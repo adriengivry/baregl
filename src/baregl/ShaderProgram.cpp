@@ -8,8 +8,8 @@
 
 #include <baregl/debug/Assert.h>
 #include <baregl/debug/Log.h>
-#include <baregl/details/glad/glad.h>
-#include <baregl/details/Types.h>
+#include <baregl/detail/glad/glad.h>
+#include <baregl/detail/Types.h>
 #include <baregl/ShaderProgram.h>
 #include <baregl/Texture.h>
 #include <baregl/Texture.h>
@@ -25,9 +25,8 @@ namespace
 namespace baregl
 {
 	ShaderProgram::ShaderProgram() :
-		m_id { glCreateProgram() }
+		detail::NativeObject(glCreateProgram())
 	{
-
 	}
 
 	ShaderProgram::~ShaderProgram()
@@ -43,11 +42,6 @@ namespace baregl
 	void ShaderProgram::Unbind() const
 	{
 		glUseProgram(0);
-	}
-
-	uint32_t ShaderProgram::GetID() const
-	{
-		return m_id;
 	}
 
 	void ShaderProgram::Attach(const ShaderStage& p_shader)
