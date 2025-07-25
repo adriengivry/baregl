@@ -4,8 +4,6 @@
 * @licence: MIT
 */
 
-#include <format>
-
 #include <baregl/debug/Log.h>
 #include <baregl/debug/Assert.h>
 #include <baregl/detail/Types.h>

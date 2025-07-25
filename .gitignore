@@ -6,3 +6,4 @@
 *.vcxproj*
 *.sln
 *.vcxitems*
+Makefile

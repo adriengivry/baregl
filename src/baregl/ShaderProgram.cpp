@@ -4,6 +4,7 @@
 * @licence: MIT
 */
 
+#include <algorithm>
 #include <array>
 
 #include <baregl/debug/Assert.h>
