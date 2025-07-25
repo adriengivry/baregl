@@ -13,15 +13,6 @@
 #include <baregl/detail/Types.h>
 #include <baregl/ShaderProgram.h>
 #include <baregl/Texture.h>
-#include <baregl/Texture.h>
-
-namespace
-{
-	constexpr bool IsReservedUniform(std::string_view p_name)
-	{
-		return p_name.starts_with("ubo_") || p_name.starts_with("ReflectionUBO");
-	}
-}
 
 namespace baregl
 {
@@ -161,15 +152,13 @@ void ShaderProgram::SetUniform<type>(const std::string& p_name, const type& valu
 
 			const auto name = std::string{ nameBuffer.data(), static_cast<size_t>(actualLength) };
 			const auto uniformType = utils::ValueToEnum<types::EUniformType>(type);
+			const auto location = glGetUniformLocation(m_id, name.c_str());
 
-			// Skip reserved uniforms (e.g. ubo uniforms)
-			if (IsReservedUniform(name))
+			if (location == -1)
 			{
-				continue;
+				continue; // Skip uniforms that don't have a valid location (e.g. uniform buffer members)
 			}
 
-			const auto location = glGetUniformLocation(m_id, name.c_str());
-			BAREGL_ASSERT(location != -1, "Failed to get uniform location for: " + name);
 			m_uniformsLocationCache.emplace(name, static_cast<uint32_t>(location));
 
 			const std::any uniformValue = [&]() -> std::any {
