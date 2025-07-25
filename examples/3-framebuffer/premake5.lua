@@ -19,7 +19,6 @@ project "3-framebuffer"
 
 	links {
 		"glfw",
-		"glm",
 		"baregl"
     }
 

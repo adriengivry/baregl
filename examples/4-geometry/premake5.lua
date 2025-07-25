@@ -19,7 +19,6 @@ project "4-geometry"
 
 	links {
 		"glfw",
-		"glm",
 		"baregl"
     }
 

@@ -19,7 +19,6 @@ project "5-compute"
 
 	links {
 		"glfw",
-		"glm",
 		"baregl"
     }
 

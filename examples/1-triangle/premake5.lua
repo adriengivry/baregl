@@ -19,7 +19,6 @@ project "1-triangle"
 
 	links {
 		"glfw",
-		"glm",
 		"baregl"
     }
 

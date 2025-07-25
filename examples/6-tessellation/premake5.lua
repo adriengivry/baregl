@@ -19,7 +19,6 @@ project "6-tessellation"
 
 	links {
 		"glfw",
-		"glm",
 		"baregl"
     }
 
