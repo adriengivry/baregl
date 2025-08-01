@@ -25,6 +25,8 @@ namespace baregl::types
 		FLOAT_MAT4,
 		DOUBLE_MAT4,
 		SAMPLER_2D,
-		SAMPLER_CUBE
+		SAMPLER_CUBE,
+		IMAGE_2D,
+		IMAGE_CUBE
 	};
 }
