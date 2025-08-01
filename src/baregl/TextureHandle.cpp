@@ -32,6 +32,14 @@ namespace baregl
 			glBindTexture(m_type, m_id);
 		}
 	}
+	
+	void TextureHandle::Bind(uint32_t p_slot, types::EImageAccessSpecifier p_access, types::EInternalFormat p_format, uint32_t p_level, std::optional<uint32_t> p_layer) const
+	{
+		const bool layered = !p_layer.has_value();
+		const uint32_t layer = layered ? 0 : p_layer.value();
+
+		glBindImageTexture(p_slot, m_id, p_level, layered, layer, utils::EnumToValue<GLenum>(p_access), utils::EnumToValue<GLenum>(p_format));
+	}
 
 	void TextureHandle::Unbind() const
 	{

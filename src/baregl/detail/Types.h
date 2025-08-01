@@ -16,6 +16,7 @@
 #include <baregl/types/EDataType.h>
 #include <baregl/types/EFormat.h>
 #include <baregl/types/EFramebufferAttachment.h>
+#include <baregl/types/EImageAccessSpecifier.h>
 #include <baregl/types/EInternalFormat.h>
 #include <baregl/types/EMemoryBarrierFlags.h>
 #include <baregl/types/EOperation.h>
@@ -287,6 +288,17 @@ struct baregl::utils::MappingFor<baregl::types::EAccessSpecifier, GLenum>
 		EnumValuePair<EnumType::STATIC_READ, GL_STATIC_READ>,
 		EnumValuePair<EnumType::STATIC_COPY, GL_STATIC_COPY>
 	>;
+};
+
+template <>
+struct baregl::utils::MappingFor<baregl::types::EImageAccessSpecifier, GLenum>
+{
+	using EnumType = baregl::types::EImageAccessSpecifier;
+	using type = std::tuple<
+		EnumValuePair<EnumType::READ_ONLY, GL_READ_ONLY>,
+		EnumValuePair<EnumType::WRITE_ONLY, GL_WRITE_ONLY>,
+		EnumValuePair<EnumType::READ_WRITE, GL_READ_WRITE>
+		>;
 };
 
 template <>
