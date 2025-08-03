@@ -17,6 +17,7 @@ namespace baregl::types
 	{
 		BOOL,
 		INT,
+		UNSIGNED_INT,
 		FLOAT,
 		FLOAT_VEC2,
 		FLOAT_VEC3,

@@ -27,6 +27,7 @@ namespace baregl
 	concept SupportedUniformType =
 		std::same_as<T, float> ||
 		std::same_as<T, int> ||
+		std::same_as<T, unsigned int> ||
 		std::same_as<T, math::Vec2> ||
 		std::same_as<T, math::Vec3> ||
 		std::same_as<T, math::Vec4> ||

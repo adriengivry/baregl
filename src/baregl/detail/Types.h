@@ -308,6 +308,7 @@ struct baregl::utils::MappingFor<baregl::types::EUniformType, GLenum>
 	using type = std::tuple<
 		EnumValuePair<EnumType::BOOL, GL_BOOL>,
 		EnumValuePair<EnumType::INT, GL_INT>,
+		EnumValuePair<EnumType::UNSIGNED_INT, GL_UNSIGNED_INT>,
 		EnumValuePair<EnumType::FLOAT, GL_FLOAT>,
 		EnumValuePair<EnumType::FLOAT_VEC2, GL_FLOAT_VEC2>,
 		EnumValuePair<EnumType::FLOAT_VEC3, GL_FLOAT_VEC3>,
@@ -316,7 +317,9 @@ struct baregl::utils::MappingFor<baregl::types::EUniformType, GLenum>
 		EnumValuePair<EnumType::FLOAT_MAT4, GL_FLOAT_MAT4>,
 		EnumValuePair<EnumType::DOUBLE_MAT4, GL_DOUBLE_MAT4>,
 		EnumValuePair<EnumType::SAMPLER_2D, GL_SAMPLER_2D>,
-		EnumValuePair<EnumType::SAMPLER_CUBE, GL_SAMPLER_CUBE>
+		EnumValuePair<EnumType::SAMPLER_CUBE, GL_SAMPLER_CUBE>,
+		EnumValuePair<EnumType::IMAGE_2D, GL_IMAGE_2D>,
+		EnumValuePair<EnumType::IMAGE_CUBE, GL_IMAGE_CUBE>
 	>;
 };
 
