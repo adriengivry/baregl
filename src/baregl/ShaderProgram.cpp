@@ -108,6 +108,7 @@ type ShaderProgram::GetUniform<type>(const std::string& p_name) \
 }
 
 	DECLARE_GET_UNIFORM_FUNCTION(int, GLint, glGetUniformiv);
+	DECLARE_GET_UNIFORM_FUNCTION(unsigned int, GLuint, glGetUniformuiv);
 	DECLARE_GET_UNIFORM_FUNCTION(float, GLfloat, glGetUniformfv);
 	DECLARE_GET_UNIFORM_FUNCTION(math::Vec2, GLfloat, glGetUniformfv);
 	DECLARE_GET_UNIFORM_FUNCTION(math::Vec3, GLfloat, glGetUniformfv);
@@ -126,6 +127,7 @@ void ShaderProgram::SetUniform<type>(const std::string& p_name, const type& valu
 }
 
 	DECLARE_SET_UNIFORM_FUNCTION(int, glUniform1i, value);
+	DECLARE_SET_UNIFORM_FUNCTION(unsigned int, glUniform1ui, value);
 	DECLARE_SET_UNIFORM_FUNCTION(float, glUniform1f, value);
 	DECLARE_SET_UNIFORM_FUNCTION(math::Vec2, glUniform2f, value.x, value.y);
 	DECLARE_SET_UNIFORM_FUNCTION(math::Vec3, glUniform3f, value.x, value.y, value.z);
@@ -167,6 +169,7 @@ void ShaderProgram::SetUniform<type>(const std::string& p_name, const type& valu
 					using enum types::EUniformType;
 				case BOOL: return static_cast<bool>(GetUniform<int>(name));
 				case INT: return GetUniform<int>(name);
+				case UNSIGNED_INT: return GetUniform<unsigned int>(name);
 				case FLOAT: return GetUniform<float>(name);
 				case FLOAT_VEC2: return GetUniform<math::Vec2>(name);
 				case FLOAT_VEC3: return GetUniform<math::Vec3>(name);
