@@ -10,6 +10,7 @@
 
 #include <baregl/detail/NativeObject.h>
 #include <baregl/types/EGraphicsBackend.h>
+#include <baregl/types/EImageAccessSpecifier.h>
 #include <baregl/types/ETextureType.h>
 
 namespace baregl
