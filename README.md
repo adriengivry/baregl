@@ -64,25 +64,36 @@ program.Unbind();
 - Zero dependencies on OpenGL headers required outside of BareGL (no GL headers are included in public headers)
 - Direct State Access (DSA)
 - Low overhead
-- Easy integration with either [Premake5](https://premake.github.io/) or [CMake](https://cmake.org/)
+- Easy integration with [CMake](https://cmake.org/)
 
 ## Dependencies
 | BareGL (library) | Examples |
 | - | - |
 | [glad](https://github.com/Dav1dde/glad) (included in sources) | [glfw](https://github.com/glfw/glfw) & [glm](https://github.com/g-truc/glm) (included as submodules) |
 
-## Adding BareGL to Your Project
-*BareGL* can be added to your project using either [Premake5](https://premake.github.io/) or [CMake](https://cmake.org/). You'll find both a `premake5.lua` file and a `CMakeLists.txt` file for the build system of your choice.
+## CMake Configuration
+| Option | Allowed Values | Description |
+| - | - | - |
+| `BAREGL_GENERATE_EXAMPLES` |  `ON` / `OFF` (default) | Generate example projects (require [glfw](https://github.com/glfw/glfw), and [glm](https://github.com/g-truc/glm) submodules to be initialized) |
 
-## Examples
+## Building Examples
 > [!IMPORTANT]
-> Example projects use [glfw](https://github.com/glfw/glfw) and [glm](https://github.com/g-truc/glm), which are included as submodules.
-> 
-> Submodules can be initialized directly when cloning by using the `--recurse-submodules` argument, or after the repository has been cloned using the `git submodule init` command.
+> Example projects depend on [glfw](https://github.com/glfw/glfw) and [glm](https://github.com/g-truc/glm), which are included as Git submodules. Make sure to initialize submodules before generating projects.
 
-You can generate project files for examples using [Premake5](https://premake.github.io/) from the `examples/` folder. On Windows, you can generate these project files by running the `gen_examples.bat` script.
+**Windows:**
+```powershell
+git clone https://github.com/adriengivry/baregl --recurse-submodules
+cd .\baregl
+.\gen_proj_win32.bat
+.\build\baregl.sln # (optional) open solution in Visual Studio
+```
 
-Once generated, you'll find the `baregl-examples` project files in the `examples/` folder.
+**Linux:**
+```powershell
+git clone https://github.com/adriengivry/baregl --recurse-submodules
+cd ./baregl
+./gen_proj_linux.sh
+```
 
 ## Contributing
 All contributions to *BareGL* are welcome — whether it's reporting bugs, suggesting new features, or submitting code improvements.
