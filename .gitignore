@@ -2,8 +2,15 @@
 .vscode/
 /bin/
 /obj/
+/build/
+imgui.ini
 *.aps
 *.vcxproj*
 *.sln
 *.vcxitems*
+/Releases/
+*.spv
 Makefile
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
