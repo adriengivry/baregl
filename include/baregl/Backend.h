@@ -13,7 +13,6 @@
 #include <baregl/types/EBlendingFactor.h>
 #include <baregl/types/EComparaisonAlgorithm.h>
 #include <baregl/types/ECullFace.h>
-#include <baregl/types/EGraphicsBackend.h>
 #include <baregl/types/EMemoryBarrierFlags.h>
 #include <baregl/types/EOperation.h>
 #include <baregl/types/EPixelDataFormat.h>

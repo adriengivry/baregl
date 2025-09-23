@@ -9,7 +9,6 @@
 #include <baregl/Buffer.h>
 #include <baregl/detail/NativeObject.h>
 #include <baregl/types/EDataType.h>
-#include <baregl/types/EGraphicsBackend.h>
 #include <baregl/data/VertexAttribute.h>
 
 namespace baregl

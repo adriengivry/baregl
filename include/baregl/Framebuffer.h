@@ -12,7 +12,6 @@
 #include <baregl/types/EComparaisonAlgorithm.h>
 #include <baregl/types/ECullFace.h>
 #include <baregl/types/EFramebufferAttachment.h>
-#include <baregl/types/EGraphicsBackend.h>
 #include <baregl/types/EOperation.h>
 #include <baregl/types/EPixelDataFormat.h>
 #include <baregl/types/EPixelDataType.h>

@@ -10,7 +10,6 @@
 
 #include <baregl/TextureHandle.h>
 #include <baregl/math/Vec4.h>
-#include <baregl/types/EGraphicsBackend.h>
 #include <baregl/data/TextureDesc.h>
 
 namespace baregl

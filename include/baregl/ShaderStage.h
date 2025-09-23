@@ -7,7 +7,6 @@
 #pragma once
 
 #include <baregl/detail/NativeObject.h>
-#include <baregl/types/EGraphicsBackend.h>
 #include <baregl/types/EShaderType.h>
 #include <baregl/data/ShaderCompilationResult.h>
 

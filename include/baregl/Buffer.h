@@ -10,7 +10,6 @@
 #include <baregl/detail/NativeObject.h>
 #include <baregl/types/EAccessSpecifier.h>
 #include <baregl/types/EBufferType.h>
-#include <baregl/types/EGraphicsBackend.h>
 
 #include <optional>
 

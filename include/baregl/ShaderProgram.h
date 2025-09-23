@@ -14,7 +14,6 @@
 #include <baregl/detail/NativeObject.h>
 #include <baregl/data/ShaderLinkingResult.h>
 #include <baregl/data/UniformInfo.h>
-#include <baregl/types/EGraphicsBackend.h>
 #include <baregl/ShaderStage.h>
 
 #include <optional>
