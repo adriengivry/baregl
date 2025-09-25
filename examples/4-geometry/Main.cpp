@@ -4,7 +4,7 @@
 * @licence: MIT
 */
 
-#include <baregl/Backend.h>
+#include <baregl/Context.h>
 #include <baregl/Buffer.h>
 #include <baregl/VertexArray.h>
 #include <baregl/ShaderProgram.h>
@@ -22,9 +22,8 @@ int main(int, char**)
 	GLFWwindow* window = glfwCreateWindow(512, 512, "4-geometry", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
-	// Graphics Backend
-	baregl::Backend backend;
-	backend.Init(true);
+	// Graphics context
+	baregl::Context context(true);
 
 	// Empty vertex array - the geometry shader will generate all vertices
 	baregl::VertexArray va;
@@ -113,12 +112,12 @@ void main() {
 	{
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
-		backend.SetViewport(0, 0, width, height);
-		backend.Clear(true, true, true);
+		context.SetViewport(0, 0, width, height);
+		context.Clear(true, true, true);
 
 		program.Bind();
 		va.Bind();
-		backend.DrawArrays(baregl::types::EPrimitiveMode::POINTS, 1);
+		context.DrawArrays(baregl::types::EPrimitiveMode::POINTS, 1);
 		va.Unbind();
 		program.Unbind();
 

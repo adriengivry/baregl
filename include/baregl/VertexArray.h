@@ -14,7 +14,7 @@
 namespace baregl
 {
 	/**
-	* Represents a vertex array, used to describe a vertex layout to the graphics backend.
+	* Represents a vertex array, used to describe a vertex layout to the graphics context.
 	*/
 	class VertexArray final : public detail::NativeObject
 	{

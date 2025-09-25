@@ -30,7 +30,7 @@ namespace baregl
 		~ShaderStage();
 
 		/**
-		* Uploads the shader source to the graphics backend memory.
+		* Uploads the shader source to the graphics context memory.
 		* @param p_source
 		*/
 		void Upload(const std::string& p_source) const;

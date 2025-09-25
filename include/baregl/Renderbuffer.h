@@ -12,7 +12,7 @@
 namespace baregl
 {
 	/**
-	* Represents a renderbuffer, used to store render data for the graphics backend to use.
+	* Represents a renderbuffer, used to store render data for the graphics context to use.
 	*/
 	class Renderbuffer final : public detail::NativeObject
 	{

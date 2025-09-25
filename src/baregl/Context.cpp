@@ -8,7 +8,7 @@
 #include <baregl/debug/Assert.h>
 #include <baregl/detail/Types.h>
 #include <baregl/detail/glad/glad.h>
-#include <baregl/Backend.h>
+#include <baregl/Context.h>
 #include <baregl/math/Conversions.h>
 #include <baregl/utils/BitmaskOperators.h>
 
@@ -153,7 +153,7 @@ namespace
 
 namespace baregl
 {
-	void Backend::Init(bool debug)
+	Context::Context(bool debug)
 	{
 		const int error = gladLoadGL();
 
@@ -163,7 +163,7 @@ namespace baregl
 			return;
 		}
 
-		BAREGL_LOG_INFO("OpenGL backend initialized.");
+		BAREGL_LOG_INFO("OpenGL context initialized.");
 
 		if (debug)
 		{
@@ -178,7 +178,7 @@ namespace baregl
 		glCullFace(GL_BACK);
 	}
 
-	void Backend::Clear(bool p_colorBuffer, bool p_depthBuffer, bool p_stencilBuffer)
+	void Context::Clear(bool p_colorBuffer, bool p_depthBuffer, bool p_stencilBuffer)
 	{
 		GLbitfield clearMask = 0;
 		if (p_colorBuffer) clearMask |= GL_COLOR_BUFFER_BIT;
@@ -191,27 +191,27 @@ namespace baregl
 		}
 	}
 
-	void Backend::DrawElements(types::EPrimitiveMode p_primitiveMode, uint32_t p_indexCount)
+	void Context::DrawElements(types::EPrimitiveMode p_primitiveMode, uint32_t p_indexCount)
 	{
 		glDrawElements(utils::EnumToValue<GLenum>(p_primitiveMode), p_indexCount, GL_UNSIGNED_INT, nullptr);
 	}
 
-	void Backend::DrawElementsInstanced(types::EPrimitiveMode p_primitiveMode, uint32_t p_indexCount, uint32_t p_instances)
+	void Context::DrawElementsInstanced(types::EPrimitiveMode p_primitiveMode, uint32_t p_indexCount, uint32_t p_instances)
 	{
 		glDrawElementsInstanced(utils::EnumToValue<GLenum>(p_primitiveMode), p_indexCount, GL_UNSIGNED_INT, nullptr, p_instances);
 	}
 
-	void Backend::DrawArrays(types::EPrimitiveMode p_primitiveMode, uint32_t p_vertexCount)
+	void Context::DrawArrays(types::EPrimitiveMode p_primitiveMode, uint32_t p_vertexCount)
 	{
 		glDrawArrays(utils::EnumToValue<GLenum>(p_primitiveMode), 0, p_vertexCount);
 	}
 
-	void Backend::DrawArraysInstanced(types::EPrimitiveMode p_primitiveMode, uint32_t p_vertexCount, uint32_t p_instances)
+	void Context::DrawArraysInstanced(types::EPrimitiveMode p_primitiveMode, uint32_t p_vertexCount, uint32_t p_instances)
 	{
 		glDrawArraysInstanced(utils::EnumToValue<GLenum>(p_primitiveMode), 0, p_vertexCount, p_instances);
 	}
 
-	void Backend::DispatchCompute(uint32_t p_x, uint32_t p_y, uint32_t p_z) const
+	void Context::DispatchCompute(uint32_t p_x, uint32_t p_y, uint32_t p_z) const
 	{
 		BAREGL_ASSERT(
 			p_x > 0 && p_y > 0 && p_z > 0,
@@ -221,54 +221,54 @@ namespace baregl
 		glDispatchCompute(p_x, p_y, p_z);
 	}
 
-	void Backend::MemoryBarrier(types::EMemoryBarrierFlags p_barriers) const
+	void Context::MemoryBarrier(types::EMemoryBarrierFlags p_barriers) const
 	{
 		glMemoryBarrier(
 			utils::EnumToValue<GLbitfield>(p_barriers)
 		);
 	}
 
-	void Backend::SetClearColor(float p_red, float p_green, float p_blue, float p_alpha)
+	void Context::SetClearColor(float p_red, float p_green, float p_blue, float p_alpha)
 	{
 		glClearColor(p_red, p_green, p_blue, p_alpha);
 	}
 
-	void Backend::SetRasterizationLinesWidth(float p_width)
+	void Context::SetRasterizationLinesWidth(float p_width)
 	{
 		glLineWidth(p_width);
 	}
 
-	void Backend::SetRasterizationMode(types::ERasterizationMode p_rasterizationMode)
+	void Context::SetRasterizationMode(types::ERasterizationMode p_rasterizationMode)
 	{
 		glPolygonMode(GL_FRONT_AND_BACK, utils::EnumToValue<GLenum>(p_rasterizationMode));
 	}
 
-	void Backend::SetCapability(types::ERenderingCapability p_capability, bool p_value)
+	void Context::SetCapability(types::ERenderingCapability p_capability, bool p_value)
 	{
 		(p_value ? glEnable : glDisable)(utils::EnumToValue<GLenum>(p_capability));
 	}
 
-	bool Backend::GetCapability(types::ERenderingCapability p_capability)
+	bool Context::GetCapability(types::ERenderingCapability p_capability)
 	{
 		return glIsEnabled(utils::EnumToValue<GLenum>(p_capability));
 	}
 
-	void Backend::SetStencilAlgorithm(types::EComparaisonAlgorithm p_algorithm, int32_t p_reference, uint32_t p_mask)
+	void Context::SetStencilAlgorithm(types::EComparaisonAlgorithm p_algorithm, int32_t p_reference, uint32_t p_mask)
 	{
 		glStencilFunc(utils::EnumToValue<GLenum>(p_algorithm), p_reference, p_mask);
 	}
 
-	void Backend::SetDepthAlgorithm(types::EComparaisonAlgorithm p_algorithm)
+	void Context::SetDepthAlgorithm(types::EComparaisonAlgorithm p_algorithm)
 	{
 		glDepthFunc(utils::EnumToValue<GLenum>(p_algorithm));
 	}
 
-	void Backend::SetStencilMask(uint32_t p_mask)
+	void Context::SetStencilMask(uint32_t p_mask)
 	{
 		glStencilMask(p_mask);
 	}
 
-	void Backend::SetStencilOperations(types::EOperation p_stencilFail, types::EOperation p_depthFail, types::EOperation p_bothPass)
+	void Context::SetStencilOperations(types::EOperation p_stencilFail, types::EOperation p_depthFail, types::EOperation p_bothPass)
 	{
 		glStencilOp(
 			utils::EnumToValue<GLenum>(p_stencilFail),
@@ -277,7 +277,7 @@ namespace baregl
 		);
 	}
 
-	void Backend::SetBlendingFunction(types::EBlendingFactor p_sourceFactor, types::EBlendingFactor p_destinationFactor)
+	void Context::SetBlendingFunction(types::EBlendingFactor p_sourceFactor, types::EBlendingFactor p_destinationFactor)
 	{
 		glBlendFunc(
 			utils::EnumToValue<GLenum>(p_sourceFactor),
@@ -285,47 +285,47 @@ namespace baregl
 		);
 	}
 
-	void Backend::SetBlendingEquation(types::EBlendingEquation p_equation)
+	void Context::SetBlendingEquation(types::EBlendingEquation p_equation)
 	{
 		glBlendEquation(utils::EnumToValue<GLenum>(p_equation));
 	}
 
-	void Backend::SetCullFace(types::ECullFace p_cullFace)
+	void Context::SetCullFace(types::ECullFace p_cullFace)
 	{
 		glCullFace(utils::EnumToValue<GLenum>(p_cullFace));
 	}
 
-	void Backend::SetDepthWriting(bool p_enable)
+	void Context::SetDepthWriting(bool p_enable)
 	{
 		glDepthMask(p_enable);
 	}
 
-	void Backend::SetColorWriting(bool p_enableRed, bool p_enableGreen, bool p_enableBlue, bool p_enableAlpha)
+	void Context::SetColorWriting(bool p_enableRed, bool p_enableGreen, bool p_enableBlue, bool p_enableAlpha)
 	{
 		glColorMask(p_enableRed, p_enableGreen, p_enableBlue, p_enableAlpha);
 	}
 
-	void Backend::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+	void Context::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
 	{
 		glViewport(x, y, width, height);
 	}
 
-	std::string Backend::GetVendor()
+	std::string Context::GetVendor()
 	{
 		return GetString(GL_VENDOR);
 	}
 
-	std::string Backend::GetHardware()
+	std::string Context::GetHardware()
 	{
 		return GetString(GL_RENDERER);
 	}
 
-	std::string Backend::GetVersion()
+	std::string Context::GetVersion()
 	{
 		return GetString(GL_VERSION);
 	}
 
-	std::string Backend::GetShadingLanguageVersion()
+	std::string Context::GetShadingLanguageVersion()
 	{
 		return GetString(GL_SHADING_LANGUAGE_VERSION);
 	}

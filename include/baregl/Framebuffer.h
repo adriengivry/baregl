@@ -32,7 +32,7 @@ namespace baregl
 	>;
 
 	/**
-	* Represents a framebuffer, used to store render data for the graphics backend to use.
+	* Represents a framebuffer, used to store render data for the graphics context to use.
 	*/
 	class Framebuffer : public detail::NativeObject
 	{

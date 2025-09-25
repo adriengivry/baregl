@@ -5,7 +5,7 @@
 */
 
 #include <chrono>
-#include <baregl/Backend.h>
+#include <baregl/Context.h>
 #include <baregl/Buffer.h>
 #include <baregl/VertexArray.h>
 #include <baregl/ShaderProgram.h>
@@ -24,10 +24,9 @@ int main()
 	GLFWwindow* window = glfwCreateWindow(640, 480, "2-cube", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
-	// Backend
-	baregl::Backend backend;
-	backend.Init(true);
-	backend.SetCapability(baregl::types::ERenderingCapability::DEPTH_TEST, true);
+	// Graphics context
+	baregl::Context context(true);
+	context.SetCapability(baregl::types::ERenderingCapability::DEPTH_TEST, true);
 
 	// Cube vertices (position, uv, normal)
 	float vertices[] = {
@@ -150,8 +149,8 @@ void main() {
 		// Viewport
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
-		backend.SetViewport(0, 0, width, height);
-		backend.Clear(true, true, true);
+		context.SetViewport(0, 0, width, height);
+		context.Clear(true, true, true);
 
 		// Matrices
 		glm::mat4 model = glm::rotate(glm::mat4(1.0f), time, glm::vec3(1.0f, 1.0f, 1.0f));
@@ -166,7 +165,7 @@ void main() {
 		program.SetUniform("u_Color", baregl::math::Vec3{ 1.0f, 1.0f, 0.0f });
 
 		va.Bind();
-		backend.DrawElements(baregl::types::EPrimitiveMode::TRIANGLES, 36);
+		context.DrawElements(baregl::types::EPrimitiveMode::TRIANGLES, 36);
 		va.Unbind();
 		program.Unbind();
 

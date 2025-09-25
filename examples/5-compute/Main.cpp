@@ -5,7 +5,7 @@
 */
 
 #include <array>
-#include <baregl/Backend.h>
+#include <baregl/Context.h>
 #include <baregl/Buffer.h>
 #include <baregl/VertexArray.h>
 #include <baregl/ShaderProgram.h>
@@ -34,9 +34,8 @@ int main(int, char**)
 	GLFWwindow* window = glfwCreateWindow(600, 600, "5-compute", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
-	// Graphics Backend
-	baregl::Backend backend;
-	backend.Init(true);
+	// Graphics context
+	baregl::Context context(true);
 
 	constexpr uint32_t k_particleCount = 4096;
 	std::vector<Particle> particles(k_particleCount); // Heap allocated, due to its size.
@@ -195,8 +194,8 @@ void main() {
 	renderProgram.Link();
 
 	// Enable blending
-	backend.SetCapability(baregl::types::ERenderingCapability::BLEND, true);
-	backend.SetBlendingFunction(baregl::types::EBlendingFactor::SRC_ALPHA, baregl::types::EBlendingFactor::ONE_MINUS_SRC_ALPHA);
+	context.SetCapability(baregl::types::ERenderingCapability::BLEND, true);
+	context.SetBlendingFunction(baregl::types::EBlendingFactor::SRC_ALPHA, baregl::types::EBlendingFactor::ONE_MINUS_SRC_ALPHA);
 
 	// Timing
 	float lastTime = static_cast<float>(glfwGetTime());
@@ -210,8 +209,8 @@ void main() {
 
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
-		backend.SetViewport(0, 0, width, height);
-		backend.Clear(true, true, true);
+		context.SetViewport(0, 0, width, height);
+		context.Clear(true, true, true);
 
 		// Compute shader dispatch
 		computeProgram.Bind();
@@ -220,14 +219,14 @@ void main() {
 		computeProgram.SetUniform("u_Time", currentTime);
 		constexpr uint32_t k_workGroupSize = 64;
 		constexpr uint32_t k_dispatchSize = (k_particleCount + k_workGroupSize - 1) / k_workGroupSize;
-		backend.DispatchCompute(k_dispatchSize, 1, 1);
-		backend.MemoryBarrier(baregl::types::EMemoryBarrierFlags::SHADER_STORAGE);
+		context.DispatchCompute(k_dispatchSize, 1, 1);
+		context.MemoryBarrier(baregl::types::EMemoryBarrierFlags::SHADER_STORAGE);
 
 		// Render particles
 		renderProgram.Bind();
 		particleBuffer.Bind(baregl::types::EBufferType::SHADER_STORAGE, 0);
 		va.Bind();
-		backend.DrawElementsInstanced(baregl::types::EPrimitiveMode::TRIANGLES, 6, k_particleCount);
+		context.DrawElementsInstanced(baregl::types::EPrimitiveMode::TRIANGLES, 6, k_particleCount);
 		va.Unbind();
 		renderProgram.Unbind();
 

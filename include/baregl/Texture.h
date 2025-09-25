@@ -15,7 +15,7 @@
 namespace baregl
 {
 	/**
-	* Represents a texture, used to store image data for the graphics backend to use.
+	* Represents a texture, used to store image data for the graphics context to use.
 	*/
 	class Texture final : public TextureHandle
 	{

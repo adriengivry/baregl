@@ -24,16 +24,16 @@
 namespace baregl
 {
 	/**
-	* Backend class that wraps the selected graphics API's context.
+	* High-level interface for interacting with the OpenGL context.
 	*/
-	class Backend final
+	class Context final
 	{
 	public:
 		/**
-		* Initializes the backend.
+		* Initializes the OpenGL context.
 		* @param debug Indicates whether to enable debug mode.
 		*/
-		void Init(bool p_debug);
+		Context(bool p_debug);
 
 		/**
 		* Clears the specified buffers.

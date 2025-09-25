@@ -5,7 +5,7 @@
 */
 
 #include <cmath>
-#include <baregl/Backend.h>
+#include <baregl/Context.h>
 #include <baregl/Buffer.h>
 #include <baregl/VertexArray.h>
 #include <baregl/ShaderProgram.h>
@@ -24,11 +24,10 @@ int main(int, char**)
 	GLFWwindow* window = glfwCreateWindow(800, 600, "6-tessellation", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
-	// Graphics Backend
-	baregl::Backend backend;
-	backend.Init(true);
-	backend.SetCapability(baregl::types::ERenderingCapability::DEPTH_TEST, true);
-	backend.SetRasterizationMode(baregl::types::ERasterizationMode::LINE);
+	// Graphics context
+	baregl::Context context(true);
+	context.SetCapability(baregl::types::ERenderingCapability::DEPTH_TEST, true);
+	context.SetRasterizationMode(baregl::types::ERasterizationMode::LINE);
 
 	// 3D plane patch
 	const float vertices[] = {
@@ -155,8 +154,8 @@ void main() {
 
 		int width, height;
 		glfwGetFramebufferSize(window, &width, &height);
-		backend.SetViewport(0, 0, width, height);
-		backend.Clear(true, true, true);
+		context.SetViewport(0, 0, width, height);
+		context.Clear(true, true, true);
 
 		// Create view-projection matrix
 		const glm::mat4 proj = glm::perspective(glm::radians(60.0f), (float)width / height, 0.1f, 100.0f);
@@ -169,7 +168,7 @@ void main() {
 		program.SetUniform("u_TessellationLevel", 64.0f);
 		program.SetUniform("u_ViewProjection", reinterpret_cast<const baregl::math::Mat4&>(viewProj));
 		va.Bind();
-		backend.DrawElements(baregl::types::EPrimitiveMode::PATCHES, 4);
+		context.DrawElements(baregl::types::EPrimitiveMode::PATCHES, 4);
 		va.Unbind();
 		program.Unbind();
 
