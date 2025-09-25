@@ -7,8 +7,8 @@ It aims to reduce the boilerplate code required to get your modern OpenGL applic
 ## What It's Like
 ```cpp
 // Creating an OpenGL context
-baregl::Backend backend;
-backend.Init(true);
+baregl::Context context;
+context.Init(true);
 
 // Creating a vertex buffer
 baregl::Buffer vb;
@@ -48,11 +48,11 @@ const auto shaderLinkingResult = program.Link();
 assert(shaderLinkingResult.success);
 
 // Drawing
-backend.SetViewport(0, 0, width, height);
-backend.Clear(true, true, true);
+context.SetViewport(0, 0, width, height);
+context.Clear(true, true, true);
 program.Bind();
 va.Bind();
-backend.DrawElements(baregl::types::EPrimitiveMode::TRIANGLES, 3);
+context.DrawElements(baregl::types::EPrimitiveMode::TRIANGLES, 3);
 va.Unbind();
 program.Unbind();
 ```
