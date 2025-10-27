@@ -149,7 +149,8 @@ void main() {
 	program.Link();
 
 	// Render loop
-	while (!glfwWindowShouldClose(window)) {
+	while (!glfwWindowShouldClose(window))
+	{
 		float currentTime = static_cast<float>(glfwGetTime());
 
 		int width, height;
