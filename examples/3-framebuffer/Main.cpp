@@ -24,7 +24,7 @@ int main(int, char**)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(800, 600, "1-Triangle", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(800, 600, "3-framebuffer", nullptr, nullptr);
 	glfwMakeContextCurrent(window);
 
 	// Graphics context
