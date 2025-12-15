@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include <stdexcept>
-
 namespace baregl::math
 {
 	struct Vec3

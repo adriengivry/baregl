@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <cassert>
-
 #include <baregl/debug/Assert.h>
+
+#include <cassert>
 
 void baregl::debug::Assert(bool condition, const std::string_view p_message)
 {

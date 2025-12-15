@@ -6,9 +6,10 @@
 
 #pragma once
 
+#include <baregl/utils/BitmaskOperators.h>
+
 #include <tuple>
 #include <type_traits>
-#include <baregl/utils/BitmaskOperators.h>
 
 namespace baregl::utils
 {

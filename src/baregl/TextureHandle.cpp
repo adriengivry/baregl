@@ -4,9 +4,10 @@
 * @licence: MIT
 */
 
+#include <baregl/TextureHandle.h>
+
 #include <baregl/detail/glad/glad.h>
 #include <baregl/detail/Types.h>
-#include <baregl/TextureHandle.h>
 
 namespace baregl
 {

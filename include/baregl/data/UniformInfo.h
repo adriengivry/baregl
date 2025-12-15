@@ -6,10 +6,10 @@
 
 #pragma once
 
+#include <baregl/types/EUniformType.h>
+
 #include <any>
 #include <string>
-
-#include <baregl/types/EUniformType.h>
 
 namespace baregl::data
 {

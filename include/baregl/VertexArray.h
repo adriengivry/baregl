@@ -6,10 +6,10 @@
 
 #pragma once
 
-#include <baregl/Buffer.h>
+#include <baregl/data/VertexAttribute.h>
 #include <baregl/detail/NativeObject.h>
 #include <baregl/types/EDataType.h>
-#include <baregl/data/VertexAttribute.h>
+#include <baregl/Buffer.h>
 
 namespace baregl
 {

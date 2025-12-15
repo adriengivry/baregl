@@ -4,12 +4,13 @@
 * @licence: MIT
 */
 
-#include <algorithm>
+#include <baregl/ShaderStage.h>
 
 #include <baregl/debug/Log.h>
 #include <baregl/detail/glad/glad.h>
 #include <baregl/detail/Types.h>
-#include <baregl/ShaderStage.h>
+
+#include <algorithm>
 
 namespace baregl
 {

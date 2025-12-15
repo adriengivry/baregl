@@ -6,14 +6,14 @@
 
 #pragma once
 
+#include <baregl/data/ShaderLinkingResult.h>
+#include <baregl/data/UniformInfo.h>
+#include <baregl/detail/NativeObject.h>
 #include <baregl/math/Mat3.h>
 #include <baregl/math/Mat4.h>
 #include <baregl/math/Vec2.h>
 #include <baregl/math/Vec3.h>
 #include <baregl/math/Vec4.h>
-#include <baregl/detail/NativeObject.h>
-#include <baregl/data/ShaderLinkingResult.h>
-#include <baregl/data/UniformInfo.h>
 #include <baregl/ShaderStage.h>
 
 #include <optional>

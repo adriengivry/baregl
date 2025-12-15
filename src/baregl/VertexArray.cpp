@@ -4,10 +4,11 @@
 * @licence: MIT
 */
 
+#include <baregl/VertexArray.h>
+
 #include <baregl/debug/Assert.h>
 #include <baregl/detail/glad/glad.h>
 #include <baregl/detail/Types.h>
-#include <baregl/VertexArray.h>
 
 namespace
 {

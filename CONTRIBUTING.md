@@ -62,9 +62,9 @@ Every file must include the following header:
 ### Includes
 | | |
 |-|-|
-| I.1 | Includes are in lexicographic order with lowercase precedence (e.g. `aa`, `aA`, `Aa`, `AA`). |
-| I.2 | Included file paths are fully specialized (`project/namespace/File.h`). |
-| I.3 | Include statements use brackets (`<>`) over quotation marks (`""`). |
+| I.1 | Organize includes in 3 groups separated by blank lines: (1) corresponding header for source files, (2) other headers, (3) standard library headers. Sort each group lexicographically with lowercase precedence (e.g. `aa`, `aA`, `Aa`, `AA`). |
+| I.2 | Use fully qualified paths (`project/namespace/File.h`). |
+| I.3 | Use angle brackets (`<>`) for all includes. |
 
 ### Documentation
 | | |

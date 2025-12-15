@@ -4,15 +4,16 @@
 * @licence: MIT
 */
 
-#include <algorithm>
-#include <array>
+#include <baregl/ShaderProgram.h>
 
 #include <baregl/debug/Assert.h>
 #include <baregl/debug/Log.h>
 #include <baregl/detail/glad/glad.h>
 #include <baregl/detail/Types.h>
-#include <baregl/ShaderProgram.h>
 #include <baregl/Texture.h>
+
+#include <algorithm>
+#include <array>
 
 namespace baregl
 {

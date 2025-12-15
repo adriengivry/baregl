@@ -6,9 +6,9 @@
 
 #pragma once
 
+#include <baregl/data/ShaderCompilationResult.h>
 #include <baregl/detail/NativeObject.h>
 #include <baregl/types/EShaderType.h>
-#include <baregl/data/ShaderCompilationResult.h>
 
 namespace baregl
 {

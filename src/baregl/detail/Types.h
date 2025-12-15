@@ -20,6 +20,8 @@
 #include <baregl/types/EInternalFormat.h>
 #include <baregl/types/EMemoryBarrierFlags.h>
 #include <baregl/types/EOperation.h>
+#include <baregl/types/EPixelDataFormat.h>
+#include <baregl/types/EPixelDataType.h>
 #include <baregl/types/EPrimitiveMode.h>
 #include <baregl/types/ERasterizationMode.h>
 #include <baregl/types/ERenderingCapability.h>
@@ -28,8 +30,6 @@
 #include <baregl/types/ETextureType.h>
 #include <baregl/types/ETextureWrapMode.h>
 #include <baregl/types/EUniformType.h>
-#include <baregl/types/EPixelDataFormat.h>
-#include <baregl/types/EPixelDataType.h>
 #include <baregl/utils/EnumMapper.h>
 
 template <>

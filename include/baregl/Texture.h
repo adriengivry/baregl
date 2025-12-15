@@ -6,11 +6,11 @@
 
 #pragma once
 
-#include <string>
-
 #include <baregl/TextureHandle.h>
 #include <baregl/math/Vec4.h>
 #include <baregl/data/TextureDesc.h>
+
+#include <string>
 
 namespace baregl
 {

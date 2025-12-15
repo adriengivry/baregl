@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <span>
-
 #include <baregl/types/EDataType.h>
+
+#include <span>
 
 namespace baregl::data
 {

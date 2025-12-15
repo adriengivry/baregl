@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include <baregl/Renderbuffer.h>
-#include <baregl/Texture.h>
 #include <baregl/detail/NativeObject.h>
 #include <baregl/types/EComparaisonAlgorithm.h>
 #include <baregl/types/ECullFace.h>
@@ -18,6 +16,8 @@
 #include <baregl/types/EPrimitiveMode.h>
 #include <baregl/types/ERasterizationMode.h>
 #include <baregl/types/ERenderingCapability.h>
+#include <baregl/Renderbuffer.h>
+#include <baregl/Texture.h>
 
 #include <memory>
 #include <optional>

@@ -4,10 +4,11 @@
 * @licence: MIT
 */
 
+#include <baregl/Buffer.h>
+
 #include <baregl/debug/Assert.h>
 #include <baregl/detail/glad/glad.h>
 #include <baregl/detail/Types.h>
-#include <baregl/Buffer.h>
 
 namespace baregl
 {

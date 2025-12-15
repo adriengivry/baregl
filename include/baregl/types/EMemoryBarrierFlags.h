@@ -6,9 +6,10 @@
 
 #pragma once
 
+#include <baregl/utils/BitmaskOperators.h>
+
 #include <cstdint>
 #include <limits>
-#include <baregl/utils/BitmaskOperators.h>
 
 namespace baregl::types
 {

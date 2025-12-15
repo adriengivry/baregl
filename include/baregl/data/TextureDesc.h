@@ -6,11 +6,11 @@
 
 #pragma once
 
+#include <baregl/types/EFormat.h>
+#include <baregl/types/EInternalFormat.h>
+#include <baregl/types/EPixelDataType.h>
 #include <baregl/types/ETextureFilteringMode.h>
 #include <baregl/types/ETextureWrapMode.h>
-#include <baregl/types/EInternalFormat.h>
-#include <baregl/types/EFormat.h>
-#include <baregl/types/EPixelDataType.h>
 
 namespace baregl::data
 {

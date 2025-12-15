@@ -6,9 +6,6 @@
 
 #pragma once
 
-#include <optional>
-#include <string>
-
 #include <baregl/types/EBlendingEquation.h>
 #include <baregl/types/EBlendingFactor.h>
 #include <baregl/types/EComparaisonAlgorithm.h>
@@ -20,6 +17,9 @@
 #include <baregl/types/EPrimitiveMode.h>
 #include <baregl/types/ERasterizationMode.h>
 #include <baregl/types/ERenderingCapability.h>
+
+#include <optional>
+#include <string>
 
 namespace baregl
 {

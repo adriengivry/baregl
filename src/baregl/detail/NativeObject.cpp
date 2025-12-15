@@ -4,6 +4,8 @@
 * @licence: MIT
 */
 
+#include <baregl/detail/NativeObject.h>
+
 #include <baregl/debug/Assert.h>
 #include <baregl/detail/glad/glad.h>
 #include <baregl/detail/Types.h>

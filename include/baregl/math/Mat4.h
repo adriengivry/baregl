@@ -6,9 +6,9 @@
 
 #pragma once
 
-#include <array>
-
 #include <baregl/math/Vec4.h>
+
+#include <array>
 
 namespace baregl::math
 {

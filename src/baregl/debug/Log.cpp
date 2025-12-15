@@ -4,9 +4,9 @@
 * @licence: MIT
 */
 
-#include <cstdio>
-
 #include <baregl/debug/Log.h>
+
+#include <cstdio>
 
 namespace baregl::debug
 {

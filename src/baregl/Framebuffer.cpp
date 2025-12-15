@@ -4,11 +4,12 @@
 * @licence: MIT
 */
 
+#include <baregl/Framebuffer.h>
+
 #include <baregl/debug/Assert.h>
 #include <baregl/debug/Log.h>
 #include <baregl/detail/glad/glad.h>
 #include <baregl/detail/Types.h>
-#include <baregl/Framebuffer.h>
 #include <baregl/Renderbuffer.h>
 
 namespace baregl
