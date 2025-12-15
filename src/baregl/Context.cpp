@@ -15,17 +15,18 @@
 
 namespace
 {
-	void GLDebugMessageCallback(uint32_t source, uint32_t type, uint32_t id, uint32_t severity, int32_t length, const char* message, const void* userParam)
+	void GLDebugMessageCallback(uint32_t p_source, uint32_t p_type, uint32_t p_id, uint32_t p_severity, int32_t p_length, const char* p_message, const void* p_userParam)
 	{
-		// ignore non-significant error/warning codes
-		if (id == 131169 || id == 131185 || id == 131218 || id == 131204) return;
+		// Ignore non-significant error/warning codes
+		if (p_id == 131169 || p_id == 131185 || p_id == 131218 || p_id == 131204)
+		{
+			return;
+		}
 
-		std::string output;
+		std::string output = "OpenGL Debug Message:\n";
+		output += "Debug message (" + std::to_string(p_id) + "): " + p_message + "\n";
 
-		output += "OpenGL Debug Message:\n";
-		output += "Debug message (" + std::to_string(id) + "): " + message + "\n";
-
-		switch (source)
+		switch (p_source)
 		{
 		case GL_DEBUG_SOURCE_API:				output += "Source: API";				break;
 		case GL_DEBUG_SOURCE_WINDOW_SYSTEM:		output += "Source: Window System";		break;
@@ -37,7 +38,7 @@ namespace
 
 		output += "\n";
 
-		switch (type)
+		switch (p_type)
 		{
 		case GL_DEBUG_TYPE_ERROR:               output += "Type: Error";				break;
 		case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: output += "Type: Deprecated Behaviour"; break;
@@ -52,20 +53,12 @@ namespace
 
 		output += "\n";
 
-		switch (severity)
+		switch (p_severity)
 		{
-		case GL_DEBUG_SEVERITY_HIGH:			output += "Severity: High";				break;
-		case GL_DEBUG_SEVERITY_MEDIUM:			output += "Severity: Medium";			break;
-		case GL_DEBUG_SEVERITY_LOW:				output += "Severity: Low";				break;
-		case GL_DEBUG_SEVERITY_NOTIFICATION:	output += "Severity: Notification";		break;
-		}
-
-		switch (severity)
-		{
-		case GL_DEBUG_SEVERITY_HIGH:			BAREGL_LOG_ERROR(output);	break;
-		case GL_DEBUG_SEVERITY_MEDIUM:			BAREGL_LOG_WARNING(output);	break;
-		case GL_DEBUG_SEVERITY_LOW:				BAREGL_LOG_INFO(output);		break;
-		case GL_DEBUG_SEVERITY_NOTIFICATION:	BAREGL_LOG_INFO(output);		break;
+		case GL_DEBUG_SEVERITY_HIGH:			output += "Severity: High";				BAREGL_LOG_ERROR(output);	break;
+		case GL_DEBUG_SEVERITY_MEDIUM:			output += "Severity: Medium";			BAREGL_LOG_WARNING(output);	break;
+		case GL_DEBUG_SEVERITY_LOW:				output += "Severity: Low";				BAREGL_LOG_INFO(output);	break;
+		case GL_DEBUG_SEVERITY_NOTIFICATION:	output += "Severity: Notification";		BAREGL_LOG_INFO(output);	break;
 		}
 	}
 
