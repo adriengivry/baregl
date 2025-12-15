@@ -82,7 +82,7 @@ program.Unbind();
 ```powershell
 git clone https://github.com/adriengivry/baregl --recurse-submodules
 cd .\baregl
-.\gen_proj_win32.bat
+.\gen_proj_windows.bat
 .\build\baregl.sln # (optional) open solution in Visual Studio
 ```
 
