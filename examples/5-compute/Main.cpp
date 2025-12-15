@@ -64,11 +64,9 @@ int main(int, char**)
 	ib.Upload(quadIndices);
 
 	baregl::VertexArray va;
-	va.SetLayout(
-		std::to_array<baregl::data::VertexAttribute>({
-			{ baregl::types::EDataType::FLOAT, 2 }
-		}), vb, ib
-	);
+	va.SetLayout({
+		{ baregl::types::EDataType::FLOAT, 2 }
+	}, vb, ib);
 
 	// Compute shader for particle simulation
 	baregl::ShaderStage computeShader(baregl::types::EShaderType::COMPUTE);

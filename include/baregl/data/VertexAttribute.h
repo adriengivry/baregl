@@ -8,7 +8,7 @@
 
 #include <baregl/types/EDataType.h>
 
-#include <span>
+#include <initializer_list>
 
 namespace baregl::data
 {
@@ -22,5 +22,5 @@ namespace baregl::data
 		bool normalized = false;
 	};
 
-	using VertexAttributeLayout = std::span<const data::VertexAttribute>;
+	using VertexAttributeLayout = std::initializer_list<const data::VertexAttribute>;
 }

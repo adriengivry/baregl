@@ -82,13 +82,11 @@ int main()
 	ib.Upload(indices);
 
 	baregl::VertexArray va;
-	va.SetLayout(
-		std::to_array<baregl::data::VertexAttribute>({
-			{ baregl::types::EDataType::FLOAT, 3 }, // Position
-			{ baregl::types::EDataType::FLOAT, 2 }, // UV
-			{ baregl::types::EDataType::FLOAT, 3 }  // Normal
-			}), vb, ib
-	);
+	va.SetLayout({
+		{ baregl::types::EDataType::FLOAT, 3 }, // Position
+		{ baregl::types::EDataType::FLOAT, 2 }, // UV
+		{ baregl::types::EDataType::FLOAT, 3 }  // Normal
+	}, vb, ib);
 
 	// Shaders
 	baregl::ShaderStage vs(baregl::types::EShaderType::VERTEX);

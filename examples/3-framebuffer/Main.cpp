@@ -49,12 +49,10 @@ int main(int, char**)
 	ib.Upload(indices);
 
 	baregl::VertexArray va;
-	va.SetLayout(
-		std::to_array<baregl::data::VertexAttribute>({
-			{ baregl::types::EDataType::FLOAT, 3 },
-			{ baregl::types::EDataType::FLOAT, 2 }
-		}), vb, ib
-	);
+	va.SetLayout({
+		{ baregl::types::EDataType::FLOAT, 3 },
+		{ baregl::types::EDataType::FLOAT, 2 }
+	}, vb, ib);
 
 	// Shaders
 	baregl::ShaderStage vs(baregl::types::EShaderType::VERTEX);

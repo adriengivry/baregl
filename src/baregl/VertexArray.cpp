@@ -28,7 +28,7 @@ namespace
 		}
 	}
 
-	uint32_t CalculateTotalVertexSize(std::span<const baregl::data::VertexAttribute> p_attributes)
+	uint32_t CalculateTotalVertexSize(const std::initializer_list<const baregl::data::VertexAttribute>& p_attributes)
 	{
 		uint32_t result = 0;
 
