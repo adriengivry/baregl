@@ -4,16 +4,17 @@
 * @licence: MIT
 */
 
-#include <assert.h>
-#include <baregl/Context.h>
 #include <baregl/Buffer.h>
-#include <baregl/VertexArray.h>
+#include <baregl/Context.h>
+#include <baregl/Framebuffer.h>
+#include <baregl/Renderbuffer.h>
 #include <baregl/ShaderProgram.h>
 #include <baregl/ShaderStage.h>
-#include <baregl/Framebuffer.h>
 #include <baregl/Texture.h>
-#include <baregl/Renderbuffer.h>
+#include <baregl/VertexArray.h>
 #include <GLFW/glfw3.h>
+
+#include <cassert>
 
 int main(int, char**)
 {

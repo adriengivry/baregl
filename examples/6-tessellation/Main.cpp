@@ -4,14 +4,15 @@
 * @licence: MIT
 */
 
-#include <cmath>
-#include <baregl/Context.h>
 #include <baregl/Buffer.h>
-#include <baregl/VertexArray.h>
+#include <baregl/Context.h>
 #include <baregl/ShaderProgram.h>
 #include <baregl/ShaderStage.h>
+#include <baregl/VertexArray.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <GLFW/glfw3.h>
+
+#include <cmath>
 
 int main(int, char**)
 {
