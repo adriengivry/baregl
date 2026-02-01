@@ -4,6 +4,7 @@
 * @licence: MIT
 */
 
+#include "utils/EnumMapper.h"
 #include <baregl/Context.h>
 
 #include <baregl/debug/Log.h>
@@ -331,7 +332,7 @@ namespace baregl
 	)
 	{
 		glGetIntegerv(
-			static_cast<GLenum>(p_param),
+			utils::EnumToValue<GLenum>(p_param),
 			&p_out
 		);
 	}
@@ -344,7 +345,7 @@ namespace baregl
 	)
 	{
 		glGetIntegeri_v(
-			static_cast<GLenum>(p_param),
+			utils::EnumToValue<GLenum>(p_param),
 			p_index,
 			&p_out
 		);
