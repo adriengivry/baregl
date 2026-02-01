@@ -25,6 +25,10 @@ int main(int, char**)
 
 	// Graphics context
 	baregl::Context context(true);
+	int val;
+	context.GetValue<int>(baregl::types::EGetParameter::MAX_DRAW_BUFFERS, val);
+	printf("Value: %d\n", val);
+	return 0;
 
 	// Triangle data
 	const float vertices[] = {

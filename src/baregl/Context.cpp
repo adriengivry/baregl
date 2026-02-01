@@ -323,4 +323,30 @@ namespace baregl
 	{
 		return GetString(GL_SHADING_LANGUAGE_VERSION);
 	}
+	
+	template<>
+	void Context::GetValue<int>(
+		types::EGetParameter p_param,
+		int& p_out
+	)
+	{
+		glGetIntegerv(
+			static_cast<GLenum>(p_param),
+			&p_out
+		);
+	}
+
+	template<>
+	void Context::GetValueIndexed<int>(
+		types::EGetParameter p_param,
+		int& p_out,
+		uint32_t p_index
+	)
+	{
+		glGetIntegeri_v(
+			static_cast<GLenum>(p_param),
+			p_index,
+			&p_out
+		);
+	}
 }
