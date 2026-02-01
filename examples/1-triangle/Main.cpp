@@ -25,9 +25,9 @@ int main(int, char**)
 
 	// Graphics context
 	baregl::Context context(true);
-	int val;
+	std::array<int, 1> val;
 	context.GetValue<int>(baregl::types::EGetParameter::MAX_DRAW_BUFFERS, val);
-	printf("Value: %d\n", val);
+	printf("Value: %d\n", val[0]);
 	return 0;
 
 	// Triangle data

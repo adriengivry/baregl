@@ -328,26 +328,26 @@ namespace baregl
 	template<>
 	void Context::GetValue<int>(
 		types::EGetParameter p_param,
-		int& p_out
+		std::span<int> p_out
 	)
 	{
 		glGetIntegerv(
 			utils::EnumToValue<GLenum>(p_param),
-			&p_out
+			p_out.data()
 		);
 	}
 
 	template<>
 	void Context::GetValueIndexed<int>(
 		types::EGetParameter p_param,
-		int& p_out,
+		std::span<int> p_out,
 		uint32_t p_index
 	)
 	{
 		glGetIntegeri_v(
 			utils::EnumToValue<GLenum>(p_param),
 			p_index,
-			&p_out
+			p_out.data()
 		);
 	}
 }

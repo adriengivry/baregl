@@ -20,6 +20,7 @@
 #include <baregl/types/ERenderingCapability.h>
 
 #include <optional>
+#include <span>
 #include <string>
 
 namespace baregl
@@ -269,7 +270,7 @@ namespace baregl
 		template<SupportedGetType T>
 		void GetValue(
 			types::EGetParameter p_param,
-			T& p_out
+			std::span<T> p_out
 		);
 
 		/**
@@ -282,7 +283,7 @@ namespace baregl
 		template<SupportedGetType T>
 		void GetValueIndexed(
 			types::EGetParameter p_param,
-			T& p_out,
+			std::span<T> p_out,
 			uint32_t p_index
 		);
 	};
