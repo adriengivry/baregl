@@ -6,8 +6,7 @@
 
 #pragma once
 
-#include "glad/glad.h"
-#include <GL/glext.h>
+#include <baregl/detail/glad/glad.h>
 #include <baregl/types/EAccessSpecifier.h>
 #include <baregl/types/EBlendingEquation.h>
 #include <baregl/types/EBlendingFactor.h>
@@ -32,7 +31,8 @@
 #include <baregl/types/ETextureType.h>
 #include <baregl/types/ETextureWrapMode.h>
 #include <baregl/types/EUniformType.h>
-#include "../utils/EnumMapper.h"
+#include <baregl/utils/EnumMapper.h>
+#include <GL/glext.h>
 
 template <>
 struct baregl::utils::MappingFor<baregl::types::EComparaisonAlgorithm, GLenum>
