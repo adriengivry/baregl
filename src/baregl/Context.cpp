@@ -4,7 +4,6 @@
 * @licence: MIT
 */
 
-#include "utils/EnumMapper.h"
 #include <baregl/Context.h>
 
 #include <baregl/debug/Log.h>
@@ -13,6 +12,7 @@
 #include <baregl/detail/glad/glad.h>
 #include <baregl/math/Conversions.h>
 #include <baregl/utils/BitmaskOperators.h>
+#include <baregl/utils/EnumMapper.h>
 
 namespace
 {
