@@ -350,4 +350,108 @@ namespace baregl
 			p_out.data()
 		);
 	}
+
+	template<>
+	void Context::GetValue<int64_t>(
+		types::EGetParameter p_param,
+		std::span<int64_t> p_out
+	)
+	{
+		glGetInteger64v(
+			utils::EnumToValue<GLenum>(p_param),
+			p_out.data()
+		);
+	}
+
+	template<>
+	void Context::GetValueIndexed<int64_t>(
+		types::EGetParameter p_param,
+		std::span<int64_t> p_out,
+		uint32_t p_index
+	)
+	{
+		glGetInteger64i_v(
+			utils::EnumToValue<GLenum>(p_param),
+			p_index,
+			p_out.data()
+		);
+	}
+
+	template<>
+	void Context::GetValue<bool>(
+		types::EGetParameter p_param,
+		std::span<bool> p_out
+	)
+	{
+		glGetBooleanv(
+			utils::EnumToValue<GLenum>(p_param),
+			reinterpret_cast<GLboolean*>(p_out.data())
+		);
+	}
+
+	template<>
+	void Context::GetValueIndexed<bool>(
+		types::EGetParameter p_param,
+		std::span<bool> p_out,
+		uint32_t p_index
+	)
+	{
+		glGetBooleani_v(
+			utils::EnumToValue<GLenum>(p_param),
+			p_index,
+			reinterpret_cast<GLboolean*>(p_out.data())
+		);
+	}
+
+	template<>
+	void Context::GetValue<float>(
+		types::EGetParameter p_param,
+		std::span<float> p_out
+	)
+	{
+		glGetFloatv(
+			utils::EnumToValue<GLenum>(p_param),
+			p_out.data()
+		);
+	}
+
+	template<>
+	void Context::GetValueIndexed<float>(
+		types::EGetParameter p_param,
+		std::span<float> p_out,
+		uint32_t p_index
+	)
+	{
+		glGetFloati_v(
+			utils::EnumToValue<GLenum>(p_param),
+			p_index,
+			p_out.data()
+		);
+	}
+
+	template<>
+	void Context::GetValue<double>(
+		types::EGetParameter p_param,
+		std::span<double> p_out
+	)
+	{
+		glGetDoublev(
+			utils::EnumToValue<GLenum>(p_param),
+			p_out.data()
+		);
+	}
+
+	template<>
+	void Context::GetValueIndexed<double>(
+		types::EGetParameter p_param,
+		std::span<double> p_out,
+		uint32_t p_index
+	)
+	{
+		glGetDoublei_v(
+			utils::EnumToValue<GLenum>(p_param),
+			p_index,
+			p_out.data()
+		);
+	}
 }
