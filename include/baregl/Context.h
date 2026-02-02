@@ -274,6 +274,21 @@ namespace baregl
 		);
 
 		/**
+		* Returns the first value of a selected parameter.
+		* @param p_param Parameter to get a value from.
+		* @note BufferSize needs to match the expected parameter value count.
+		*/
+		template<SupportedGetType T, size_t BufferSize = 1>
+		T GetValue(
+			types::EGetParameter p_param
+		)
+		{
+			std::array<T, BufferSize> out;
+			GetValue<T>(p_param, out);
+			return out[0];
+		}
+
+		/**
 		* Returns the value or values of a selected parameter at a given index.
 		* @param p_param Parameter to get a value from.
 		* @param p_out Value or array of values for the given parameter.
@@ -286,5 +301,22 @@ namespace baregl
 			std::span<T> p_out,
 			uint32_t p_index
 		);
+
+		/**
+		* Returns the first value of a selected parameter at a given index.
+		* @param p_param Parameter to get a value from.
+		* @param p_index Specifies the index to retrieve from.
+		* @note BufferSize needs to match the expected parameter value count.
+		*/
+		template<SupportedGetType T, size_t BufferSize = 1>
+		T GetValueIndexed(
+			types::EGetParameter p_param,
+			uint32_t p_index
+		)
+		{
+			std::array<T, BufferSize> out;
+			GetValueIndexed<T>(p_param, out, p_index);
+			return out[0];
+		}
 	};
 }

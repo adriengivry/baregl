@@ -4,6 +4,7 @@
 * @licence: MIT
 */
 
+#include "baregl/types/EGetParameter.h"
 #include <baregl/Buffer.h>
 #include <baregl/Context.h>
 #include <baregl/ShaderProgram.h>
@@ -28,6 +29,7 @@ int main(int, char**)
 	std::array<int, 1> val;
 	context.GetValue<int>(baregl::types::EGetParameter::MAX_DRAW_BUFFERS, val);
 	printf("Value: %d\n", val[0]);
+	printf("Value: %d\n", context.GetValue<int>(baregl::types::EGetParameter::MAX_DRAW_BUFFERS));
 	return 0;
 
 	// Triangle data
