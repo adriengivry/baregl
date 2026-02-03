@@ -1,7 +1,7 @@
 BasedOnStyle: WebKit
 AlignAfterOpenBracket: BlockIndent
 AllowShortFunctionsOnASingleLine: Empty
-BinPackParameters: AlwaysOnePerLine
+BinPackParameters: true
 BreakBeforeBraces: Allman
 ColumnLimit: 80
 NamespaceIndentation: All
