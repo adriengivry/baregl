@@ -1,5 +1,6 @@
 BasedOnStyle: WebKit
 AlignAfterOpenBracket: BlockIndent
+AllowShortCaseLabelsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: Empty
 BinPackParameters: true
 BreakBeforeBraces: Allman
