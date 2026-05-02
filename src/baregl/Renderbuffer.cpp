@@ -51,6 +51,12 @@ namespace baregl
 	void Renderbuffer::Resize(uint16_t p_width, uint16_t p_height)
 	{
 		BAREGL_ASSERT(IsValid(), "Cannot resize a renderbuffer that has not been allocated");
+
+		if (m_width == p_width && m_height == p_height)
+		{
+			return;
+		}
+
 		Allocate(p_width, p_height, m_format);
 	}
 
