@@ -171,7 +171,7 @@ namespace baregl
 
 		auto& desc = m_desc;
 
-		if (p_width != desc.width || p_height != desc.width)
+		if (p_width != desc.width || p_height != desc.height)
 		{
 			desc.width = p_width;
 			desc.height = p_height;
