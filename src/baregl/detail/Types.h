@@ -32,7 +32,6 @@
 #include <baregl/types/ETextureWrapMode.h>
 #include <baregl/types/EUniformType.h>
 #include <baregl/utils/EnumMapper.h>
-#include <GL/glext.h>
 
 template <>
 struct baregl::utils::MappingFor<baregl::types::EComparaisonAlgorithm, GLenum>
@@ -653,7 +652,7 @@ struct baregl::utils::MappingFor<baregl::types::EGetParameter, GLenum>
 		EnumValuePair<EnumType::POINT_SIZE_RANGE, GL_POINT_SIZE_RANGE>,
 		EnumValuePair<EnumType::POLYGON_OFFSET_FACTOR, GL_POLYGON_OFFSET_FACTOR>,
 		EnumValuePair<EnumType::POLYGON_OFFSET_UNITS, GL_POLYGON_OFFSET_UNITS>,
-		EnumValuePair<EnumType::POLYGON_OFFSET_CLAMP, GL_POLYGON_OFFSET_CLAMP>,
+		// EnumValuePair<EnumType::POLYGON_OFFSET_CLAMP, GL_POLYGON_OFFSET_CLAMP>,
 		EnumValuePair<EnumType::POLYGON_OFFSET_FILL, GL_POLYGON_OFFSET_FILL>,
 		EnumValuePair<EnumType::POLYGON_OFFSET_LINE, GL_POLYGON_OFFSET_LINE>,
 		EnumValuePair<EnumType::POLYGON_OFFSET_POINT, GL_POLYGON_OFFSET_POINT>,
