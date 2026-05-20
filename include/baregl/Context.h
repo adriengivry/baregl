@@ -19,7 +19,6 @@
 #include <baregl/types/ERasterizationMode.h>
 #include <baregl/types/ERenderingCapability.h>
 
-#include <optional>
 #include <span>
 #include <string>
 

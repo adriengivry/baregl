@@ -25,6 +25,11 @@ namespace baregl::detail
 		NativeObject(NativeID p_id = 0U);
 
 		/**
+		* Destroys the native object (no-op)
+		*/
+		virtual ~NativeObject() = default;
+
+		/**
 		* Deleted copy constructor
 		*/
 		NativeObject(const NativeObject&) = delete;

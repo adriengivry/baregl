@@ -34,7 +34,7 @@ namespace baregl
 	/**
 	* Represents a framebuffer, used to store render data for the graphics context to use.
 	*/
-	class Framebuffer : public detail::NativeObject
+	class Framebuffer final : public detail::NativeObject
 	{
 	public:
 		template<typename T>
