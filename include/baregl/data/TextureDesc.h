@@ -12,6 +12,8 @@
 #include <baregl/types/ETextureFilteringMode.h>
 #include <baregl/types/ETextureWrapMode.h>
 
+#include <optional>
+
 namespace baregl::data
 {
 	/**

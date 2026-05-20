@@ -6,10 +6,14 @@
 
 #pragma once
 
-#include <baregl/TextureHandle.h>
+#include <baregl/detail/NativeObject.h>
 #include <baregl/math/Vec4.h>
 #include <baregl/data/TextureDesc.h>
+#include <baregl/types/EImageAccessSpecifier.h>
+#include <baregl/types/EInternalFormat.h>
+#include <baregl/types/ETextureType.h>
 
+#include <optional>
 #include <string>
 
 namespace baregl
@@ -17,7 +21,7 @@ namespace baregl
 	/**
 	* Represents a texture, used to store image data for the graphics context to use.
 	*/
-	class Texture final : public TextureHandle
+	class Texture final : public detail::NativeObject
 	{
 	public:
 		/**
@@ -31,6 +35,32 @@ namespace baregl
 		* Destroys the texture.
 		*/
 		~Texture();
+
+		/**
+		* Binds the texture to the given slot.
+		* @param p_slot Optional slot to bind the texture to.
+		*/
+		void Bind(std::optional<uint32_t> p_slot = std::nullopt) const;
+
+		/**
+		* Binds the texture to the given slot as an image texture.
+		* @param p_slot Slot to bind the texture to.
+		* @param p_access The level of access the shader has to the image.
+		* @param p_format The format that the shader will treat the image as.
+		* @param p_level Mipmap level of the texture that will be bound.
+		* @param p_layer Optional layer of the texture to bind.
+		*/
+		void Bind(uint32_t p_slot, types::EImageAccessSpecifier p_access, types::EInternalFormat p_format, uint32_t p_level = 0, std::optional<uint32_t> p_layer = std::nullopt) const;
+
+		/**
+		* Unbinds the texture.
+		*/
+		void Unbind() const;
+
+		/**
+		* Returns the texture type.
+		*/
+		types::ETextureType GetType() const;
 
 		/**
 		* Allocates memory for the texture.
@@ -85,6 +115,7 @@ namespace baregl
 		const std::string& GetDebugName() const;
 
 	private:
+		const uint32_t m_type;
 		data::TextureDesc m_desc;
 		bool m_allocated = false;
 		std::string m_debugName;
