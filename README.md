@@ -92,6 +92,42 @@ cd ./baregl
 ./gen_proj_linux.sh
 ```
 
+## CMake Quick Start
+Create a new C++ project with `glfw`, `glm`, and `baregl` in a few seconds with this quick start `CMakeLists.txt`.
+
+```cmake
+cmake_minimum_required(VERSION 3.16)
+project(my-project)
+
+set(TARGET_NAME ${PROJECT_NAME})
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include(FetchContent)
+
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set(GLFW_BUILD_DOCS  OFF CACHE BOOL "" FORCE)
+set(GLFW_INSTALL     OFF CACHE BOOL "" FORCE)
+FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw.git GIT_TAG 3.4)
+
+set(GLM_BUILD_TESTS   OFF CACHE BOOL "" FORCE)
+set(GLM_ENABLE_CXX_20 ON  CACHE BOOL "" FORCE)
+FetchContent_Declare(glm GIT_REPOSITORY https://github.com/g-truc/glm.git GIT_TAG 1.0.1)
+
+FetchContent_Declare(baregl GIT_REPOSITORY https://github.com/adriengivry/baregl.git GIT_TAG origin/main)
+
+FetchContent_MakeAvailable(glfw glm baregl)
+
+file(GLOB_RECURSE SOURCES "*.cpp" "*.h")
+add_executable(${TARGET_NAME} ${SOURCES})
+
+target_link_libraries(my-project PRIVATE glfw glm baregl)
+```
+
+> [!NOTE]
+> Want a hello world triangle? Add this file alongside your `CMakeLists.txt`:
+> [examples/1-triangle/Main.cpp](examples/1-triangle/Main.cpp)
+
 ## Contributing
 All contributions to *BareGL* are welcome — whether it's reporting bugs, suggesting new features, or submitting code improvements.
 
