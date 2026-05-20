@@ -5,12 +5,10 @@
       "name": "Debug Project",
       "type": "lldb",
       "request": "launch",
-      "cwd": "${workspaceFolder}/build/bin/${input:projectName}/",
-      "program": "${workspaceFolder}/build/bin/${input:projectName}/${input:projectName}",
+      "cwd": "${workspaceFolder}/build/bin/Debug/${input:projectName}/",
+      "program": "${workspaceFolder}/build/bin/Debug/${input:projectName}/${input:projectName}",
       "windows" : {
-        "type": "cppvsdbg",
-        "cwd": "${workspaceFolder}/build/bin/Debug/${input:projectName}/",
-        "program": "${workspaceFolder}/build/bin/Debug/${input:projectName}/${input:projectName}"
+        "type": "cppvsdbg"
       },
       "preLaunchTask": "Build ${input:projectName}"
     }
