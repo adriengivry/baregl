@@ -10,13 +10,18 @@ on:
 
 jobs:
   build:
-    name: Build (${{ matrix.os }})
+    name: ${{ matrix.os_name }} ${{ matrix.config }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
         config: [Debug, Release]
+        include:
+          - os: ubuntu-latest
+            os_name: Linux
+          - os: windows-latest
+            os_name: Windows
 
     steps:
       - name: Checkout
