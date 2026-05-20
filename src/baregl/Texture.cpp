@@ -137,10 +137,10 @@ namespace baregl
 						0,
 						0,
 						0,
-						0,
+						i,
 						m_desc.width,
 						m_desc.height,
-						i,
+						1,
 						utils::EnumToValue<GLenum>(p_format),
 						utils::EnumToValue<GLenum>(p_type),
 						p_data
