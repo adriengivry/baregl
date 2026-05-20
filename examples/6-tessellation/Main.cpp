@@ -12,19 +12,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <GLFW/glfw3.h>
 
-#include <cmath>
-
-int main(int, char**)
+void RunTessellationExample(GLFWwindow* p_window)
 {
-	// GLFW setup
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	GLFWwindow* window = glfwCreateWindow(800, 600, "6-tessellation", nullptr, nullptr);
-	glfwMakeContextCurrent(window);
-
 	// Graphics context
 	baregl::Context context(true);
 	context.SetCapability(baregl::types::ERenderingCapability::DEPTH_TEST, true);
@@ -150,12 +139,12 @@ void main() {
 	program.Link();
 
 	// Render loop
-	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(p_window))
 	{
 		float currentTime = static_cast<float>(glfwGetTime());
 
 		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
+		glfwGetFramebufferSize(p_window, &width, &height);
 		context.SetViewport(0, 0, width, height);
 		context.Clear(true, true, true);
 
@@ -174,9 +163,23 @@ void main() {
 		va.Unbind();
 		program.Unbind();
 
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(p_window);
 		glfwPollEvents();
 	}
+}
+
+int main(int, char**)
+{
+	// GLFW setup
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWwindow* window = glfwCreateWindow(800, 600, "6-tessellation", nullptr, nullptr);
+	glfwMakeContextCurrent(window);
+
+	RunTessellationExample(window);
 
 	glfwTerminate();
 

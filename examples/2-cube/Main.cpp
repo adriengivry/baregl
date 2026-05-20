@@ -14,17 +14,8 @@
 
 #include <chrono>
 
-int main()
+void RunCubeExample(GLFWwindow* p_window)
 {
-	// GLFW setup
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	GLFWwindow* window = glfwCreateWindow(640, 480, "2-cube", nullptr, nullptr);
-	glfwMakeContextCurrent(window);
-
 	// Graphics context
 	baregl::Context context(true);
 	context.SetCapability(baregl::types::ERenderingCapability::DEPTH_TEST, true);
@@ -129,7 +120,7 @@ void main() {
 	auto startTime = std::chrono::steady_clock::now();
 
 	// Render loop
-	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(p_window))
 	{
 		// Time
 		auto now = std::chrono::steady_clock::now();
@@ -137,17 +128,17 @@ void main() {
 
 		// Input
 		const float speed = 0.1f;
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) camPos.z -= speed;
-		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) camPos.z += speed;
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) camPos.x -= speed;
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) camPos.x += speed;
-		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) camPos.y -= speed;
-		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) camPos.y += speed;
-		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) break;
+		if (glfwGetKey(p_window, GLFW_KEY_W) == GLFW_PRESS) camPos.z -= speed;
+		if (glfwGetKey(p_window, GLFW_KEY_S) == GLFW_PRESS) camPos.z += speed;
+		if (glfwGetKey(p_window, GLFW_KEY_A) == GLFW_PRESS) camPos.x -= speed;
+		if (glfwGetKey(p_window, GLFW_KEY_D) == GLFW_PRESS) camPos.x += speed;
+		if (glfwGetKey(p_window, GLFW_KEY_Q) == GLFW_PRESS) camPos.y -= speed;
+		if (glfwGetKey(p_window, GLFW_KEY_E) == GLFW_PRESS) camPos.y += speed;
+		if (glfwGetKey(p_window, GLFW_KEY_ESCAPE) == GLFW_PRESS) break;
 
 		// Viewport
 		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
+		glfwGetFramebufferSize(p_window, &width, &height);
 		context.SetViewport(0, 0, width, height);
 		context.Clear(true, true, true);
 
@@ -168,11 +159,26 @@ void main() {
 		va.Unbind();
 		program.Unbind();
 
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(p_window);
 		glfwPollEvents();
 	}
+}
+
+int main()
+{
+	// GLFW setup
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWwindow* window = glfwCreateWindow(640, 480, "2-cube", nullptr, nullptr);
+	glfwMakeContextCurrent(window);
+
+	RunCubeExample(window);
 
 	glfwTerminate();
 
 	return EXIT_SUCCESS;
 }
+

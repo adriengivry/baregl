@@ -11,8 +11,6 @@
 #include <baregl/VertexArray.h>
 #include <GLFW/glfw3.h>
 
-#include <array>
-
 struct Particle
 {
 	baregl::math::Vec2 position = { 0.0f, 0.0f };
@@ -24,17 +22,8 @@ struct Particle
 	float padding = 0.0f; 
 };
 
-int main(int, char**)
+void RunComputeExample(GLFWwindow* p_window)
 {
-	// GLFW setup
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	GLFWwindow* window = glfwCreateWindow(600, 600, "5-compute", nullptr, nullptr);
-	glfwMakeContextCurrent(window);
-
 	// Graphics context
 	baregl::Context context(true);
 
@@ -200,14 +189,14 @@ void main() {
 	float lastTime = static_cast<float>(glfwGetTime());
 
 	// Render loop
-	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(p_window))
 	{
 		float currentTime = static_cast<float>(glfwGetTime());
 		float deltaTime = currentTime - lastTime;
 		lastTime = currentTime;
 
 		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
+		glfwGetFramebufferSize(p_window, &width, &height);
 		context.SetViewport(0, 0, width, height);
 		context.Clear(true, true, true);
 
@@ -229,9 +218,23 @@ void main() {
 		va.Unbind();
 		renderProgram.Unbind();
 
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(p_window);
 		glfwPollEvents();
 	}
+}
+
+int main(int, char**)
+{
+	// GLFW setup
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWwindow* window = glfwCreateWindow(600, 600, "5-compute", nullptr, nullptr);
+	glfwMakeContextCurrent(window);
+
+	RunComputeExample(window);
 
 	glfwTerminate();
 

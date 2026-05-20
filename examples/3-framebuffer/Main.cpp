@@ -16,17 +16,8 @@
 
 #include <cassert>
 
-int main(int, char**)
+void RunFramebufferExample(GLFWwindow* p_window)
 {
-	// GLFW setup
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	GLFWwindow* window = glfwCreateWindow(800, 600, "3-framebuffer", nullptr, nullptr);
-	glfwMakeContextCurrent(window);
-
 	// Graphics context
 	baregl::Context context(true);
 
@@ -109,10 +100,10 @@ void main() {
 	assert(framebuffer.Validate());
 
 	// Render loop
-	while (!glfwWindowShouldClose(window))
+	while (!glfwWindowShouldClose(p_window))
 	{
 		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
+		glfwGetFramebufferSize(p_window, &width, &height);
 
 		// Draw to framebuffer
 		framebuffer.Bind();
@@ -129,9 +120,23 @@ void main() {
 		// Blit framebuffer to backbuffer
 		framebuffer.BlitToBackBuffer(width, height);
 
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(p_window);
 		glfwPollEvents();
 	}
+}
+
+int main(int, char**)
+{
+	// GLFW setup
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWwindow* window = glfwCreateWindow(800, 600, "3-framebuffer", nullptr, nullptr);
+	glfwMakeContextCurrent(window);
+
+	RunFramebufferExample(window);
 
 	glfwTerminate();
 
