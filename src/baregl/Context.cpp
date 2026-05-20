@@ -16,6 +16,8 @@
 
 namespace
 {
+	uint32_t g_contextCount = 0u;
+
 	void GLDebugMessageCallback(uint32_t p_source, uint32_t p_type, uint32_t p_id, uint32_t p_severity, int32_t p_length, const char* p_message, const void* p_userParam)
 	{
 		// Ignore non-significant error/warning codes
@@ -148,8 +150,12 @@ namespace
 
 namespace baregl
 {
-	Context::Context(bool debug)
+	Context::Context(const baregl::data::ContextDesc& p_desc)
 	{
+		BAREGL_ASSERT(g_contextCount == 0, "A context already exists. BareGL currently only supports a single context.");
+
+		++g_contextCount;
+
 		const int error = gladLoadGL();
 
 		if (error == 0)
@@ -160,7 +166,7 @@ namespace baregl
 
 		BAREGL_LOG_INFO("OpenGL context initialized.");
 
-		if (debug)
+		if (p_desc.debug)
 		{
 			glEnable(GL_DEBUG_OUTPUT);
 			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
@@ -171,6 +177,13 @@ namespace baregl
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glCullFace(GL_BACK);
+	}
+
+	Context::~Context()
+	{
+		BAREGL_ASSERT(g_contextCount > 0, "No context to destroy, did you modify g_contextCount manually?");
+
+		--g_contextCount;
 	}
 
 	void Context::Clear(bool p_colorBuffer, bool p_depthBuffer, bool p_stencilBuffer)

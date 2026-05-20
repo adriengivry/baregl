@@ -7,7 +7,7 @@ It aims to reduce the boilerplate code required to get your modern OpenGL applic
 ## What It's Like
 ```cpp
 // Creating an OpenGL context
-baregl::Context context(true);
+baregl::Context context;
 
 // Creating a vertex buffer
 baregl::Buffer vb;

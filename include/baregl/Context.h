@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include <baregl/data/ContextDesc.h>
 #include <baregl/types/EBlendingEquation.h>
 #include <baregl/types/EBlendingFactor.h>
 #include <baregl/types/EComparaisonAlgorithm.h>
@@ -43,9 +44,14 @@ namespace baregl
 	public:
 		/**
 		* Initializes the OpenGL context.
-		* @param debug Indicates whether to enable debug mode.
+		* @param p_desc Settings to use when creating the context
 		*/
-		Context(bool p_debug);
+		Context(const baregl::data::ContextDesc& p_desc = {});
+
+		/**
+		* Destructor for the OpenGL context.
+		*/
+		~Context();
 
 		/**
 		* Clears the specified buffers.

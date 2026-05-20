@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <string>
+#include <string_view>
 
 #define BAREGL_ASSERT(condition, message) baregl::debug::Assert(condition, message)
 

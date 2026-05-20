@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <string>
+#include <string_view>
 
 #define BAREGL_LOG_INFO(message) baregl::debug::Log<baregl::debug::ELogLevel::INFO>(message)
 #define BAREGL_LOG_WARNING(message) baregl::debug::Log<baregl::debug::ELogLevel::WARNING>(message)

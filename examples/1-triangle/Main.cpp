@@ -15,7 +15,7 @@
 void RunTriangleExample(GLFWwindow* p_window)
 {
 	// Graphics context
-	baregl::Context context(true);
+	baregl::Context context({.debug = true});
 
 	// Triangle data
 	const float vertices[] = {
