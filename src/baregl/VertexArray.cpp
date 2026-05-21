@@ -28,17 +28,85 @@ namespace
 		}
 	}
 
-	uint32_t CalculateTotalVertexSize(const std::initializer_list<const baregl::data::VertexAttribute>& p_attributes)
+	uint32_t GetAttributeSizeInBytes(const baregl::data::VertexAttribute& p_attribute)
+	{
+		return std::visit([](const auto& attr) -> uint32_t {
+			using T = std::decay_t<decltype(attr)>;
+			if constexpr (std::is_same_v<T, baregl::data::DoubleVertexAttribute>)
+			{
+				return sizeof(GLdouble) * attr.count;
+			}
+			else
+			{
+				return GetDataTypeSizeInBytes(attr.type) * attr.count;
+			}
+		}, p_attribute);
+	}
+
+	uint32_t CalculateTotalVertexSize(baregl::data::VertexAttributeLayout p_attributes)
 	{
 		uint32_t result = 0;
 
 		for (const auto& attribute : p_attributes)
 		{
-			result += GetDataTypeSizeInBytes(attribute.type) * attribute.count;
+			result += GetAttributeSizeInBytes(attribute);
 		}
 
 		return result;
 	}
+
+	struct VertexAttribSetter
+	{
+		GLuint index;
+		GLsizei stride;
+		const GLvoid* offset;
+
+		void operator()(const baregl::data::FloatVertexAttribute& attr) const
+		{
+			BAREGL_ASSERT(attr.count >= 1 && attr.count <= 4, "Attribute count must be between 1 and 4");
+			glVertexAttribPointer(
+				index,
+				static_cast<GLint>(attr.count),
+				baregl::utils::EnumToValue<GLenum>(attr.type),
+				static_cast<GLboolean>(attr.normalized),
+				stride,
+				offset
+			);
+		}
+
+		void operator()(const baregl::data::IntegerVertexAttribute& attr) const
+		{
+			BAREGL_ASSERT(attr.count >= 1 && attr.count <= 4, "Attribute count must be between 1 and 4");
+			BAREGL_ASSERT(
+				attr.type == baregl::types::EDataType::BYTE ||
+				attr.type == baregl::types::EDataType::UNSIGNED_BYTE ||
+				attr.type == baregl::types::EDataType::SHORT ||
+				attr.type == baregl::types::EDataType::UNSIGNED_SHORT ||
+				attr.type == baregl::types::EDataType::INT ||
+				attr.type == baregl::types::EDataType::UNSIGNED_INT,
+				"glVertexAttribIPointer requires an integer data type"
+			);
+			glVertexAttribIPointer(
+				index,
+				static_cast<GLint>(attr.count),
+				baregl::utils::EnumToValue<GLenum>(attr.type),
+				stride,
+				offset
+			);
+		}
+
+		void operator()(const baregl::data::DoubleVertexAttribute& attr) const
+		{
+			BAREGL_ASSERT(attr.count >= 1 && attr.count <= 4, "Attribute count must be between 1 and 4");
+			glVertexAttribLPointer(
+				index,
+				static_cast<GLint>(attr.count),
+				GL_DOUBLE,
+				stride,
+				offset
+			);
+		}
+	};
 }
 
 namespace baregl
@@ -72,27 +140,20 @@ namespace baregl
 
 		uint32_t attributeIndex = 0;
 
-		const uint32_t totalSize = CalculateTotalVertexSize(p_attributes);
+		const GLsizei totalSize = static_cast<GLsizei>(CalculateTotalVertexSize(p_attributes));
 		intptr_t currentOffset = 0;
 
 		for (const auto& attribute : p_attributes)
 		{
-			BAREGL_ASSERT(attribute.count >= 1 && attribute.count <= 4, "Attribute count must be between 1 and 4");
-
 			glEnableVertexAttribArray(attributeIndex);
 
-			glVertexAttribPointer(
+			std::visit(VertexAttribSetter{
 				static_cast<GLuint>(attributeIndex),
-				static_cast<GLint>(attribute.count),
-				utils::EnumToValue<GLenum>(attribute.type),
-				static_cast<GLboolean>(attribute.normalized),
-				static_cast<GLsizei>(totalSize),
+				totalSize,
 				reinterpret_cast<const GLvoid*>(currentOffset)
-			);
+			}, attribute);
 
-			const uint64_t typeSize = GetDataTypeSizeInBytes(attribute.type);
-			const uint64_t attributeSize = typeSize * attribute.count;
-			currentOffset += attributeSize;
+			currentOffset += GetAttributeSizeInBytes(attribute);
 			++attributeIndex;
 			++m_attributeCount;
 		}

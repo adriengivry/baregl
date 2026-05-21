@@ -22,8 +22,8 @@ ib.Upload(indices);
 // Defining a vertex layout
 baregl::VertexArray va;
 va.SetLayout({
-    { baregl::types::EDataType::FLOAT, 3 },
-    { baregl::types::EDataType::FLOAT, 2 }
+    baregl::data::FloatVertexAttribute{ baregl::types::EDataType::FLOAT, 3 },
+    baregl::data::FloatVertexAttribute{ baregl::types::EDataType::FLOAT, 2 }
 }, vb, ib);
 
 // Loading and compiling shaders

@@ -74,9 +74,9 @@ void RunCubeExample(GLFWwindow* p_window)
 
 	baregl::VertexArray va;
 	va.SetLayout({
-		{ baregl::types::EDataType::FLOAT, 3 }, // Position
-		{ baregl::types::EDataType::FLOAT, 2 }, // UV
-		{ baregl::types::EDataType::FLOAT, 3 }  // Normal
+		baregl::data::FloatVertexAttribute{ baregl::types::EDataType::FLOAT, 3 }, // Position
+		baregl::data::FloatVertexAttribute{ baregl::types::EDataType::FLOAT, 2 }, // UV
+		baregl::data::FloatVertexAttribute{ baregl::types::EDataType::FLOAT, 3 }  // Normal
 	}, vb, ib);
 
 	// Shaders

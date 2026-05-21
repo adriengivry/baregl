@@ -54,7 +54,7 @@ void RunComputeExample(GLFWwindow* p_window)
 
 	baregl::VertexArray va;
 	va.SetLayout({
-		{ baregl::types::EDataType::FLOAT, 2 }
+		baregl::data::FloatVertexAttribute{ baregl::types::EDataType::FLOAT, 2 }
 	}, vb, ib);
 
 	// Compute shader for particle simulation
