@@ -4,14 +4,7 @@
 * @licence: MIT
 */
 
-#include <baregl/Buffer.h>
-#include <baregl/Context.h>
-#include <baregl/Framebuffer.h>
-#include <baregl/Renderbuffer.h>
-#include <baregl/ShaderProgram.h>
-#include <baregl/ShaderStage.h>
-#include <baregl/Texture.h>
-#include <baregl/VertexArray.h>
+#include <baregl/BareGL.h>
 #include <GLFW/glfw3.h>
 
 #include <cassert>

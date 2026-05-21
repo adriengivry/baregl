@@ -4,11 +4,7 @@
 * @licence: MIT
 */
 
-#include <baregl/Buffer.h>
-#include <baregl/Context.h>
-#include <baregl/ShaderProgram.h>
-#include <baregl/ShaderStage.h>
-#include <baregl/VertexArray.h>
+#include <baregl/BareGL.h>
 #include <GLFW/glfw3.h>
 
 struct Particle
