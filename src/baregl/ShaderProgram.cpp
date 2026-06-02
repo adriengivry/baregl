@@ -99,12 +99,9 @@ template<> \
 type ShaderProgram::GetUniform<type>(const std::string& p_name) \
 { \
 	type result{}; \
-	if (m_uniformsLocationCache.contains(p_name)) \
+	if (auto it = m_uniformsLocationCache.find(p_name); it != m_uniformsLocationCache.end()) \
 	{ \
-		if (const uint32_t location = m_uniformsLocationCache.at(p_name)) \
-		{ \
-			func(m_id, location, reinterpret_cast<glType*>(&result)); \
-		} \
+		func(m_id, it->second, reinterpret_cast<glType*>(&result)); \
 	} \
 	return result; \
 }
@@ -122,9 +119,9 @@ type ShaderProgram::GetUniform<type>(const std::string& p_name) \
 template<> \
 void ShaderProgram::SetUniform<type>(const std::string& p_name, const type& value) \
 { \
-	if (m_uniformsLocationCache.contains(p_name)) \
+	if (auto it = m_uniformsLocationCache.find(p_name); it != m_uniformsLocationCache.end()) \
 	{ \
-		func(m_uniformsLocationCache.at(p_name), __VA_ARGS__); \
+		func(it->second, __VA_ARGS__); \
 	} \
 }
 
