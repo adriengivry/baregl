@@ -24,6 +24,8 @@ namespace baregl
 	{
 		BAREGL_ASSERT(p_toAttach != nullptr, "Cannot attach a null renderbuffer");
 		BAREGL_ASSERT(!p_layer.has_value(), "Renderbuffer cannot use layers");
+		BAREGL_ASSERT(p_index == 0 || p_attachment == types::EFramebufferAttachment::COLOR, "Only color attachments support indexing");
+		BAREGL_ASSERT(p_index < 32, "Color attachment index must be in range [0, 31]");
 
 		const auto attachmentIndex = utils::EnumToValue<GLenum>(p_attachment) + static_cast<GLenum>(p_index);
 		glNamedFramebufferRenderbuffer(m_id, attachmentIndex, GL_RENDERBUFFER, p_toAttach->GetID());
@@ -39,6 +41,8 @@ namespace baregl
 	)
 	{
 		BAREGL_ASSERT(p_toAttach != nullptr, "Cannot attach a null texture");
+		BAREGL_ASSERT(p_index == 0 || p_attachment == types::EFramebufferAttachment::COLOR, "Only color attachments support indexing");
+		BAREGL_ASSERT(p_index < 32, "Color attachment index must be in range [0, 31]");
 
 		const auto attachmentIndex = utils::EnumToValue<GLenum>(p_attachment) + static_cast<GLenum>(p_index);
 		constexpr uint32_t k_mipMapLevel = 0;
