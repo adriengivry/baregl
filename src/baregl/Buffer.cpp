@@ -59,13 +59,23 @@ namespace baregl
 		}
 
 		m_boundAs = p_type;
+		m_bindIndex = p_index;
 	}
 
 	void Buffer::Unbind()
 	{
 		BAREGL_ASSERT(IsValid(), "Cannot unbind an invalid buffer");
 		BAREGL_ASSERT(m_boundAs.has_value(), "Cannot unbind a buffer that is not bound");
-		glBindBuffer(utils::EnumToValue<GLenum>(m_boundAs.value()), 0);
+
+		if (m_bindIndex.has_value())
+		{
+			glBindBufferBase(utils::EnumToValue<GLenum>(m_boundAs.value()), m_bindIndex.value(), m_id);
+		}
+		else
+		{
+			glBindBuffer(utils::EnumToValue<GLenum>(m_boundAs.value()), 0);
+		}
+
 		m_boundAs.reset();
 	}
 

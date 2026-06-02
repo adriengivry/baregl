@@ -79,5 +79,6 @@ namespace baregl
 	protected:
 		uint64_t m_allocatedBytes = 0;
 		std::optional<types::EBufferType> m_boundAs = std::nullopt;
+		std::optional<uint32_t> m_bindIndex = std::nullopt;
 	};
 }
