@@ -84,6 +84,7 @@ namespace baregl
 
 		/**
 		* Sends a uniform value associated with the given name to the GPU.
+		* @note The shader program must be bound before calling SetUniform
 		* @param p_name
 		* @param p_value
 		*/
@@ -92,6 +93,7 @@ namespace baregl
 
 		/**
 		* Returns the value of a uniform associated with the given name.
+		* @note The shader program must be bound before calling GetUniform
 		* @param p_name
 		* @param p_value
 		*/
@@ -105,14 +107,12 @@ namespace baregl
 		std::optional<std::reference_wrapper<const data::UniformInfo>> GetUniformInfo(const std::string& p_name) const;
 
 		/**
-		* Queries the uniforms from the program and caches them in memory.
-		*/
-		void QueryUniforms();
-
-		/**
 		* Returns the uniforms associated with this program.
 		*/
 		const std::unordered_map<std::string, data::UniformInfo>& GetUniforms() const;
+
+	private:
+		void QueryUniforms();
 
 	private:
 		std::unordered_map<std::string, data::UniformInfo> m_uniforms;

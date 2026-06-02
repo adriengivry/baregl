@@ -134,6 +134,21 @@ void ShaderProgram::SetUniform<type>(const std::string& p_name, const type& valu
 	DECLARE_SET_UNIFORM_FUNCTION(math::Mat3, glUniformMatrix3fv, 1, GL_FALSE, &value[0][0]);
 	DECLARE_SET_UNIFORM_FUNCTION(math::Mat4, glUniformMatrix4fv, 1, GL_FALSE, &value[0][0]);
 
+	std::optional<std::reference_wrapper<const baregl::data::UniformInfo>> ShaderProgram::GetUniformInfo(const std::string& p_name) const
+	{
+		if (m_uniforms.contains(p_name))
+		{
+			return m_uniforms.at(p_name);
+		}
+
+		return std::nullopt;
+	}
+
+	const std::unordered_map<std::string, baregl::data::UniformInfo>& ShaderProgram::GetUniforms() const
+	{
+		return m_uniforms;
+	}
+
 	void ShaderProgram::QueryUniforms()
 	{
 		m_uniforms.clear();
@@ -191,20 +206,5 @@ void ShaderProgram::SetUniform<type>(const std::string& p_name, const type& valu
 				});
 			}
 		}
-	}
-
-	std::optional<std::reference_wrapper<const baregl::data::UniformInfo>> ShaderProgram::GetUniformInfo(const std::string& p_name) const
-	{
-		if (m_uniforms.contains(p_name))
-		{
-			return m_uniforms.at(p_name);
-		}
-
-		return std::nullopt;
-	}
-
-	const std::unordered_map<std::string, baregl::data::UniformInfo>& ShaderProgram::GetUniforms() const
-	{
-		return m_uniforms;
 	}
 }
