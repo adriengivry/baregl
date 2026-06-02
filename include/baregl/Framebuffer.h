@@ -122,12 +122,11 @@ namespace baregl
 		void SetTargetReadBuffer(std::optional<uint32_t> p_index);
 
 		/**
-		* Returns the size of the given attachment.
+		* Returns the size of the framebuffer
 		* @param p_attachment
+		* @param p_index
 		*/
-		std::pair<uint16_t, uint16_t> GetSize(
-			types::EFramebufferAttachment p_attachment = types::EFramebufferAttachment::COLOR
-		) const;
+		std::pair<uint16_t, uint16_t> GetSize() const;
 
 		/**
 		* Blits the framebuffer to the back buffer.

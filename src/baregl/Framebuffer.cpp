@@ -12,6 +12,11 @@
 #include <baregl/detail/Types.h>
 #include <baregl/Renderbuffer.h>
 
+namespace
+{
+	constexpr uint32_t k_maxColorAttachmentCount = 32;
+}
+
 namespace baregl
 {
 	template<>
@@ -25,7 +30,7 @@ namespace baregl
 		BAREGL_ASSERT(p_toAttach != nullptr, "Cannot attach a null renderbuffer");
 		BAREGL_ASSERT(!p_layer.has_value(), "Renderbuffer cannot use layers");
 		BAREGL_ASSERT(p_index == 0 || p_attachment == types::EFramebufferAttachment::COLOR, "Only color attachments support indexing");
-		BAREGL_ASSERT(p_index < 32, "Color attachment index must be in range [0, 31]");
+		BAREGL_ASSERT(p_index < k_maxColorAttachmentCount, "Color attachment index must be in range [0, 31]");
 
 		const auto attachmentIndex = utils::EnumToValue<GLenum>(p_attachment) + static_cast<GLenum>(p_index);
 		glNamedFramebufferRenderbuffer(m_id, attachmentIndex, GL_RENDERBUFFER, p_toAttach->GetID());
@@ -42,7 +47,7 @@ namespace baregl
 	{
 		BAREGL_ASSERT(p_toAttach != nullptr, "Cannot attach a null texture");
 		BAREGL_ASSERT(p_index == 0 || p_attachment == types::EFramebufferAttachment::COLOR, "Only color attachments support indexing");
-		BAREGL_ASSERT(p_index < 32, "Color attachment index must be in range [0, 31]");
+		BAREGL_ASSERT(p_index < k_maxColorAttachmentCount, "Color attachment index must be in range [0, 31]");
 
 		const auto attachmentIndex = utils::EnumToValue<GLenum>(p_attachment) + static_cast<GLenum>(p_index);
 		constexpr uint32_t k_mipMapLevel = 0;
@@ -160,6 +165,7 @@ namespace baregl
 	void Framebuffer::SetTargetDrawBuffer(std::optional<uint32_t> p_index)
 	{
 		BAREGL_ASSERT(IsValid(), "Invalid framebuffer");
+		BAREGL_ASSERT(!p_index.has_value() || p_index < k_maxColorAttachmentCount, "Color attachment index must be in range [0, 31]");
 
 		if (p_index.has_value())
 		{
@@ -174,6 +180,7 @@ namespace baregl
 	void Framebuffer::SetTargetReadBuffer(std::optional<uint32_t> p_index)
 	{
 		BAREGL_ASSERT(IsValid(), "Invalid framebuffer");
+		BAREGL_ASSERT(!p_index.has_value() || p_index < k_maxColorAttachmentCount, "Color attachment index must be in range [0, 31]");
 
 		if (p_index.has_value())
 		{
@@ -185,12 +192,12 @@ namespace baregl
 		}
 	}
 
-	std::pair<uint16_t, uint16_t> Framebuffer::GetSize(
-		types::EFramebufferAttachment p_attachment
-	) const
+	std::pair<uint16_t, uint16_t> Framebuffer::GetSize() const
 	{
 		BAREGL_ASSERT(IsValid(), "Cannot get width of an invalid framebuffer");
 
+		// Attachments are expected to be of the same size, other Validate() would fail.
+		// We only need to return the size of the first attachment found, whether it's a texture of render buffer.
 		for (auto& attachment : m_attachments)
 		{
 			if (const auto pval = std::get_if<std::shared_ptr<Texture>>(&attachment.second); pval && *pval)
@@ -216,7 +223,7 @@ namespace baregl
 	{
 		BAREGL_ASSERT(IsValid(), "Cannot blit an invalid framebuffer");
 
-		auto [width, height] = GetSize(types::EFramebufferAttachment::COLOR);
+		auto [width, height] = GetSize();
 
 		glBlitNamedFramebuffer(
 			m_id, 0,
