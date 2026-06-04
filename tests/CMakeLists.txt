@@ -8,6 +8,7 @@ project(tests)
 set(TARGET_NAME ${PROJECT_NAME})
 
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "src" FILES ${SOURCES})
 
 # Create the executable
 add_executable(${TARGET_NAME} ${SOURCES})
