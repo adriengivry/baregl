@@ -6,6 +6,7 @@
 
 #include <baregl/Context.h>
 
+#include <concepts>
 #include <span>
 #include <vector>
 
@@ -538,12 +539,15 @@ namespace baregl
 				return raw[0];
 			else if constexpr (std::same_as<typename R::type, std::array<Elem, N>>)
 				return raw;
+			else if constexpr (std::integral<typename R::type> && std::integral<Elem>)
+				return static_cast<typename R::type>(raw[0]);
 			else if constexpr (std::is_enum_v<typename R::type>)
 				return utils::ValueToEnum<typename R::type>(static_cast<GLenum>(raw[0]));
 
 			static_assert(
 				std::same_as<typename R::type, Elem> ||
 				std::same_as<typename R::type, std::array<Elem, N>> ||
+				(std::integral<typename R::type> && std::integral<Elem>) ||
 				std::is_enum_v<typename R::type>,
 				"Unsupported query result type"
 			);
@@ -585,12 +589,15 @@ namespace baregl
 				return raw[0];
 			else if constexpr (std::same_as<typename R::type, std::array<Elem, N>>)
 				return raw;
+			else if constexpr (std::integral<typename R::type> && std::integral<Elem>)
+				return static_cast<typename R::type>(raw[0]);
 			else if constexpr (std::is_enum_v<typename R::type>)
 				return utils::ValueToEnum<typename R::type>(static_cast<GLenum>(raw[0]));
 
 			static_assert(
 				std::same_as<typename R::type, Elem> ||
 				std::same_as<typename R::type, std::array<Elem, N>> ||
+				(std::integral<typename R::type> && std::integral<Elem>) ||
 				std::is_enum_v<typename R::type>,
 				"Unsupported indexed query result type"
 			);
@@ -872,4 +879,3 @@ namespace baregl
 	INSTANTIATE_DEFAULT_INDEXED_QUERY_SPECIALIZATION(VERTEX_BINDING_BUFFER);
 	INSTANTIATE_DEFAULT_INDEXED_QUERY_SPECIALIZATION(VIEWPORT);
 }
-

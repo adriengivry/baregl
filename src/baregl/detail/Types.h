@@ -12,18 +12,23 @@
 #include <baregl/types/EBlendingFactor.h>
 #include <baregl/types/EBufferType.h>
 #include <baregl/types/EComparaisonAlgorithm.h>
+#include <baregl/types/EContextFlags.h>
 #include <baregl/types/ECullFace.h>
 #include <baregl/types/EDataType.h>
+#include <baregl/types/EDrawBuffer.h>
 #include <baregl/types/EFormat.h>
 #include <baregl/types/EFramebufferAttachment.h>
 #include <baregl/types/EGetParameter.h>
+#include <baregl/types/EHint.h>
 #include <baregl/types/EImageAccessSpecifier.h>
 #include <baregl/types/EInternalFormat.h>
+#include <baregl/types/ELogicOperation.h>
 #include <baregl/types/EMemoryBarrierFlags.h>
 #include <baregl/types/EOperation.h>
 #include <baregl/types/EPixelDataFormat.h>
 #include <baregl/types/EPixelDataType.h>
 #include <baregl/types/EPrimitiveMode.h>
+#include <baregl/types/EProvokingVertexConvention.h>
 #include <baregl/types/ERasterizationMode.h>
 #include <baregl/types/ERenderingCapability.h>
 #include <baregl/types/EShaderType.h>
@@ -109,6 +114,85 @@ struct baregl::utils::MappingFor<baregl::types::ECullFace, GLenum>
 		EnumValuePair<EnumType::FRONT, GL_FRONT>,
 		EnumValuePair<EnumType::BACK, GL_BACK>,
 		EnumValuePair<EnumType::FRONT_AND_BACK, GL_FRONT_AND_BACK>
+	>;
+};
+
+template <>
+struct baregl::utils::MappingFor<baregl::types::EHint, GLenum>
+{
+	using EnumType = baregl::types::EHint;
+	using type = std::tuple<
+		EnumValuePair<EnumType::DONT_CARE, GL_DONT_CARE>,
+		EnumValuePair<EnumType::FASTEST, GL_FASTEST>,
+		EnumValuePair<EnumType::NICEST, GL_NICEST>
+	>;
+};
+
+template <>
+struct baregl::utils::MappingFor<baregl::types::ELogicOperation, GLenum>
+{
+	using EnumType = baregl::types::ELogicOperation;
+	using type = std::tuple<
+		EnumValuePair<EnumType::CLEAR, GL_CLEAR>,
+		EnumValuePair<EnumType::SET, GL_SET>,
+		EnumValuePair<EnumType::COPY, GL_COPY>,
+		EnumValuePair<EnumType::COPY_INVERTED, GL_COPY_INVERTED>,
+		EnumValuePair<EnumType::NOOP, GL_NOOP>,
+		EnumValuePair<EnumType::INVERT, GL_INVERT>,
+		EnumValuePair<EnumType::AND, GL_AND>,
+		EnumValuePair<EnumType::NAND, GL_NAND>,
+		EnumValuePair<EnumType::OR, GL_OR>,
+		EnumValuePair<EnumType::NOR, GL_NOR>,
+		EnumValuePair<EnumType::XOR, GL_XOR>,
+		EnumValuePair<EnumType::EQUIV, GL_EQUIV>,
+		EnumValuePair<EnumType::AND_REVERSE, GL_AND_REVERSE>,
+		EnumValuePair<EnumType::AND_INVERTED, GL_AND_INVERTED>,
+		EnumValuePair<EnumType::OR_REVERSE, GL_OR_REVERSE>,
+		EnumValuePair<EnumType::OR_INVERTED, GL_OR_INVERTED>
+	>;
+};
+
+template <>
+struct baregl::utils::MappingFor<baregl::types::EProvokingVertexConvention, GLenum>
+{
+	using EnumType = baregl::types::EProvokingVertexConvention;
+	using type = std::tuple<
+		EnumValuePair<EnumType::FIRST_VERTEX_CONVENTION, GL_FIRST_VERTEX_CONVENTION>,
+		EnumValuePair<EnumType::LAST_VERTEX_CONVENTION, GL_LAST_VERTEX_CONVENTION>,
+		EnumValuePair<EnumType::UNDEFINED_VERTEX, GL_UNDEFINED_VERTEX>
+	>;
+};
+
+template <>
+struct baregl::utils::MappingFor<baregl::types::EDrawBuffer, GLenum>
+{
+	using EnumType = baregl::types::EDrawBuffer;
+	using type = std::tuple<
+		EnumValuePair<EnumType::NONE, GL_NONE>,
+		EnumValuePair<EnumType::FRONT_LEFT, GL_FRONT_LEFT>,
+		EnumValuePair<EnumType::FRONT_RIGHT, GL_FRONT_RIGHT>,
+		EnumValuePair<EnumType::BACK_LEFT, GL_BACK_LEFT>,
+		EnumValuePair<EnumType::BACK_RIGHT, GL_BACK_RIGHT>,
+		EnumValuePair<EnumType::FRONT, GL_FRONT>,
+		EnumValuePair<EnumType::BACK, GL_BACK>,
+		EnumValuePair<EnumType::LEFT, GL_LEFT>,
+		EnumValuePair<EnumType::RIGHT, GL_RIGHT>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT0>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT1>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT2, GL_COLOR_ATTACHMENT2>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT3, GL_COLOR_ATTACHMENT3>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT4, GL_COLOR_ATTACHMENT4>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT5, GL_COLOR_ATTACHMENT5>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT6, GL_COLOR_ATTACHMENT6>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT7, GL_COLOR_ATTACHMENT7>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT8, GL_COLOR_ATTACHMENT8>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT9, GL_COLOR_ATTACHMENT9>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT10, GL_COLOR_ATTACHMENT10>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT11, GL_COLOR_ATTACHMENT11>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT12, GL_COLOR_ATTACHMENT12>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT13, GL_COLOR_ATTACHMENT13>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT14, GL_COLOR_ATTACHMENT14>,
+		EnumValuePair<EnumType::COLOR_ATTACHMENT15, GL_COLOR_ATTACHMENT15>
 	>;
 };
 
@@ -523,6 +607,19 @@ struct baregl::utils::MappingFor<baregl::types::EMemoryBarrierFlags, GLbitfield>
 		EnumValuePair<EnumType::SHADER_STORAGE, GL_SHADER_STORAGE_BARRIER_BIT>,
 		EnumValuePair<EnumType::QUERY_BUFFER, GL_QUERY_BUFFER_BARRIER_BIT>,
 		EnumValuePair<EnumType::ALL, GL_ALL_BARRIER_BITS>
+	>;
+};
+
+template <>
+struct baregl::utils::MappingFor<baregl::types::EContextFlags, GLbitfield>
+{
+	using EnumType = baregl::types::EContextFlags;
+	using type = std::tuple<
+		EnumValuePair<EnumType::NONE, static_cast<GLbitfield>(0)>,
+		EnumValuePair<EnumType::FORWARD_COMPATIBLE, GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT>,
+		EnumValuePair<EnumType::DEBUG_BIT, GL_CONTEXT_FLAG_DEBUG_BIT>,
+		EnumValuePair<EnumType::ROBUST_ACCESS, GL_CONTEXT_FLAG_ROBUST_ACCESS_BIT>,
+		EnumValuePair<EnumType::NO_ERROR, static_cast<GLbitfield>(0x00000008)>
 	>;
 };
 
