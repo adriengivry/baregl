@@ -62,6 +62,10 @@ endif()
 
 if(BAREGL_GENERATE_TESTS)
     message(STATUS "Generating BareGL tests...")
+
+    include(CTest)
+    enable_testing()
+
     add_subdirectory(deps/Catch2)
     add_subdirectory(tests)
 endif()

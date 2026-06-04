@@ -38,6 +38,12 @@ target_link_libraries(${TARGET_NAME}
         Catch2::Catch2WithMain
 )
 
+# Enable tests
+list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
+include(CTest)
+include(Catch)
+catch_discover_tests(${TARGET_NAME})
+
 # Configuration-specific settings
 target_compile_definitions(${TARGET_NAME}
     PRIVATE
