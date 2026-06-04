@@ -13,6 +13,8 @@ void RunTriangleExample(GLFWwindow* p_window)
 	// Graphics context
 	baregl::Context context({.debug = true});
 
+	auto activeTexture = context.Get<baregl::types::EGetParameter::ACTIVE_TEXTURE>();
+
 	// Triangle data
 	const float vertices[] = {
 		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,	// Bottom left

@@ -7,6 +7,7 @@
 #pragma once
 
 #include <baregl/data/ContextDesc.h>
+#include <baregl/data/QueryResult.h>
 #include <baregl/types/EBlendingEquation.h>
 #include <baregl/types/EBlendingFactor.h>
 #include <baregl/types/EComparaisonAlgorithm.h>
@@ -265,6 +266,12 @@ namespace baregl
 		* @return A string containing the shading language version.
 		*/
 		std::string GetShadingLanguageVersion();
+
+		/**
+		* Queries OpenGL context for a given value
+		*/
+		template<auto PName>
+		data::QueryResultType<PName> Get();
 
 		/**
 		* Returns the value or values of a selected parameter.

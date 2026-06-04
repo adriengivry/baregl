@@ -467,4 +467,12 @@ namespace baregl
 			p_out.data()
 		);
 	}
+
+	template<>
+	data::QueryResultType<types::EGetParameter::ACTIVE_TEXTURE> Context::Get<types::EGetParameter::ACTIVE_TEXTURE>()
+	{
+		std::array<int, 1> values;
+		GetValue<int>(types::EGetParameter::ACTIVE_TEXTURE, values);
+		return values.at(0) - static_cast<int>(GL_TEXTURE0);
+	}
 }
