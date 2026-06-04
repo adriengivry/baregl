@@ -55,6 +55,12 @@
       "command": "cmake --build ${workspaceFolder}/build --config Debug --target tests"
     },
     {
+      "label": "Run tests",
+      "type": "shell",
+      "command": "ctest --test-dir ${workspaceFolder}/build -C Debug --output-on-failure",
+      "dependsOn": "Build tests"
+    },
+    {
       "label": "Clean",
       "type": "shell",
       "command": "rm -rf ${workspaceFolder}/build/",
