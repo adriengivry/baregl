@@ -29,6 +29,7 @@
 #include <baregl/types/EShaderType.h>
 #include <baregl/types/ETextureFilteringMode.h>
 #include <baregl/types/ETextureType.h>
+#include <baregl/types/ETextureUnit.h>
 #include <baregl/types/ETextureWrapMode.h>
 #include <baregl/types/EUniformType.h>
 #include <baregl/utils/EnumMapper.h>
@@ -458,6 +459,46 @@ struct baregl::utils::MappingFor<baregl::types::ETextureType, GLenum>
 	using type = std::tuple<
 		EnumValuePair<EnumType::TEXTURE_2D, GL_TEXTURE_2D>,
 		EnumValuePair<EnumType::TEXTURE_CUBE, GL_TEXTURE_CUBE_MAP>
+	>;
+};
+
+template <>
+struct baregl::utils::MappingFor<baregl::types::ETextureUnit, GLenum>
+{
+	using EnumType = baregl::types::ETextureUnit;
+	using type = std::tuple<
+		EnumValuePair<EnumType::TEXTURE0,  GL_TEXTURE0>,
+		EnumValuePair<EnumType::TEXTURE1,  GL_TEXTURE1>,
+		EnumValuePair<EnumType::TEXTURE2,  GL_TEXTURE2>,
+		EnumValuePair<EnumType::TEXTURE3,  GL_TEXTURE3>,
+		EnumValuePair<EnumType::TEXTURE4,  GL_TEXTURE4>,
+		EnumValuePair<EnumType::TEXTURE5,  GL_TEXTURE5>,
+		EnumValuePair<EnumType::TEXTURE6,  GL_TEXTURE6>,
+		EnumValuePair<EnumType::TEXTURE7,  GL_TEXTURE7>,
+		EnumValuePair<EnumType::TEXTURE8,  GL_TEXTURE8>,
+		EnumValuePair<EnumType::TEXTURE9,  GL_TEXTURE9>,
+		EnumValuePair<EnumType::TEXTURE10, GL_TEXTURE10>,
+		EnumValuePair<EnumType::TEXTURE11, GL_TEXTURE11>,
+		EnumValuePair<EnumType::TEXTURE12, GL_TEXTURE12>,
+		EnumValuePair<EnumType::TEXTURE13, GL_TEXTURE13>,
+		EnumValuePair<EnumType::TEXTURE14, GL_TEXTURE14>,
+		EnumValuePair<EnumType::TEXTURE15, GL_TEXTURE15>,
+		EnumValuePair<EnumType::TEXTURE16, GL_TEXTURE16>,
+		EnumValuePair<EnumType::TEXTURE17, GL_TEXTURE17>,
+		EnumValuePair<EnumType::TEXTURE18, GL_TEXTURE18>,
+		EnumValuePair<EnumType::TEXTURE19, GL_TEXTURE19>,
+		EnumValuePair<EnumType::TEXTURE20, GL_TEXTURE20>,
+		EnumValuePair<EnumType::TEXTURE21, GL_TEXTURE21>,
+		EnumValuePair<EnumType::TEXTURE22, GL_TEXTURE22>,
+		EnumValuePair<EnumType::TEXTURE23, GL_TEXTURE23>,
+		EnumValuePair<EnumType::TEXTURE24, GL_TEXTURE24>,
+		EnumValuePair<EnumType::TEXTURE25, GL_TEXTURE25>,
+		EnumValuePair<EnumType::TEXTURE26, GL_TEXTURE26>,
+		EnumValuePair<EnumType::TEXTURE27, GL_TEXTURE27>,
+		EnumValuePair<EnumType::TEXTURE28, GL_TEXTURE28>,
+		EnumValuePair<EnumType::TEXTURE29, GL_TEXTURE29>,
+		EnumValuePair<EnumType::TEXTURE30, GL_TEXTURE30>,
+		EnumValuePair<EnumType::TEXTURE31, GL_TEXTURE31>
 	>;
 };
 

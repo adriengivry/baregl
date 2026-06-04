@@ -13,6 +13,7 @@
 #include <baregl/types/EComparaisonAlgorithm.h>
 #include <baregl/types/ECullFace.h>
 #include <baregl/types/EGetParameter.h>
+#include <baregl/types/ETextureUnit.h>
 #include <baregl/types/EOperation.h>
 
 namespace baregl::data
@@ -37,7 +38,8 @@ namespace baregl::data
 			static constexpr bool dynamic_count = true; \
 			static constexpr types::EGetParameter dynamic_count_parameter = COUNT_PARAMETER; \
 		};
-	BAREGL_DECLARE_QUERY_RESULT(ACTIVE_TEXTURE, int, 1, false, uint32_t);
+
+	BAREGL_DECLARE_QUERY_RESULT(ACTIVE_TEXTURE, int, 1, false, types::ETextureUnit);
 	BAREGL_DECLARE_QUERY_RESULT(ALIASED_LINE_WIDTH_RANGE, float, 2, false, std::array<float, 2>);
 	BAREGL_DECLARE_QUERY_RESULT(ARRAY_BUFFER_BINDING, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(BLEND, bool, 1, false, bool);
