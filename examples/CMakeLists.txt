@@ -1,7 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
 
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
 # Now add the example projects
 add_subdirectory(1-triangle)
 add_subdirectory(2-cube)

@@ -8,6 +8,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include <stdexcept>
+
 namespace tests::baregl
 {
 	void RunInContext(std::function<void(GLFWwindow*)> p_callback)

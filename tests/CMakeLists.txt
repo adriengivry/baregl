@@ -36,6 +36,8 @@ FetchContent_Declare(
   GIT_TAG        v3.8.1 # or a later release
 )
 FetchContent_MakeAvailable(Catch2)
+set_target_properties(Catch2 PROPERTIES FOLDER "deps")
+set_target_properties(Catch2WithMain PROPERTIES FOLDER "deps")
 
 # Link libraries
 target_link_libraries(${TARGET_NAME}
