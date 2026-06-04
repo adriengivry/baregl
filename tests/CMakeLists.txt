@@ -28,17 +28,6 @@ set_target_properties(${TARGET_NAME} PROPERTIES
     FOLDER "tests"
 )
 
-# Add Catch2 (test framework)
-Include(FetchContent)
-FetchContent_Declare(
-  Catch2
-  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.8.1 # or a later release
-)
-FetchContent_MakeAvailable(Catch2)
-set_target_properties(Catch2 PROPERTIES FOLDER "deps")
-set_target_properties(Catch2WithMain PROPERTIES FOLDER "deps")
-
 # Link libraries
 target_link_libraries(${TARGET_NAME}
     PRIVATE

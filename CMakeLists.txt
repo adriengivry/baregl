@@ -46,22 +46,8 @@ set_target_properties(baregl PROPERTIES
 
 # Add dependencies when either examples or tests projects are requested
 if(BAREGL_GENERATE_EXAMPLES OR BAREGL_GENERATE_TESTS)
-    include(FetchContent)
-
-    set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-    set(GLFW_BUILD_DOCS  OFF CACHE BOOL "" FORCE)
-    set(GLFW_INSTALL     OFF CACHE BOOL "" FORCE)
-    FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw.git GIT_TAG 3.4)
-
-    set(GLM_BUILD_TESTS   OFF CACHE BOOL "" FORCE)
-    set(GLM_ENABLE_CXX_20 ON  CACHE BOOL "" FORCE)
-    FetchContent_Declare(glm GIT_REPOSITORY https://github.com/g-truc/glm.git GIT_TAG 1.0.3)
-
-    FetchContent_MakeAvailable(glfw glm)
-
-    set_target_properties(glm PROPERTIES FOLDER "deps")
-    set_target_properties(glfw PROPERTIES FOLDER "deps/GLFW")
-    set_target_properties(update_mappings PROPERTIES FOLDER "deps/GLFW")
+    add_subdirectory(deps/glfw)
+    add_subdirectory(deps/glm)
 endif()
 
 # Include examples if the option is enabled
@@ -73,5 +59,6 @@ endif()
 
 if(BAREGL_GENERATE_TESTS)
     message(STATUS "Generating BareGL tests...")
+    add_subdirectory(deps/Catch2)
     add_subdirectory(tests)
 endif()
