@@ -140,7 +140,6 @@ For more information on contributing, check out [CONTRIBUTING.md](CONTRIBUTING.m
 
 *By contributing, you agree that your contributions will be licensed under the [MIT License](LICENSE).*
 
-
 ## License
 *BareGL* is licensed under the [MIT License](LICENSE).
 
