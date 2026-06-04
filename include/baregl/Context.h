@@ -264,6 +264,7 @@ namespace baregl
 
 		/**
 		* Returns the value or values for a given parameter at a given index
+		* @param p_index
 		* @return Query result
 		*/
 		template<auto PName>
