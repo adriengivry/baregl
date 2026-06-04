@@ -1,6 +1,0 @@
-[submodule "examples/deps/_glfw/glfw"]
-	path = examples/deps/_glfw/glfw
-	url = https://github.com/glfw/glfw.git
-[submodule "examples/deps/_glm/glm"]
-	path = examples/deps/_glm/glm
-	url = https://github.com/g-truc/glm.git

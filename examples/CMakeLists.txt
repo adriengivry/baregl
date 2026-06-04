@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.16)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# First, add the dependencies
-add_subdirectory(deps/_glm)
-add_subdirectory(deps/_glfw)
-
 # Now add the example projects
 add_subdirectory(1-triangle)
 add_subdirectory(2-cube)

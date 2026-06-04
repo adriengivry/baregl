@@ -64,22 +64,20 @@ program.Unbind();
 - Easy integration with [CMake](https://cmake.org/)
 
 ## Dependencies
-| BareGL (library) | Examples |
+| BareGL (library) | Examples & Tests |
 | - | - |
-| [glad](https://github.com/Dav1dde/glad) (included in sources) | [glfw](https://github.com/glfw/glfw) & [glm](https://github.com/g-truc/glm) (included as submodules) |
+| [glad](https://github.com/Dav1dde/glad) (included in sources) | [glfw](https://github.com/glfw/glfw) & [glm](https://github.com/g-truc/glm) (downloaded with CMake's FetchContent) |
 
 ## CMake Configuration
 | Option | Allowed Values | Description |
 | - | - | - |
-| `BAREGL_GENERATE_EXAMPLES` |  `ON` / `OFF` (default) | Generate example projects (require [glfw](https://github.com/glfw/glfw), and [glm](https://github.com/g-truc/glm) submodules to be initialized) |
+| `BAREGL_GENERATE_EXAMPLES` |  `ON` / `OFF` (default) | Generate example projects |
+| `BAREGL_GENERATE_TESTS` |  `ON` / `OFF` (default) | Generate test project |
 
 ## Building Examples
-> [!IMPORTANT]
-> Example projects depend on [glfw](https://github.com/glfw/glfw) and [glm](https://github.com/g-truc/glm), which are included as Git submodules. Make sure to initialize submodules before generating projects.
-
 **Windows:**
 ```powershell
-git clone https://github.com/adriengivry/baregl --recurse-submodules
+git clone https://github.com/adriengivry/baregl
 cd .\baregl
 .\gen_proj_windows.bat
 .\build\baregl.sln # (optional) open solution in Visual Studio
@@ -87,7 +85,7 @@ cd .\baregl
 
 **Linux:**
 ```powershell
-git clone https://github.com/adriengivry/baregl --recurse-submodules
+git clone https://github.com/adriengivry/baregl
 cd ./baregl
 ./gen_proj_linux.sh
 ```

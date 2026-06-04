@@ -24,7 +24,8 @@
         "3-framebuffer",
         "4-geometry",
         "5-compute",
-        "6-tessellation"
+        "6-tessellation",
+        "tests"
       ],
       "default": "1-triangle"
     }
