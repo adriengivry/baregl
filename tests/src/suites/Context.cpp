@@ -10,7 +10,7 @@
 
 using namespace baregl;
 
-TEST_CASE( "Context created", "[context]" ) {
+TEST_CASE( "Context can be created", "[context]" ) {
 	tests::baregl::RunInContext([](GLFWwindow* p_window) {
 		Context context;
 	});
@@ -25,12 +25,9 @@ TEST_CASE( "Context is alone", "[context]" ) {
 
 TEST_CASE( "Context can be recreated", "[context]" ) {
 	tests::baregl::RunInContext([](GLFWwindow* p_window) {
-		{
-			Context context;
-		}
-		{
-			baregl::Context context;
-		}
+		auto context = std::make_unique<Context>();
+		context.reset();
+		context = std::make_unique<Context>();
 	});
 }
 
