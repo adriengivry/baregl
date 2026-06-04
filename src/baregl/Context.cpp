@@ -6,8 +6,8 @@
 
 #include <baregl/Context.h>
 
-#include <baregl/debug/Log.h>
 #include <baregl/debug/Assert.h>
+#include <baregl/debug/Log.h>
 #include <baregl/detail/Types.h>
 #include <baregl/detail/glad/glad.h>
 #include <baregl/math/Conversions.h>

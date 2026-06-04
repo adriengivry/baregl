@@ -7,6 +7,7 @@
 #include <baregl/ShaderProgram.h>
 
 #include <baregl/debug/Assert.h>
+#include <baregl/debug/Event.h>
 #include <baregl/debug/Log.h>
 #include <baregl/detail/glad/glad.h>
 #include <baregl/detail/Types.h>
@@ -21,11 +22,13 @@ namespace baregl
 	ShaderProgram::ShaderProgram() :
 		detail::NativeObject(glCreateProgram())
 	{
+		NOTIFY_SHADER_PROGRAM_CREATED;
 	}
 
 	ShaderProgram::~ShaderProgram()
 	{
 		glDeleteProgram(m_id);
+		NOTIFY_SHADER_PROGRAM_DESTROYED;
 	}
 
 	void ShaderProgram::Bind() const
