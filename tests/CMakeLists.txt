@@ -7,8 +7,8 @@ project(tests)
 # Reuse the project name as the target name to avoid repetition
 set(TARGET_NAME ${PROJECT_NAME})
 
-file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
-source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "src" FILES ${SOURCES})
+file(GLOB_RECURSE SOURCES "*.cpp" "*.h")
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${SOURCES})
 
 # Create the executable
 add_executable(${TARGET_NAME} ${SOURCES})
@@ -16,7 +16,7 @@ add_executable(${TARGET_NAME} ${SOURCES})
 # Add include directory
 target_include_directories(${TARGET_NAME}
     PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
 # Set C++ standard

@@ -6,18 +6,20 @@
 
 #include <catch2/catch_test_macros.hpp>
 
-#include <common/BareGL.h>
+#include <common/Boilerplate.h>
 
 using namespace baregl;
+using namespace tests::common::boilerplate;
 
 TEST_CASE( "Context can be created", "[context]" ) {
-	tests::baregl::RunInContext([](GLFWwindow* p_window) {
+	RunInWindow([](GLFWwindow* p_window) {
 		Context context;
+		REQUIRE( context.GetShadingLanguageVersion() != "" );
 	});
 }
 
 TEST_CASE( "Context can be recreated", "[context]" ) {
-	tests::baregl::RunInContext([](GLFWwindow* p_window) {
+	RunInWindow([](GLFWwindow* p_window) {
 		auto context = std::make_unique<Context>();
 		context.reset();
 		context = std::make_unique<Context>();

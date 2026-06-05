@@ -226,7 +226,8 @@ struct baregl::utils::MappingFor<baregl::types::ERenderingCapability, GLenum>
 		EnumValuePair<EnumType::SAMPLE_COVERAGE, GL_SAMPLE_COVERAGE>,
 		EnumValuePair<EnumType::SCISSOR_TEST, GL_SCISSOR_TEST>,
 		EnumValuePair<EnumType::STENCIL_TEST, GL_STENCIL_TEST>,
-		EnumValuePair<EnumType::MULTISAMPLE, GL_MULTISAMPLE>
+		EnumValuePair<EnumType::MULTISAMPLE, GL_MULTISAMPLE>,
+		EnumValuePair<EnumType::LINE_SMOOTH, GL_LINE_SMOOTH>
 	>;
 };
 
