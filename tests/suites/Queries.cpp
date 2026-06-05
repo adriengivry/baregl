@@ -131,6 +131,11 @@ TEST_CASE( "Queries return the expected values", "[queries]" ) {
 		REQUIRE( QUERY(LINE_SMOOTH) == false );
 		p_context.SetCapability(ERenderingCapability::LINE_SMOOTH, true);
 		REQUIRE( QUERY(LINE_SMOOTH) == true );
+		REQUIRE( QUERY(LINE_SMOOTH_HINT) == EHint::DONT_CARE );
+		REQUIRE( QUERY(LINE_WIDTH) == 1.0f);
+		p_context.SetRasterizationLinesWidth(2.0f);
+		REQUIRE( QUERY(LINE_WIDTH) == 2.0f);
+		REQUIRE( QUERY(LAYER_PROVOKING_VERTEX) == EProvokingVertexConvention::FIRST_VERTEX_CONVENTION);
 	});
 }
 

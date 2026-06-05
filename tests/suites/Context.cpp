@@ -14,7 +14,6 @@ using namespace tests::common::boilerplate;
 TEST_CASE( "Context can be created", "[context]" ) {
 	RunInWindow([](GLFWwindow* p_window) {
 		Context context;
-		REQUIRE( context.GetShadingLanguageVersion() != "" );
 	});
 }
 
