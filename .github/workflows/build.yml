@@ -26,8 +26,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
@@ -36,7 +34,10 @@ jobs:
           sudo apt-get install -y libgl-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
 
       - name: Configure
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DBAREGL_GENERATE_EXAMPLES=ON -DGLFW_BUILD_WAYLAND=OFF
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DBAREGL_GENERATE_EXAMPLES=ON -DBAREGL_GENERATE_TESTS=ON -DGLFW_BUILD_WAYLAND=OFF
 
       - name: Build
         run: cmake --build build --config ${{ matrix.config }}
+
+      - name: Test
+        run: ctest --test-dir build -C ${{ matrix.config }} --output-on-failure

@@ -1,0 +1,77 @@
+cmake_minimum_required(VERSION 3.16)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+project(tests)
+
+# Reuse the project name as the target name to avoid repetition
+set(TARGET_NAME ${PROJECT_NAME})
+
+file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.h")
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/src PREFIX "src" FILES ${SOURCES})
+
+# Create the executable
+add_executable(${TARGET_NAME} ${SOURCES})
+
+# Add include directory
+target_include_directories(${TARGET_NAME}
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
+)
+
+# Set C++ standard
+set_target_properties(${TARGET_NAME} PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>/${TARGET_NAME}"
+    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>/${TARGET_NAME}"
+    FOLDER "tests"
+)
+
+# Link libraries
+target_link_libraries(${TARGET_NAME}
+    PRIVATE
+        glfw
+        glm
+        baregl
+        Catch2::Catch2WithMain
+)
+
+# Enable tests
+list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
+include(CTest)
+include(Catch)
+catch_discover_tests(${TARGET_NAME})
+
+# Configuration-specific settings
+target_compile_definitions(${TARGET_NAME}
+    PRIVATE
+        $<$<CONFIG:Debug>:DEBUG>
+        $<$<CONFIG:Release>:NDEBUG>
+)
+
+# Platform-specific options
+if(WIN32)
+    target_compile_options(${TARGET_NAME}
+        PRIVATE
+            $<$<CONFIG:Debug>:/Zi /Od /MDd>
+            $<$<CONFIG:Release>:/O2 /MD>
+    )
+else()
+    target_compile_options(${TARGET_NAME}
+        PRIVATE
+            $<$<CONFIG:Debug>:-g -O0>
+            $<$<CONFIG:Release>:-O3>
+    )
+
+    # Add platform-specific libraries
+    if(UNIX AND NOT APPLE)
+        if(DEFINED X11_LIBS)
+            target_link_libraries(${TARGET_NAME} PRIVATE ${X11_LIBS})
+        endif()
+        if(DEFINED WAYLAND_LIBS)
+            target_link_libraries(${TARGET_NAME} PRIVATE ${WAYLAND_LIBS})
+        endif()
+    endif()
+endif()
