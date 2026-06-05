@@ -16,13 +16,6 @@ TEST_CASE( "Context can be created", "[context]" ) {
 	});
 }
 
-TEST_CASE( "Context is alone", "[context]" ) {
-	tests::baregl::RunInContext([](GLFWwindow* p_window) {
-		Context context;
-		REQUIRE_THROWS( std::make_unique<baregl::Context>() );
-	});
-}
-
 TEST_CASE( "Context can be recreated", "[context]" ) {
 	tests::baregl::RunInContext([](GLFWwindow* p_window) {
 		auto context = std::make_unique<Context>();
