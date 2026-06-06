@@ -5,6 +5,7 @@
 */
 
 #include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include <common/Boilerplate.h>
 
@@ -236,8 +237,7 @@ TEST_CASE( "Queries return the expected values", "[queries]" ) {
 		REQUIRE( QUERY(POINT_SIZE_RANGE)[1] >= 1.0f );
 		REQUIRE( QUERY(POLYGON_OFFSET_FACTOR) == 0.0f );
 		REQUIRE( QUERY(POLYGON_OFFSET_UNITS) == 0.0f );
-		// FIXME: Fails although both are 0.0f
-		// REQUIRE( QUERY(POLYGON_OFFSET_CLAMP) == 0.0f );
+		REQUIRE_THAT( QUERY(POLYGON_OFFSET_CLAMP), Catch::Matchers::WithinAbs(0.0, 1e-12) );
 		REQUIRE( QUERY(POLYGON_OFFSET_FILL) == false );
 		REQUIRE( QUERY(POLYGON_OFFSET_LINE) == false );
 		REQUIRE( QUERY(POLYGON_OFFSET_POINT) == false );
