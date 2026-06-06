@@ -34,6 +34,21 @@ namespace
 
 TEST_CASE( "Queries return the expected values", "[queries]" ) {
 	RunInContext([](GLFWwindow* p_window, Context& p_context) {
+		// Extras (missing from glGet documentation, but in Core 4.5 spec)
+		REQUIRE( QUERY(IMAGE_BINDING_NAME, 1) == 0 );
+		REQUIRE( QUERY(IMAGE_BINDING_LEVEL, 1) == 0 );
+		REQUIRE( QUERY(IMAGE_BINDING_LAYERED, 1) == false );
+		REQUIRE( QUERY(IMAGE_BINDING_LAYER, 1) == 0 );
+		REQUIRE( QUERY(IMAGE_BINDING_ACCESS, 1) == EImageAccessSpecifier::READ_ONLY );
+		REQUIRE( QUERY(IMAGE_BINDING_FORMAT, 1) == EInternalFormat::R8 );
+		REQUIRE( QUERY(ATOMIC_COUNTER_BUFFER_BINDING, 0) == 0 );
+		REQUIRE( QUERY(ATOMIC_COUNTER_BUFFER_START, 0) == 0 );
+		REQUIRE( QUERY(ATOMIC_COUNTER_BUFFER_SIZE, 0) == 0 );
+		REQUIRE( QUERY(ATOMIC_COUNTER_BUFFER_BINDING) == 0 );
+		REQUIRE( QUERY(ATOMIC_COUNTER_BUFFER_BINDING, 0) == 0 );
+		REQUIRE( QUERY(ATOMIC_COUNTER_BUFFER_START, 0) == 0 );
+		REQUIRE( QUERY(ATOMIC_COUNTER_BUFFER_SIZE, 0) == 0 );
+
 		REQUIRE( QUERY(ACTIVE_TEXTURE) == ETextureUnit::TEXTURE0 );
 		REQUIRE( IsWithinRange(1.0f, QUERY(ALIASED_LINE_WIDTH_RANGE)) );
 		Buffer vbo;
@@ -58,8 +73,8 @@ TEST_CASE( "Queries return the expected values", "[queries]" ) {
 		p_context.SetColorWriting(true, false, true, false);
 		REQUIRE( QUERY(COLOR_WRITEMASK) == std::to_array({true,false,true,false}) );
 		REQUIRE( QUERY(COMPRESSED_TEXTURE_FORMATS).size() == QUERY(NUM_COMPRESSED_TEXTURE_FORMATS) );
-		REQUIRE( QUERY(MAX_COMPUTE_SHADER_STORAGE_BLOCKS) >= 4 ); // Heuristic (https://opengl.gpuinfo.org)
-		REQUIRE( QUERY(MAX_COMBINED_SHADER_STORAGE_BLOCKS) >= 8 ); // Heuristic (https://opengl.gpuinfo.org)
+		REQUIRE( QUERY(MAX_COMPUTE_SHADER_STORAGE_BLOCKS) >= 8 );
+		REQUIRE( QUERY(MAX_COMBINED_SHADER_STORAGE_BLOCKS) >= 8 );
 		REQUIRE( QUERY(MAX_COMPUTE_UNIFORM_BLOCKS) >= 11 ); // Spec says 14 is minimum, but some driver implementations have lower values
 		REQUIRE( QUERY(MAX_COMPUTE_TEXTURE_IMAGE_UNITS) >= 16 );
 		REQUIRE( QUERY(MAX_COMPUTE_UNIFORM_COMPONENTS) >= 1024 );

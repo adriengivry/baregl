@@ -19,6 +19,8 @@
 #include <baregl/types/EDrawBuffer.h>
 #include <baregl/types/EGetParameter.h>
 #include <baregl/types/EHint.h>
+#include <baregl/types/EImageAccessSpecifier.h>
+#include <baregl/types/EInternalFormat.h>
 #include <baregl/types/ELogicOperation.h>
 #include <baregl/types/ETextureUnit.h>
 #include <baregl/types/EPixelDataFormat.h>
@@ -49,6 +51,15 @@ namespace baregl::data
 			static constexpr types::EGetParameter dynamic_count_parameter = COUNT_PARAMETER; \
 		};
 
+	BAREGL_DECLARE_QUERY_RESULT(IMAGE_BINDING_NAME, int, 1, true, int);
+	BAREGL_DECLARE_QUERY_RESULT(IMAGE_BINDING_LEVEL, int, 1, true, int);
+	BAREGL_DECLARE_QUERY_RESULT(IMAGE_BINDING_LAYERED, bool, 1, true, bool);
+	BAREGL_DECLARE_QUERY_RESULT(IMAGE_BINDING_LAYER, int, 1, true, int);
+	BAREGL_DECLARE_QUERY_RESULT(IMAGE_BINDING_ACCESS, int, 1, true, types::EImageAccessSpecifier);
+	BAREGL_DECLARE_QUERY_RESULT(IMAGE_BINDING_FORMAT, int, 1, true, types::EInternalFormat);
+	BAREGL_DECLARE_QUERY_RESULT(ATOMIC_COUNTER_BUFFER_BINDING, int, 1, true, int);
+	BAREGL_DECLARE_QUERY_RESULT(ATOMIC_COUNTER_BUFFER_START, int64_t, 1, true, int64_t);
+	BAREGL_DECLARE_QUERY_RESULT(ATOMIC_COUNTER_BUFFER_SIZE, int64_t, 1, true, int64_t);
 	BAREGL_DECLARE_QUERY_RESULT(ACTIVE_TEXTURE, int, 1, false, types::ETextureUnit);
 	BAREGL_DECLARE_QUERY_RESULT(ALIASED_LINE_WIDTH_RANGE, float, 2, false, std::array<float, 2>);
 	BAREGL_DECLARE_QUERY_RESULT(ARRAY_BUFFER_BINDING, int, 1, false, uint32_t);

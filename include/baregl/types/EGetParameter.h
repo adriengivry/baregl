@@ -15,6 +15,18 @@ namespace baregl::types
 	*/
 	enum class EGetParameter : uint8_t
 	{
+		// From https://registry.khronos.org/OpenGL/specs/gl/glspec45.core.pdf
+		// Missing from https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGet.xhtml
+		IMAGE_BINDING_NAME,                             // 1 int (indexed)
+		IMAGE_BINDING_LEVEL,                            // 1 int (indexed)
+		IMAGE_BINDING_LAYERED,                          // 1 boolean (indexed)
+		IMAGE_BINDING_LAYER,                            // 1 int (indexed)
+		IMAGE_BINDING_ACCESS,                           // 1 int (GLenum)(indexed)
+		IMAGE_BINDING_FORMAT,                           // 1 int (GLenum)(indexed)
+		ATOMIC_COUNTER_BUFFER_BINDING,                  // 1 int (indexed)
+		ATOMIC_COUNTER_BUFFER_START,                    // 1 int64 (indexed)
+		ATOMIC_COUNTER_BUFFER_SIZE,                     // 1 int64 (indexed)
+
 		ACTIVE_TEXTURE,                                 // 1 int (GLenum)
 		ALIASED_LINE_WIDTH_RANGE,                       // 2 floats
 		ARRAY_BUFFER_BINDING,                           // 1 int
