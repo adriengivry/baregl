@@ -13,7 +13,7 @@ namespace baregl::types
 	/**
 	* Parameter that can be use to retrieve associated values through GetX functions.
 	*/
-	enum class EGetParameter : uint8_t
+	enum class EGetParameter : uint16_t
 	{
 		// From https://registry.khronos.org/OpenGL/specs/gl/glspec45.core.pdf
 		// Missing from https://registry.khronos.org/OpenGL-Refpages/gl4/html/glGet.xhtml
@@ -57,6 +57,13 @@ namespace baregl::types
 		MAX_DEBUG_GROUP_STACK_DEPTH,                    // 1 int
 		DEBUG_GROUP_STACK_DEPTH,                        // 1 int
 		CONTEXT_FLAGS,                                  // 1 int
+		EXTENSIONS,                                     // n ints (GL_NUM_EXTENSIONS)
+		RENDERER,                                       // 1 string
+		SHADING_LANGUAGE_VERSION,                       // 1 string
+		SHADING_LANGUAGE_VERSIONS,                      // n string (GL_NUM_SHADING_LANGUAGE_VERSIONS)
+		NUM_SHADING_LANGUAGE_VERSIONS,                  // 1 int
+		VENDOR,                                         // 1 string
+		VERSION,                                        // 1 string
 		CULL_FACE,                                      // 1 boolean
 		CULL_FACE_MODE,                                 // 1 int (GLenum)
 		CURRENT_PROGRAM,                                // 1 int
@@ -99,6 +106,8 @@ namespace baregl::types
 		MAX_3D_TEXTURE_SIZE,                            // 1 int
 		MAX_ARRAY_TEXTURE_LAYERS,                       // 1 int
 		MAX_CLIP_DISTANCES,                             // 1 int
+		MAX_CULL_DISTANCES,                             // 1 int
+		MAX_COMBINED_CLIP_AND_CULL_DISTANCES,           // 1 int
 		MAX_COLOR_TEXTURE_SAMPLES,                      // 1 int
 		MAX_COMBINED_ATOMIC_COUNTERS,                   // 1 int
 		MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS,       // 1 int
@@ -153,6 +162,7 @@ namespace baregl::types
 		MAX_VARYING_COMPONENTS,                         // 1 int
 		MAX_VARYING_VECTORS,                            // 1 int
 		MAX_VARYING_FLOATS,                             // 1 int
+		MAX_VERTEX_ATOMIC_COUNTER_BUFFERS,              // 1 int
 		MAX_VERTEX_ATOMIC_COUNTERS,                     // 1 int
 		MAX_VERTEX_ATTRIBS,                             // 1 int
 		MAX_VERTEX_SHADER_STORAGE_BLOCKS,               // 1 int
@@ -180,7 +190,9 @@ namespace baregl::types
 		PIXEL_UNPACK_BUFFER_BINDING,                    // 1 int
 		POINT_FADE_THRESHOLD_SIZE,                      // 1 float
 		PRIMITIVE_RESTART_INDEX,                        // 1 int
+		PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED,        // 1 bool
 		PROGRAM_BINARY_FORMATS,                         // n ints (GL_NUM_PROGRAM_BINARY_FORMATS)
+		SHADER_BINARY_FORMATS,                          // n ints (GL_NUM_SHADER_BINARY_FORMATS)
 		PROGRAM_PIPELINE_BINDING,                       // 1 int
 		PROGRAM_POINT_SIZE,                             // 1 boolean
 		PROVOKING_VERTEX,                               // 1 int (GLenum)
@@ -265,6 +277,7 @@ namespace baregl::types
 		VERTEX_BINDING_BUFFER,                          // 1 int (indexed)
 		MAX_VERTEX_ATTRIB_RELATIVE_OFFSET,              // 1 int
 		MAX_VERTEX_ATTRIB_BINDINGS,                     // 1 int
+		MAX_VERTEX_ATTRIB_STRIDE,                       // 1 int
 		VIEWPORT,                                       // 4 ints (or indexed)
 		VIEWPORT_BOUNDS_RANGE,                          // 2 ints
 		VIEWPORT_INDEX_PROVOKING_VERTEX,                // 1 int (GLenum)

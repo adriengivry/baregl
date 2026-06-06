@@ -9,6 +9,7 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <string>
 #include <vector>
 
 #include <baregl/types/EBlendingEquation.h>
@@ -41,14 +42,15 @@ namespace baregl::data
 			static constexpr bool dynamic_count = false; \
 		};
 
-	#define BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(PARAM, QUERY_TYPE, INDEXED, COUNT_PARAMETER, ...) \
+	#define BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(PARAM, QUERY_TYPE, INDEXED, QUERY_PARAM, COUNT_PARAMETER, ...) \
 		template <> struct QueryResult<types::EGetParameter::PARAM> { \
 			using type = __VA_ARGS__; \
 			using query_type = QUERY_TYPE; \
 			static constexpr std::size_t count = 0; \
 			static constexpr bool indexed = INDEXED; \
 			static constexpr bool dynamic_count = true; \
-			static constexpr types::EGetParameter dynamic_count_parameter = COUNT_PARAMETER; \
+			static constexpr types::EGetParameter dynamic_query_parameter = types::EGetParameter::QUERY_PARAM; \
+			static constexpr types::EGetParameter dynamic_count_parameter = types::EGetParameter::COUNT_PARAMETER; \
 		};
 
 	BAREGL_DECLARE_QUERY_RESULT(IMAGE_BINDING_NAME, int, 1, true, int);
@@ -74,7 +76,7 @@ namespace baregl::data
 	BAREGL_DECLARE_QUERY_RESULT(COLOR_CLEAR_VALUE, float, 4, false, std::array<float, 4>);
 	BAREGL_DECLARE_QUERY_RESULT(COLOR_LOGIC_OP, bool, 1, false, bool);
 	BAREGL_DECLARE_QUERY_RESULT(COLOR_WRITEMASK, bool, 4, false, std::array<bool, 4>);
-	BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(COMPRESSED_TEXTURE_FORMATS, int, false, types::EGetParameter::NUM_COMPRESSED_TEXTURE_FORMATS, std::vector<int>);
+	BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(COMPRESSED_TEXTURE_FORMATS, int, false, COMPRESSED_TEXTURE_FORMATS, NUM_COMPRESSED_TEXTURE_FORMATS, std::vector<int>);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_COMPUTE_SHADER_STORAGE_BLOCKS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_COMBINED_SHADER_STORAGE_BLOCKS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_COMPUTE_UNIFORM_BLOCKS, int, 1, false, int);
@@ -90,6 +92,13 @@ namespace baregl::data
 	BAREGL_DECLARE_QUERY_RESULT(MAX_DEBUG_GROUP_STACK_DEPTH, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(DEBUG_GROUP_STACK_DEPTH, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(CONTEXT_FLAGS, int, 1, false, types::EContextFlags);
+	BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(EXTENSIONS, int, false, EXTENSIONS, NUM_EXTENSIONS, std::vector<int>);
+	BAREGL_DECLARE_QUERY_RESULT(RENDERER, std::string, 1, false, std::string);
+	BAREGL_DECLARE_QUERY_RESULT(SHADING_LANGUAGE_VERSION, std::string, 1, true, std::string);
+	BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(SHADING_LANGUAGE_VERSIONS, std::string, false, SHADING_LANGUAGE_VERSION, NUM_SHADING_LANGUAGE_VERSIONS, std::vector<std::string>);
+	BAREGL_DECLARE_QUERY_RESULT(NUM_SHADING_LANGUAGE_VERSIONS, int, 1, false, int);
+	BAREGL_DECLARE_QUERY_RESULT(VENDOR, std::string, 1, false, std::string);
+	BAREGL_DECLARE_QUERY_RESULT(VERSION, std::string, 1, false, std::string);
 	BAREGL_DECLARE_QUERY_RESULT(CULL_FACE, bool, 1, false, bool);
 	BAREGL_DECLARE_QUERY_RESULT(CULL_FACE_MODE, int, 1, false, types::ECullFace);
 	BAREGL_DECLARE_QUERY_RESULT(CURRENT_PROGRAM, int, 1, false, uint32_t);
@@ -132,6 +141,8 @@ namespace baregl::data
 	BAREGL_DECLARE_QUERY_RESULT(MAX_3D_TEXTURE_SIZE, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_ARRAY_TEXTURE_LAYERS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_CLIP_DISTANCES, int, 1, false, int);
+	BAREGL_DECLARE_QUERY_RESULT(MAX_CULL_DISTANCES, int, 1, false, int);
+	BAREGL_DECLARE_QUERY_RESULT(MAX_COMBINED_CLIP_AND_CULL_DISTANCES, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_COLOR_TEXTURE_SAMPLES, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_COMBINED_ATOMIC_COUNTERS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_COMBINED_FRAGMENT_UNIFORM_COMPONENTS, int, 1, false, int);
@@ -186,6 +197,7 @@ namespace baregl::data
 	BAREGL_DECLARE_QUERY_RESULT(MAX_VARYING_COMPONENTS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_VARYING_VECTORS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_VARYING_FLOATS, int, 1, false, int);
+	BAREGL_DECLARE_QUERY_RESULT(MAX_VERTEX_ATOMIC_COUNTER_BUFFERS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_VERTEX_ATOMIC_COUNTERS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_VERTEX_ATTRIBS, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_VERTEX_SHADER_STORAGE_BLOCKS, int, 1, false, int);
@@ -213,7 +225,9 @@ namespace baregl::data
 	BAREGL_DECLARE_QUERY_RESULT(PIXEL_UNPACK_BUFFER_BINDING, int, 1, false, uint32_t);
 	BAREGL_DECLARE_QUERY_RESULT(POINT_FADE_THRESHOLD_SIZE, float, 1, false, float);
 	BAREGL_DECLARE_QUERY_RESULT(PRIMITIVE_RESTART_INDEX, int, 1, false, int);
-	BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(PROGRAM_BINARY_FORMATS, int, false, types::EGetParameter::NUM_PROGRAM_BINARY_FORMATS, std::vector<int>);
+	BAREGL_DECLARE_QUERY_RESULT(PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED, bool, 1, false, bool);
+	BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(PROGRAM_BINARY_FORMATS, int, false, PROGRAM_BINARY_FORMATS, NUM_PROGRAM_BINARY_FORMATS, std::vector<int>);
+	BAREGL_DECLARE_DYNAMIC_QUERY_RESULT(SHADER_BINARY_FORMATS, int, false, SHADER_BINARY_FORMATS, NUM_SHADER_BINARY_FORMATS, std::vector<int>);
 	BAREGL_DECLARE_QUERY_RESULT(PROGRAM_PIPELINE_BINDING, int, 1, false, uint32_t);
 	BAREGL_DECLARE_QUERY_RESULT(PROGRAM_POINT_SIZE, bool, 1, false, bool);
 	BAREGL_DECLARE_QUERY_RESULT(PROVOKING_VERTEX, int, 1, false, types::EProvokingVertexConvention);
@@ -298,6 +312,7 @@ namespace baregl::data
 	BAREGL_DECLARE_QUERY_RESULT(VERTEX_BINDING_BUFFER, int, 1, true, uint32_t);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_VERTEX_ATTRIB_RELATIVE_OFFSET, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(MAX_VERTEX_ATTRIB_BINDINGS, int, 1, false, int);
+	BAREGL_DECLARE_QUERY_RESULT(MAX_VERTEX_ATTRIB_STRIDE, int, 1, false, int);
 	BAREGL_DECLARE_QUERY_RESULT(VIEWPORT, int, 4, true, std::array<int, 4>);
 	BAREGL_DECLARE_QUERY_RESULT(VIEWPORT_BOUNDS_RANGE, float, 2, false, std::array<float, 2>);
 	BAREGL_DECLARE_QUERY_RESULT(VIEWPORT_INDEX_PROVOKING_VERTEX, int, 1, false, types::EProvokingVertexConvention);
