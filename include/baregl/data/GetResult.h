@@ -34,23 +34,23 @@ namespace baregl::data
 {
 	template<auto PName> struct GetResult;
 
-	#define DECLARE_GET_RESULT(PARAM, QUERY_TYPE, COUNT, INDEXED, ...) \
+	#define DECLARE_GET_RESULT(PARAM, GET_TYPE, COUNT, INDEXED, ...) \
 		template <> struct GetResult<types::EGetParameter::PARAM> { \
 			using type = __VA_ARGS__; \
-			using query_type = QUERY_TYPE; \
+			using get_type = GET_TYPE; \
 			static constexpr std::size_t count = COUNT; \
 			static constexpr bool indexed = INDEXED; \
 			static constexpr bool dynamic_count = false; \
 		};
 
-	#define DECLARE_DYNAMIC_GET_RESULT(PARAM, QUERY_TYPE, INDEXED, QUERY_PARAM, COUNT_PARAMETER, ...) \
+	#define DECLARE_DYNAMIC_GET_RESULT(PARAM, GET_TYPE, INDEXED, GET_PARAM, COUNT_PARAMETER, ...) \
 		template <> struct GetResult<types::EGetParameter::PARAM> { \
 			using type = __VA_ARGS__; \
-			using query_type = QUERY_TYPE; \
+			using get_type = GET_TYPE; \
 			static constexpr std::size_t count = 0; \
 			static constexpr bool indexed = INDEXED; \
 			static constexpr bool dynamic_count = true; \
-			static constexpr types::EGetParameter dynamic_query_parameter = types::EGetParameter::QUERY_PARAM; \
+			static constexpr types::EGetParameter dynamic_get_parameter = types::EGetParameter::GET_PARAM; \
 			static constexpr types::EGetParameter dynamic_count_parameter = types::EGetParameter::COUNT_PARAMETER; \
 		};
 

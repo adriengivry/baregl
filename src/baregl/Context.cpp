@@ -535,13 +535,13 @@ namespace baregl
 	data::GetResultType<PName> Context::Get()
 	{
 		using R = data::GetResult<PName>;
-		using Elem = typename R::query_type;
+		using Elem = typename R::get_type;
 
 		if constexpr (R::dynamic_count)
 		{
-			using CountQuery = data::GetResult<R::dynamic_count_parameter>;
-			using CountElem = typename CountQuery::query_type;
-			std::array<CountElem, CountQuery::count> countRaw;
+			using CountGet = data::GetResult<R::dynamic_count_parameter>;
+			using CountElem = typename CountGet::get_type;
+			std::array<CountElem, CountGet::count> countRaw;
 			GetValue<CountElem>(R::dynamic_count_parameter, countRaw);
 
 			const auto elementCount = static_cast<size_t>(countRaw[0] > 0 ? countRaw[0] : 0);
@@ -553,7 +553,7 @@ namespace baregl
 				return raw;
 			}
 
-			static_assert(std::same_as<typename R::type, std::vector<Elem>>, "Unsupported dynamic query result type");
+			static_assert(std::same_as<typename R::type, std::vector<Elem>>, "Unsupported dynamic get result type");
 		}
 		else
 		{
@@ -575,7 +575,7 @@ namespace baregl
 				std::same_as<typename R::type, std::array<Elem, N>> ||
 				(std::integral<typename R::type> && std::integral<Elem>) ||
 				std::is_enum_v<typename R::type>,
-				"Unsupported query result type"
+				"Unsupported get result type"
 			);
 		}
 	}
@@ -585,28 +585,28 @@ namespace baregl
 	data::GetResultType<PName> Context::Get(uint32_t p_index)
 	{
 		using R = data::GetResult<PName>;
-		using Elem = typename R::query_type;
+		using Elem = typename R::get_type;
 
 		if constexpr (R::dynamic_count)
 		{
-			using CountQuery = data::GetResult<R::dynamic_count_parameter>;
-			using CountElem = typename CountQuery::query_type;
-			using FetchQuery = data::GetResult<R::dynamic_query_parameter>;
-			using FetchElem = typename FetchQuery::query_type;
+			using CountGet = data::GetResult<R::dynamic_count_parameter>;
+			using CountElem = typename CountGet::get_type;
+			using FetchGet = data::GetResult<R::dynamic_get_parameter>;
+			using FetchElem = typename FetchGet::get_type;
 
-			std::array<CountElem, CountQuery::count> countRaw;
+			std::array<CountElem, CountGet::count> countRaw;
 			GetValue<CountElem>(R::dynamic_count_parameter, countRaw);
 
 			const auto elementCount = static_cast<size_t>(countRaw[0] > 0 ? countRaw[0] : 0);
 			std::vector<FetchElem> raw(elementCount);
-			GetValueIndexed<FetchElem>(R::dynamic_query_parameter, raw, p_index);
+			GetValueIndexed<FetchElem>(R::dynamic_get_parameter, raw, p_index);
 
 			if constexpr (std::same_as<typename R::type, std::vector<Elem>>)
 			{
 				return raw;
 			}
 
-			static_assert(std::same_as<typename R::type, std::vector<Elem>>, "Unsupported dynamic indexed query result type");
+			static_assert(std::same_as<typename R::type, std::vector<Elem>>, "Unsupported dynamic indexed get result type");
 		}
 		else
 		{
@@ -628,23 +628,23 @@ namespace baregl
 				std::same_as<typename R::type, std::array<Elem, N>> ||
 				(std::integral<typename R::type> && std::integral<Elem>) ||
 				std::is_enum_v<typename R::type>,
-				"Unsupported indexed query result type"
+				"Unsupported indexed get result type"
 			);
 		}
 	}
 
-#define INSTANTIATE_GET(PARAM, QUERY_TYPE, COUNT, INDEXED, ...) \
+#define INSTANTIATE_GET(PARAM, GET_TYPE, COUNT, INDEXED, ...) \
 	template data::GetResultType<baregl::types::EGetParameter::PARAM> \
 	Context::Get<baregl::types::EGetParameter::PARAM>();
 
-#define INSTANTIATE_DYNAMIC_GET(PARAM, QUERY_TYPE, INDEXED, QUERY_PARAM, COUNT_PARAMETER, ...) \
+#define INSTANTIATE_DYNAMIC_GET(PARAM, GET_TYPE, INDEXED, GET_PARAM, COUNT_PARAMETER, ...) \
 	template data::GetResultType<baregl::types::EGetParameter::PARAM> \
 	Context::Get<baregl::types::EGetParameter::PARAM>();
 
-#define INSTANTIATE_INDEXED_GET(PARAM, QUERY_TYPE, COUNT, INDEXED, ...) \
+#define INSTANTIATE_INDEXED_GET(PARAM, GET_TYPE, COUNT, INDEXED, ...) \
 	INSTANTIATE_INDEXED_GET_##INDEXED(PARAM)
 
-#define INSTANTIATE_INDEXED_DYNAMIC_GET(PARAM, QUERY_TYPE, INDEXED, QUERY_PARAM, COUNT_PARAMETER, ...) \
+#define INSTANTIATE_INDEXED_DYNAMIC_GET(PARAM, GET_TYPE, INDEXED, GET_PARAM, COUNT_PARAMETER, ...) \
 	INSTANTIATE_INDEXED_GET_##INDEXED(PARAM)
 
 #define INSTANTIATE_INDEXED_GET_true(PARAM) \
