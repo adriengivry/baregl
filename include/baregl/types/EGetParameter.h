@@ -21,20 +21,20 @@ namespace baregl::types
 		PATCH_DEFAULT_INNER_LEVEL,                      // 2 floats
 
 		// Vertex Array Object State
-		// VERTEX_ATTRIB_ARRAY_ENABLED, // GetVertexAttribiv
-		// VERTEX_ATTRIB_ARRAY_SIZE, // GetVertexAttribiv
-		// VERTEX_ATTRIB_ARRAY_STRIDE, // GetVertexAttribiv
-		// VERTEX_ATTRIB_ARRAY_TYPE, // GetVertexAttribiv
-		// VERTEX_ATTRIB_ARRAY_NORMALIZED, // GetVertexAttribiv
-		// VERTEX_ATTRIB_ARRAY_INTEGER, // GetVertexAttribiv
-		// VERTEX_ATTRIB_ARRAY_LONG, // GetVertexAttribiv
-		// VERTEX_ATTRIB_ARRAY_DIVISOR, // GetVertexAttribiv
-		// VERTEX_ATTRIB_ARRAY_POINTER, // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_ENABLED,                    // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_SIZE,                       // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_STRIDE,                     // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_TYPE,                       // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_NORMALIZED,                 // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_INTEGER,                    // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_LONG,                       // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_DIVISOR,                    // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_POINTER,                    // GetVertexAttribiv
 		// GetObjectLabel (string)
 		ELEMENT_ARRAY_BUFFER_BINDING,                   // 1 int
-		// VERTEX_ATTRIB_ARRAY_BUFFER_BINDING, // GetVertexAttribiv
-		// VERTEX_ATTRIB_BINDING, // GetVertexAttribiv
-		// VERTEX_ATTRIB_RELATIVE_OFFSET, // GetVertexAttribiv
+		// VERTEX_ATTRIB_ARRAY_BUFFER_BINDING,             // GetVertexAttribiv
+		// VERTEX_ATTRIB_BINDING,                          // GetVertexAttribiv
+		// VERTEX_ATTRIB_RELATIVE_OFFSET,                  // GetVertexAttribiv
 		VERTEX_BINDING_OFFSET,                          // 1 int64 (indexed)
 		VERTEX_BINDING_STRIDE,                          // 1 int (indexed)
 		VERTEX_BINDING_DIVISOR,                         // 1 int (indexed)
