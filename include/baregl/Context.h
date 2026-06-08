@@ -7,7 +7,7 @@
 #pragma once
 
 #include <baregl/data/ContextDesc.h>
-#include <baregl/data/QueryResult.h>
+#include <baregl/data/GetResult.h>
 #include <baregl/types/EBlendingEquation.h>
 #include <baregl/types/EBlendingFactor.h>
 #include <baregl/types/EComparaisonAlgorithm.h>
@@ -260,7 +260,7 @@ namespace baregl
 		* @return Query result
 		*/
 		template<auto PName>
-		data::QueryResultType<PName> Get();
+		data::GetResultType<PName> Get();
 
 		/**
 		* Returns the value or values for a given parameter at a given index
@@ -268,7 +268,7 @@ namespace baregl
 		* @return Query result
 		*/
 		template<auto PName>
-			requires (data::QueryResult<PName>::indexed)
-		data::QueryResultType<PName> Get(uint32_t p_index);
+			requires (data::GetResult<PName>::indexed)
+		data::GetResultType<PName> Get(uint32_t p_index);
 	};
 }
