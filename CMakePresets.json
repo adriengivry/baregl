@@ -73,5 +73,47 @@
     { "name": "full-ninja-multi-release", "configurePreset": "full-ninja-multi", "configuration": "Release" },
     { "name": "minimal-ninja-multi-debug", "configurePreset": "minimal-ninja-multi", "configuration": "Debug" },
     { "name": "minimal-ninja-multi-release", "configurePreset": "minimal-ninja-multi", "configuration": "Release" }
+  ],
+  "testPresets": [
+    {
+      "name": "test-base",
+      "hidden": true,
+      "output": { "outputOnFailure": true },
+      "execution": { "noTestsAction": "error", "stopOnFailure": false }
+    },
+    {
+      "name": "full-ninja",
+      "inherits": "test-base",
+      "configurePreset": "full-ninja"
+    },
+    {
+      "name": "minimal-ninja",
+      "inherits": "test-base",
+      "configurePreset": "minimal-ninja"
+    },
+    {
+      "name": "full-ninja-multi-debug",
+      "inherits": "test-base",
+      "configurePreset": "full-ninja-multi",
+      "configuration": "Debug"
+    },
+    {
+      "name": "full-ninja-multi-release",
+      "inherits": "test-base",
+      "configurePreset": "full-ninja-multi",
+      "configuration": "Release"
+    },
+    {
+      "name": "minimal-ninja-multi-debug",
+      "inherits": "test-base",
+      "configurePreset": "minimal-ninja-multi",
+      "configuration": "Debug"
+    },
+    {
+      "name": "minimal-ninja-multi-release",
+      "inherits": "test-base",
+      "configurePreset": "minimal-ninja-multi",
+      "configuration": "Release"
+    }
   ]
 }

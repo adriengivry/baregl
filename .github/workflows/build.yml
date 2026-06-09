@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        config: [Debug, Release]
+        config: [debug, release]
         include:
           - os: ubuntu-latest
             os_name: Linux
@@ -34,14 +34,12 @@ jobs:
           sudo apt-get install -y libgl-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev xvfb
 
       - name: Configure
-        run: cmake -S . -B build
+        run: cmake --preset full-ninja
           -DCMAKE_BUILD_TYPE=${{ matrix.config }}
-          -DBAREGL_GENERATE_EXAMPLES=ON
-          -DBAREGL_GENERATE_TESTS=ON
           -DGLFW_BUILD_WAYLAND=OFF
 
       - name: Build
-        run: cmake --build build --config ${{ matrix.config }}
+        run: cmake --build --preset full-ninja
 
       - name: Install Mesa (Windows)
         if: runner.os == 'Windows'
@@ -51,9 +49,9 @@ jobs:
 
       - name: Test (Linux)
         if: runner.os == 'Linux'
-        run: xvfb-run -a ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+        run: xvfb-run -a ctest --preset full-ninja
 
       - name: Test (Windows)
         if: runner.os == 'Windows'
-        run: ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+        run: ctest --preset full-ninja
 

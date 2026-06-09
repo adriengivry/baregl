@@ -101,13 +101,13 @@
     {
       "label": "Run tests (Debug)",
       "type": "shell",
-      "command": "ctest --test-dir ${workspaceFolder}/build/full-ninja-multi -C Debug --output-on-failure",
+      "command": "ctest --preset full-ninja-multi-debug",
       "dependsOn": "Build tests (Debug)"
     },
     {
       "label": "Run tests (Release)",
       "type": "shell",
-      "command": "ctest --test-dir ${workspaceFolder}/build/full-ninja-multi -C Release --output-on-failure",
+      "command": "ctest --preset full-ninja-multi-release",
       "dependsOn": "Build tests (Release)"
     },
     {
