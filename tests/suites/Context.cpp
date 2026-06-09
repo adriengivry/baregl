@@ -258,7 +258,7 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		ssbo.Bind(EBufferType::SHADER_STORAGE);
 		REQUIRE( GET(SHADER_STORAGE_BUFFER_BINDING) == ssbo.GetID() );
 		ssbo.Unbind();
-		for (size_t i = 0; i < 4; ++i)
+		for (uint32_t i = 0; i < 4; ++i)
 		{
 			ssbos[i].Bind(EBufferType::SHADER_STORAGE, i);
 			REQUIRE( GET(SHADER_STORAGE_BUFFER_BINDING, i) == ssbos[i].GetID() );
