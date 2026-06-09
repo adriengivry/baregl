@@ -8,6 +8,9 @@
 
 #include <GLFW/glfw3.h>
 
+#include <iostream>
+#include <stdexcept>
+
 namespace tests::common::boilerplate
 {
 	class ThrowingLogHandler final : public baregl::debug::ILogHandler
@@ -45,13 +48,23 @@ namespace tests::common::boilerplate
 
 	void RunInWindow(std::function<void(GLFWwindow*)> p_callback)
 	{
-		glfwInit();
+		if (!glfwInit())
+		{
+			std::cerr << "GLFW init failed" << std::endl;
+		}
+
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
 		GLFWwindow* window = glfwCreateWindow(256, 256, "test", nullptr, nullptr);
+		if (!window)
+		{
+			std::cerr << "GLFW window creation failed: " << glfwGetError(nullptr) << std::endl;
+		}
+
 		glfwMakeContextCurrent(window);
 
 		p_callback(window);
