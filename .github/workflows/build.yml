@@ -47,6 +47,11 @@ jobs:
       - name: Build
         run: cmake --build build --config ${{ matrix.config }}
 
-      - name: Test
-        if: matrix.run_tests
+      - name: Test (Linux)
+        if: matrix.run_tests && runner.os == 'Linux'
         run: xvfb-run -a ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+
+      - name: Test (Windows)
+        if: matrix.run_tests && runner.os == 'Windows'
+        run: ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+
