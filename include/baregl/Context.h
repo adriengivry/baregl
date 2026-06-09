@@ -232,30 +232,6 @@ namespace baregl
 		void SetViewport(uint32_t p_x, uint32_t p_y, uint32_t p_width, uint32_t p_height);
 
 		/**
-		* Retrieves the name of the graphics vendor.
-		* @return A string containing the vendor name.
-		*/
-		std::string GetVendor();
-
-		/**
-		* Retrieves the name of the graphics hardware.
-		* @return A string containing the hardware name.
-		*/
-		std::string GetHardware();
-
-		/**
-		* Retrieves the version of the graphics API in use.
-		* @return A string containing the API version.
-		*/
-		std::string GetVersion();
-
-		/**
-		* Retrieves the version of the shading language.
-		* @return A string containing the shading language version.
-		*/
-		std::string GetShadingLanguageVersion();
-	
-		/**
 		* Returns the value or values for a given parameter
 		* @return Query result
 		*/

@@ -70,88 +70,6 @@ namespace
 		}
 	}
 
-	bool GetBool(uint32_t p_parameter)
-	{
-		GLboolean result;
-		glGetBooleanv(p_parameter, &result);
-		return static_cast<bool>(result);
-	}
-
-	bool GetBool(uint32_t p_parameter, uint32_t p_index)
-	{
-		GLboolean result;
-		glGetBooleani_v(p_parameter, p_index, &result);
-		return static_cast<bool>(result);
-	}
-
-	int GetInt(uint32_t p_parameter)
-	{
-		GLint result;
-		glGetIntegerv(p_parameter, &result);
-		return static_cast<int>(result);
-	}
-
-	int GetInt(uint32_t p_parameter, uint32_t p_index)
-	{
-		GLint result;
-		glGetIntegeri_v(p_parameter, p_index, &result);
-		return static_cast<int>(result);
-	}
-
-	float GetFloat(uint32_t p_parameter)
-	{
-		GLfloat result;
-		glGetFloatv(p_parameter, &result);
-		return static_cast<float>(result);
-	}
-
-	float GetFloat(uint32_t p_parameter, uint32_t p_index)
-	{
-		GLfloat result;
-		glGetFloati_v(p_parameter, p_index, &result);
-		return static_cast<float>(result);
-	}
-
-	double GetDouble(uint32_t p_parameter)
-	{
-		GLdouble result;
-		glGetDoublev(p_parameter, &result);
-		return static_cast<double>(result);
-	}
-
-	double GetDouble(uint32_t p_parameter, uint32_t p_index)
-	{
-		GLdouble result;
-		glGetDoublei_v(p_parameter, p_index, &result);
-		return static_cast<double>(result);
-	}
-
-	int64_t GetInt64(uint32_t p_parameter)
-	{
-		GLint64 result;
-		glGetInteger64v(p_parameter, &result);
-		return static_cast<int64_t>(result);
-	}
-
-	int64_t GetInt64(uint32_t p_parameter, uint32_t p_index)
-	{
-		GLint64 result;
-		glGetInteger64i_v(p_parameter, p_index, &result);
-		return static_cast<int64_t>(result);
-	}
-
-	std::string GetString(uint32_t p_parameter)
-	{
-		const GLubyte* result = glGetString(p_parameter);
-		return result ? reinterpret_cast<const char*>(result) : std::string();
-	}
-
-	std::string GetString(uint32_t p_parameter, uint32_t p_index)
-	{
-		const GLubyte* result = glGetStringi(p_parameter, p_index);
-		return result ? reinterpret_cast<const char*>(result) : std::string();
-	}
-
 	template<typename T>
 	concept SupportedGetType =
 		std::same_as<T, int> || 
@@ -169,7 +87,6 @@ namespace
 	{
 		using value_type = T;
 	};
-
 
 	template<SupportedGetType T>
 	void GetValue(
@@ -332,9 +249,14 @@ namespace
 		std::span<std::string> p_out
 	)
 	{
-		p_out[0] = GetString(
+		const GLubyte* result = glGetString(
 			baregl::utils::EnumToValue<GLenum>(p_param)
 		);
+
+		p_out[0] = 
+			result ?
+			reinterpret_cast<const char*>(result) :
+			std::string();
 	}
 
 	template<>
@@ -344,10 +266,15 @@ namespace
 		uint32_t p_index
 	)
 	{
-		p_out[0] = GetString(
-			baregl::utils::EnumToValue<GLenum>(p_param),
+		const GLubyte* result = glGetStringi(
+			baregl::utils::EnumToValue<GLenum>(p_param), 
 			p_index
 		);
+
+		p_out[0] = 
+			result ?
+			reinterpret_cast<const char*>(result) :
+			std::string();
 	}
 }
 
@@ -520,26 +447,6 @@ namespace baregl
 		glViewport(x, y, width, height);
 	}
 
-	std::string Context::GetVendor()
-	{
-		return GetString(GL_VENDOR);
-	}
-
-	std::string Context::GetHardware()
-	{
-		return GetString(GL_RENDERER);
-	}
-
-	std::string Context::GetVersion()
-	{
-		return GetString(GL_VERSION);
-	}
-
-	std::string Context::GetShadingLanguageVersion()
-	{
-		return GetString(GL_SHADING_LANGUAGE_VERSION);
-	}
-		
 	template<auto PName>
 	data::GetResultType<PName> Context::Get()
 	{
