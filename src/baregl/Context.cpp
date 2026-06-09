@@ -161,6 +161,15 @@ namespace
 		std::same_as<T, double> ||
 		std::same_as<T, std::string>;
 
+	template<typename T>
+	struct StdVectorTraits;
+
+	template<typename T, typename Alloc>
+	struct StdVectorTraits<std::vector<T, Alloc>>
+	{
+		using value_type = T;
+	};
+
 
 	template<SupportedGetType T>
 	void GetValue(
@@ -541,19 +550,52 @@ namespace baregl
 		{
 			using CountGet = data::GetResult<R::dynamic_count_parameter>;
 			using CountElem = typename CountGet::get_type;
+			using ResultElem = typename StdVectorTraits<typename R::type>::value_type;
 			std::array<CountElem, CountGet::count> countRaw;
 			GetValue<CountElem>(R::dynamic_count_parameter, countRaw);
 
 			const auto elementCount = static_cast<size_t>(countRaw[0] > 0 ? countRaw[0] : 0);
 			std::vector<Elem> raw(elementCount);
-			GetValue<Elem>(PName, raw);
-
-			if constexpr (std::same_as<typename R::type, std::vector<Elem>>)
+			if constexpr (std::same_as<Elem, std::string>)
 			{
-				return raw;
+				for (size_t i = 0; i < elementCount; ++i)
+				{
+					std::array<Elem, 1> value;
+					GetValueIndexed<Elem>(PName, value, static_cast<uint32_t>(i));
+					raw[i] = value[0];
+				}
+			}
+			else
+			{
+				GetValue<Elem>(PName, raw);
 			}
 
-			static_assert(std::same_as<typename R::type, std::vector<Elem>>, "Unsupported dynamic get result type");
+			if constexpr (std::same_as<ResultElem, Elem>)
+				return raw;
+			else if constexpr (std::is_enum_v<ResultElem> && std::integral<Elem>)
+			{
+				std::vector<ResultElem> converted(raw.size());
+				for (size_t i = 0; i < raw.size(); ++i)
+					converted[i] = utils::ValueToEnum<ResultElem>(static_cast<GLenum>(raw[i]));
+				return converted;
+			}
+			else if constexpr (std::integral<ResultElem> && std::integral<Elem>)
+			{
+				std::vector<ResultElem> converted(raw.size());
+				for (size_t i = 0; i < raw.size(); ++i)
+					converted[i] = static_cast<ResultElem>(raw[i]);
+				return converted;
+			}
+			else
+			{
+				static_assert(
+					std::same_as<ResultElem, Elem> ||
+					(std::is_enum_v<ResultElem> && std::integral<Elem>) ||
+					(std::integral<ResultElem> && std::integral<Elem>),
+					"Unsupported dynamic get result type"
+				);
+			}
+
 		}
 		else
 		{
@@ -591,6 +633,7 @@ namespace baregl
 		{
 			using CountGet = data::GetResult<R::dynamic_count_parameter>;
 			using CountElem = typename CountGet::get_type;
+			using ResultElem = typename StdVectorTraits<typename R::type>::value_type;
 
 			std::array<CountElem, CountGet::count> countRaw;
 			GetValue<CountElem>(R::dynamic_count_parameter, countRaw);
@@ -599,12 +642,33 @@ namespace baregl
 			std::vector<Elem> raw(elementCount);
 			GetValueIndexed<Elem>(PName, raw, p_index);
 
-			if constexpr (std::same_as<typename R::type, std::vector<Elem>>)
+			if constexpr (std::same_as<ResultElem, Elem>)
 			{
 				return raw;
 			}
-
-			static_assert(std::same_as<typename R::type, std::vector<Elem>>, "Unsupported dynamic indexed get result type");
+			else if constexpr (std::is_enum_v<ResultElem> && std::integral<Elem>)
+			{
+				std::vector<ResultElem> converted(raw.size());
+				for (size_t i = 0; i < raw.size(); ++i)
+					converted[i] = utils::ValueToEnum<ResultElem>(static_cast<GLenum>(raw[i]));
+				return converted;
+			}
+			else if constexpr (std::integral<ResultElem> && std::integral<Elem>)
+			{
+				std::vector<ResultElem> converted(raw.size());
+				for (size_t i = 0; i < raw.size(); ++i)
+					converted[i] = static_cast<ResultElem>(raw[i]);
+				return converted;
+			}
+			else
+			{
+				static_assert(
+					std::same_as<ResultElem, Elem> ||
+					(std::is_enum_v<ResultElem> && std::integral<Elem>) ||
+					(std::integral<ResultElem> && std::integral<Elem>),
+					"Unsupported dynamic indexed get result type"
+				);
+			}
 		}
 		else
 		{

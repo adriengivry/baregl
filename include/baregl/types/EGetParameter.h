@@ -593,7 +593,7 @@ namespace baregl::types
 		MINOR_VERSION,                                  // 1 int
 		CONTEXT_FLAGS,                                  // 1 int
 		CONTEXT_PROFILE_MASK,                           // 1 int
-		EXTENSIONS,                                     // n ints (GL_NUM_EXTENSIONS)
+		EXTENSIONS,                                     // 1 int (indxed)
 		NUM_EXTENSIONS,                                 // 1 int
 		RENDERER,                                       // 1 string
 		SHADING_LANGUAGE_VERSION,                       // 1 string (indexed)

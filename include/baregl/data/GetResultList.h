@@ -228,6 +228,7 @@
 	X(MINOR_VERSION, int, 1, false, int) \
 	X(CONTEXT_FLAGS, int, 1, false, types::EContextFlags) \
 	X(CONTEXT_PROFILE_MASK, int, 1, false, int) \
+	X(EXTENSIONS, std::string, 1, true, std::string) \
 	X(NUM_EXTENSIONS, int, 1, false, int) \
 	X(RENDERER, std::string, 1, false, std::string) \
 	X(SHADING_LANGUAGE_VERSION, std::string, 1, true, std::string) \
@@ -376,8 +377,7 @@
 	X(TIMESTAMP, int64_t, 1, false, int64_t)
 
 #define BAREGL_DYNAMIC_GET_RESULTS(X) \
-	X(COMPRESSED_TEXTURE_FORMATS, int, false, NUM_COMPRESSED_TEXTURE_FORMATS, int) \
+	X(COMPRESSED_TEXTURE_FORMATS, int, false, NUM_COMPRESSED_TEXTURE_FORMATS, types::EInternalFormat) \
 	X(PROGRAM_BINARY_FORMATS, int, false, NUM_PROGRAM_BINARY_FORMATS, int) \
-	X(SHADER_BINARY_FORMATS, int, false, NUM_SHADER_BINARY_FORMATS, int) \
-	X(EXTENSIONS, int, false, NUM_EXTENSIONS, int)
+	X(SHADER_BINARY_FORMATS, int, false, NUM_SHADER_BINARY_FORMATS, int) 
 
