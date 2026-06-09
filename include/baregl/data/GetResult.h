@@ -35,6 +35,13 @@ namespace baregl::data
 {
 	template<auto PName> struct GetResult;
 
+	enum class EGetIndexing
+	{
+		INDEXED,
+		NOT_INDEXED,
+		BOTH
+	};
+
 	template<std::size_t N>
 	struct FixedCount
 	{
@@ -68,7 +75,7 @@ namespace baregl::data
 		static constexpr types::EGetParameter dynamic_count_parameter = P;
 	};
 
-	#define DECLARE_GET_RESULT(PARAM, GET_TYPE, COUNT_SPEC, INDEXED, ...) \
+	#define DECLARE_GET_RESULT(PARAM, GET_TYPE, COUNT_SPEC, INDEXING, ...) \
 		template <> struct GetResult<types::EGetParameter::PARAM> { \
 			using count_spec = COUNT_SPEC; \
 			using count_traits = CountSpecTraits<count_spec>; \
@@ -76,7 +83,9 @@ namespace baregl::data
 			using type = std::conditional_t<count_traits::dynamic, std::vector<value_type>, value_type>; \
 			using get_type = GET_TYPE; \
 			static constexpr std::size_t count = count_traits::count; \
-			static constexpr bool indexed = INDEXED; \
+			static constexpr EGetIndexing indexing = EGetIndexing::INDEXING; \
+			static constexpr bool non_indexed = indexing != EGetIndexing::INDEXED; \
+			static constexpr bool indexed = indexing != EGetIndexing::NOT_INDEXED; \
 			static constexpr bool dynamic_count = count_traits::dynamic; \
 			static constexpr types::EGetParameter dynamic_count_parameter = count_traits::dynamic_count_parameter; \
 		};

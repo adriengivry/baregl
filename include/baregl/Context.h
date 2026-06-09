@@ -236,6 +236,7 @@ namespace baregl
 		* @return Query result
 		*/
 		template<auto PName>
+			requires (data::GetResult<PName>::non_indexed)
 		data::GetResultType<PName> Get();
 
 		/**

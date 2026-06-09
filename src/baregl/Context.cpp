@@ -448,6 +448,7 @@ namespace baregl
 	}
 
 	template<auto PName>
+		requires (data::GetResult<PName>::non_indexed)
 	data::GetResultType<PName> Context::Get()
 	{
 		using R = data::GetResult<PName>;
@@ -602,25 +603,42 @@ namespace baregl
 		}
 	}
 
-#define INSTANTIATE_GET(PARAM, GET_TYPE, COUNT_SPEC, INDEXED, ...) \
+#define INSTANTIATE_GET(PARAM, GET_TYPE, COUNT_SPEC, INDEXING, ...) \
+	INSTANTIATE_GET_##INDEXING(PARAM)
+
+#define INSTANTIATE_GET_NOT_INDEXED(PARAM) \
 	template data::GetResultType<baregl::types::EGetParameter::PARAM> \
 	Context::Get<baregl::types::EGetParameter::PARAM>();
 
-#define INSTANTIATE_INDEXED_GET(PARAM, GET_TYPE, COUNT_SPEC, INDEXED, ...) \
-	INSTANTIATE_INDEXED_GET_##INDEXED(PARAM)
+#define INSTANTIATE_GET_INDEXED(PARAM)
 
-#define INSTANTIATE_INDEXED_GET_true(PARAM) \
+#define INSTANTIATE_GET_BOTH(PARAM) \
+	template data::GetResultType<baregl::types::EGetParameter::PARAM> \
+	Context::Get<baregl::types::EGetParameter::PARAM>();
+
+#define INSTANTIATE_INDEXED_GET(PARAM, GET_TYPE, COUNT_SPEC, INDEXING, ...) \
+	INSTANTIATE_INDEXED_GET_##INDEXING(PARAM)
+
+#define INSTANTIATE_INDEXED_GET_NOT_INDEXED(PARAM)
+
+#define INSTANTIATE_INDEXED_GET_INDEXED(PARAM) \
 	template data::GetResultType<baregl::types::EGetParameter::PARAM> \
 	Context::Get<baregl::types::EGetParameter::PARAM>(uint32_t);
 
-#define INSTANTIATE_INDEXED_GET_false(PARAM)
+#define INSTANTIATE_INDEXED_GET_BOTH(PARAM) \
+	template data::GetResultType<baregl::types::EGetParameter::PARAM> \
+	Context::Get<baregl::types::EGetParameter::PARAM>(uint32_t);
 
 BAREGL_GET_RESULTS(INSTANTIATE_GET)
 BAREGL_GET_RESULTS(INSTANTIATE_INDEXED_GET)
 
-#undef INSTANTIATE_INDEXED_GET_false
-#undef INSTANTIATE_INDEXED_GET_true
+#undef INSTANTIATE_INDEXED_GET_BOTH
+#undef INSTANTIATE_INDEXED_GET_INDEXED
+#undef INSTANTIATE_INDEXED_GET_NOT_INDEXED
 #undef INSTANTIATE_INDEXED_GET
+#undef INSTANTIATE_GET_BOTH
+#undef INSTANTIATE_GET_INDEXED
+#undef INSTANTIATE_GET_NOT_INDEXED
 #undef INSTANTIATE_GET
 
 }
