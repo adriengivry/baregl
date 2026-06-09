@@ -47,6 +47,11 @@ jobs:
       - name: Build
         run: cmake --build build --config ${{ matrix.config }}
 
+      - name: Install Mesa (Windows)
+        uses: f3d-app/install-mesa-windows-action@v1
+        with:
+          path: ${{github.workspace}}/build/bin/${{ matrix.config }}/tests
+
       - name: Test (Linux)
         if: matrix.run_tests && runner.os == 'Linux'
         run: xvfb-run -a ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
