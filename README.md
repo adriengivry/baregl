@@ -74,20 +74,31 @@ program.Unbind();
 | `BAREGL_GENERATE_EXAMPLES` |  `ON` / `OFF` (default) | Generate example projects |
 | `BAREGL_GENERATE_TESTS` |  `ON` / `OFF` (default) | Generate test project |
 
+## CMake Presets
+| Preset | Description |
+| - | - |
+| `minimal` | Examples and tests disabled, default generator |
+| `minimal-ninja` | Examples and tests disabled, single-config Ninja |
+| `minimal-ninja-multi` | Examples and tests disabled, multi-config Ninja |
+| `full` | Examples and tests enabled, default generator |
+| `full-ninja` | Examples and tests enabled, single-config Ninja |
+| `full-ninja-multi` | Examples and tests enabled, multi-config Ninja |
+
 ## Building Examples
 **Windows:**
 ```powershell
 git clone https://github.com/adriengivry/baregl
-cd .\baregl
-.\gen_proj_windows.bat
-.\build\baregl.sln # (optional) open solution in Visual Studio
+cd baregl
+cmake --preset full
 ```
 
 **Linux:**
 ```powershell
 git clone https://github.com/adriengivry/baregl
-cd ./baregl
-./gen_proj_linux.sh
+cd baregl
+cmake --preset full
+# or
+cmake --preset full-ninja-multi
 ```
 
 ## CMake Quick Start

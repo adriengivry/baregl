@@ -1,21 +1,77 @@
 {
   "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
   "configurePresets": [
     {
-      "name": "debug",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/debug",
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}"
+    },
+    {
+      "name": "full",
+      "displayName": "Full",
+      "description": "Examples and tests enabled, default generator",
+      "inherits": "base",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
+        "BAREGL_GENERATE_EXAMPLES": "ON",
+        "BAREGL_GENERATE_TESTS": "ON"
       }
     },
     {
-      "name": "release",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/release",
+      "name": "minimal",
+      "displayName": "Minimal",
+      "description": "Examples and tests disabled, default generator",
+      "inherits": "base",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
+        "BAREGL_GENERATE_EXAMPLES": "OFF",
+        "BAREGL_GENERATE_TESTS": "OFF"
       }
+    },
+    {
+      "name": "ninja",
+      "hidden": true,
+      "inherits": "base",
+      "generator": "Ninja"
+    },
+    {
+      "name": "ninja-multi",
+      "hidden": true,
+      "inherits": "base",
+      "generator": "Ninja Multi-Config"
+    },
+    {
+      "name": "full-ninja",
+      "displayName": "Full (Ninja)",
+      "description": "Examples and tests enabled, single-config Ninja",
+      "inherits": ["full", "ninja"]
+    },
+    {
+      "name": "minimal-ninja",
+      "displayName": "Minimal (Ninja)",
+      "description": "Examples and tests disabled, single-config Ninja",
+      "inherits": ["minimal", "ninja"]
+    },
+    {
+      "name": "full-ninja-multi",
+      "displayName": "Full (Ninja Multi-Config)",
+      "description": "Examples and tests enabled, multi-config Ninja",
+      "inherits": ["full", "ninja-multi"]
+    },
+    {
+      "name": "minimal-ninja-multi",
+      "displayName": "Minimal (Ninja Multi-Config)",
+      "description": "Examples and tests disabled, multi-config Ninja",
+      "inherits": ["minimal", "ninja-multi"]
     }
+  ],
+  "buildPresets": [
+    { "name": "full", "configurePreset": "full" },
+    { "name": "minimal", "configurePreset": "minimal" },
+    { "name": "full-ninja", "configurePreset": "full-ninja" },
+    { "name": "minimal-ninja", "configurePreset": "minimal-ninja" },
+    { "name": "full-ninja-multi-debug", "configurePreset": "full-ninja-multi", "configuration": "Debug" },
+    { "name": "full-ninja-multi-release", "configurePreset": "full-ninja-multi", "configuration": "Release" },
+    { "name": "minimal-ninja-multi-debug", "configurePreset": "minimal-ninja-multi", "configuration": "Debug" },
+    { "name": "minimal-ninja-multi-release", "configurePreset": "minimal-ninja-multi", "configuration": "Release" }
   ]
 }
