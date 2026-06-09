@@ -858,7 +858,6 @@ struct baregl::utils::MappingFor<baregl::types::EGetParameter, GLenum>
 		EnumValuePair<EnumType::NUM_EXTENSIONS, GL_NUM_EXTENSIONS>,
 		EnumValuePair<EnumType::RENDERER, GL_RENDERER>,
 		EnumValuePair<EnumType::SHADING_LANGUAGE_VERSION, GL_SHADING_LANGUAGE_VERSION>,
-		EnumValuePair<EnumType::SHADING_LANGUAGE_VERSIONS, GL_SHADING_LANGUAGE_VERSION>,
 		EnumValuePair<EnumType::NUM_SHADING_LANGUAGE_VERSIONS, GL_NUM_SHADING_LANGUAGE_VERSIONS>,
 		EnumValuePair<EnumType::VENDOR, GL_VENDOR>,
 		EnumValuePair<EnumType::VERSION, GL_VERSION>,

@@ -596,8 +596,7 @@ namespace baregl::types
 		EXTENSIONS,                                     // n ints (GL_NUM_EXTENSIONS)
 		NUM_EXTENSIONS,                                 // 1 int
 		RENDERER,                                       // 1 string
-		SHADING_LANGUAGE_VERSION,                       // 1 string
-		SHADING_LANGUAGE_VERSIONS,                      // (not in specs, added for convenience) n string (GL_NUM_SHADING_LANGUAGE_VERSIONS)
+		SHADING_LANGUAGE_VERSION,                       // 1 string (indexed)
 		NUM_SHADING_LANGUAGE_VERSIONS,                  // 1 int
 		VENDOR,                                         // 1 string
 		VERSION,                                        // 1 string

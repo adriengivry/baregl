@@ -342,13 +342,10 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET_WORKS(NUM_EXTENSIONS) );
 		REQUIRE( GET_WORKS(RENDERER) );
 		REQUIRE( GET_WORKS(SHADING_LANGUAGE_VERSION) );
-		// FIXME: Retrieval doesn't seem to work properly (dynamic with different query param issue?)
-		// REQUIRE( GET(SHADING_LANGUAGE_VERSIONS).size() == GET(NUM_SHADING_LANGUAGE_VERSIONS) );
-		// for (auto& version : GET(SHADING_LANGUAGE_VERSIONS))
-		// {
-		// 	printf("Version: %s\n", version.c_str());
-		// }
-		// REQUIRE_FALSE(true);
+		for (int i = 0; i < GET(NUM_SHADING_LANGUAGE_VERSIONS); ++i)
+		{
+			REQUIRE( !GET(SHADING_LANGUAGE_VERSION).empty() );
+		}
 		REQUIRE( GET(NUM_SHADING_LANGUAGE_VERSIONS) >= 3 );
 		REQUIRE( GET_WORKS(VENDOR) );
 		REQUIRE( GET_WORKS(VERSION) );
