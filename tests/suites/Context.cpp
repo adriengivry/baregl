@@ -139,16 +139,16 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET(SCISSOR_BOX)[2] == 256 ); // Window width
 		REQUIRE( GET(SCISSOR_BOX)[3] == 256 ); // Window height
 		REQUIRE( GET(STENCIL_TEST) == false );
+		p_context.SetCapability(ERenderingCapability::STENCIL_TEST, true);
+		REQUIRE( GET(STENCIL_TEST) == true );
 		REQUIRE( GET(STENCIL_FUNC) == EComparaisonAlgorithm::ALWAYS );
-		// FIXME: Spec says default value is 1, yet I get -1
-		// REQUIRE( GET(STENCIL_VALUE_MASK) == 1 );
+		REQUIRE( GET_WORKS(STENCIL_VALUE_MASK) ); // FIXME: Spec says default value is 1 yet I get -1
 		REQUIRE( GET(STENCIL_REF) == 0 );
 		REQUIRE( GET(STENCIL_FAIL) == EOperation::KEEP );
 		REQUIRE( GET(STENCIL_PASS_DEPTH_FAIL) == EOperation::KEEP );
 		REQUIRE( GET(STENCIL_PASS_DEPTH_PASS) == EOperation::KEEP );
 		REQUIRE( GET(STENCIL_BACK_FUNC) == EComparaisonAlgorithm::ALWAYS );
-		// FIXME: Spec says default value is 1, yet I get -1
-		// REQUIRE( GET(STENCIL_BACK_VALUE_MASK) == 1 );
+		REQUIRE( GET_WORKS(STENCIL_BACK_VALUE_MASK) ); // FIXME: Spec says default value is 1 yet I get -1
 		REQUIRE( GET(STENCIL_BACK_REF) == 0 );
 		REQUIRE( GET(STENCIL_BACK_FAIL) == EOperation::KEEP );
 		REQUIRE( GET(STENCIL_BACK_PASS_DEPTH_FAIL) == EOperation::KEEP );
@@ -180,10 +180,8 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET(DEPTH_WRITEMASK) == true );
 		p_context.SetDepthWriting(false);
 		REQUIRE( GET(DEPTH_WRITEMASK) == false );
-		// FIXME: Spec says default value is 1, yet I get -1
-		// REQUIRE( GET(STENCIL_WRITEMASK) == 1 );
-		// FIXME: Spec says default value is 1, yet I get -1
-		// REQUIRE( GET(STENCIL_BACK_WRITEMASK) == 1 );
+		REQUIRE( GET_WORKS(STENCIL_WRITEMASK) ); // FIXME: Spec says default value is 1 yet I get -1
+		REQUIRE( GET_WORKS(STENCIL_BACK_WRITEMASK) ); // FIXME: Spec says default value is 1 yet I get -1
 		REQUIRE( GET(COLOR_CLEAR_VALUE) == std::to_array({0.0f,0.0f,0.0f,0.0f}));
 		p_context.SetClearColor(0.1f, 0.2f, 0.3f, 0.4f);
 		REQUIRE( GET(COLOR_CLEAR_VALUE) == std::to_array({0.1f,0.2f,0.3f,0.4f}));
@@ -266,17 +264,13 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 			REQUIRE( GET(SHADER_STORAGE_BUFFER_BINDING, i) == ssbos[i].GetID() );
 			ssbos[i].Unbind();
 		}
-		// FIXME: Spec says default value is 0, yet I get 140733763744992
-		// REQUIRE( GET(SHADER_STORAGE_BUFFER_START) == 0 );
-		// FIXME: Spec says default value is 0, yet I get 140733909164800
-		// REQUIRE( GET(SHADER_STORAGE_BUFFER_SIZE) == 0 );
+		REQUIRE( GET_WORKS(SHADER_STORAGE_BUFFER_START) ); // FIXME: Spec says default value is 0, yet I get 140733763744992
+		REQUIRE( GET_WORKS(SHADER_STORAGE_BUFFER_SIZE) ); // FIXME: Spec says default value is 0, yet I get 140733909164800
 		REQUIRE( GET(TRANSFORM_FEEDBACK_BUFFER_BINDING) == 0 );
 		REQUIRE( GET(TRANSFORM_FEEDBACK_BUFFER_BINDING, 0) == 0 );
-		// FIXME: Spec says default value is 0, yet I get 140723345732688
-		// REQUIRE( GET(TRANSFORM_FEEDBACK_BUFFER_START) == 0 );
+		REQUIRE( GET_WORKS(TRANSFORM_FEEDBACK_BUFFER_START) ); // FIXME: Spec says default value is 0, yet I get 140723345732688
 		REQUIRE( GET(TRANSFORM_FEEDBACK_BUFFER_START, 0) == 0 );
-		// FIXME: Spec says default value is 0, yet I get 140736376922736
-		// REQUIRE( GET(TRANSFORM_FEEDBACK_BUFFER_SIZE) == 0 );
+		REQUIRE( GET_WORKS(TRANSFORM_FEEDBACK_BUFFER_SIZE) ); // FIXME: Spec says default value is 0, yet I get 140736376922736
 		REQUIRE( GET(TRANSFORM_FEEDBACK_BUFFER_SIZE, 0) == 0 );
 		REQUIRE( GET(TRANSFORM_FEEDBACK_PAUSED) == false );
 		REQUIRE( GET(TRANSFORM_FEEDBACK_ACTIVE) == false );
@@ -314,8 +308,7 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET(VIEWPORT_SUBPIXEL_BITS) >= 0 );
 		REQUIRE( GET(VIEWPORT_BOUNDS_RANGE)[0] <= -32768.0f );
 		REQUIRE( GET(VIEWPORT_BOUNDS_RANGE)[1] >= 32767.0f );
-		// FIXME: Value not found in mapping
-		// REQUIRE( GET_WORKS(LAYER_PROVOKING_VERTEX) );
+		REQUIRE( GET_WORKS(LAYER_PROVOKING_VERTEX) );
 		REQUIRE( GET_WORKS(VIEWPORT_INDEX_PROVOKING_VERTEX) );
 		REQUIRE( GET(POINT_SIZE_RANGE)[0] <= 1.0f );
 		REQUIRE( GET(POINT_SIZE_RANGE)[1] >= 1.0f );

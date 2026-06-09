@@ -157,6 +157,7 @@ struct baregl::utils::MappingFor<baregl::types::EProvokingVertexConvention, GLen
 {
 	using EnumType = baregl::types::EProvokingVertexConvention;
 	using type = std::tuple<
+		EnumValuePair<EnumType::PROVOKING_VERTEX, GL_PROVOKING_VERTEX>,
 		EnumValuePair<EnumType::FIRST_VERTEX_CONVENTION, GL_FIRST_VERTEX_CONVENTION>,
 		EnumValuePair<EnumType::LAST_VERTEX_CONVENTION, GL_LAST_VERTEX_CONVENTION>,
 		EnumValuePair<EnumType::UNDEFINED_VERTEX, GL_UNDEFINED_VERTEX>
