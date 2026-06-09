@@ -20,12 +20,8 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
-            generate_tests: ON
-            run_tests: true
           - os: windows-latest
             os_name: Windows
-            generate_tests: OFF
-            run_tests: false
 
     steps:
       - name: Checkout
@@ -41,12 +37,23 @@ jobs:
         run: cmake -S . -B build
           -DCMAKE_BUILD_TYPE=${{ matrix.config }}
           -DBAREGL_GENERATE_EXAMPLES=ON
-          -DBAREGL_GENERATE_TESTS=${{ matrix.generate_tests }}
+          -DBAREGL_GENERATE_TESTS=ON
           -DGLFW_BUILD_WAYLAND=OFF
 
       - name: Build
         run: cmake --build build --config ${{ matrix.config }}
 
-      - name: Test
-        if: matrix.run_tests
+      - name: Install Mesa (Windows)
+        if: runner.os == 'Windows'
+        uses: f3d-app/install-mesa-windows-action@v1
+        with:
+          path: ${{github.workspace}}/build/bin/${{ matrix.config }}/tests
+
+      - name: Test (Linux)
+        if: runner.os == 'Linux'
         run: xvfb-run -a ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+
+      - name: Test (Windows)
+        if: runner.os == 'Windows'
+        run: ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+
