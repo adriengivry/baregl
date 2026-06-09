@@ -10,6 +10,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 #include <baregl/data/GetResultList.h>
@@ -34,29 +35,54 @@ namespace baregl::data
 {
 	template<auto PName> struct GetResult;
 
-	#define DECLARE_GET_RESULT(PARAM, GET_TYPE, COUNT, INDEXED, ...) \
-		template <> struct GetResult<types::EGetParameter::PARAM> { \
-			using type = __VA_ARGS__; \
-			using get_type = GET_TYPE; \
-			static constexpr std::size_t count = COUNT; \
-			static constexpr bool indexed = INDEXED; \
-			static constexpr bool dynamic_count = false; \
-		};
+	template<std::size_t N>
+	struct FixedCount
+	{
+		static constexpr bool dynamic = false;
+		static constexpr std::size_t value = N;
+	};
 
-	#define DECLARE_DYNAMIC_GET_RESULT(PARAM, GET_TYPE, INDEXED, COUNT_PARAMETER, ...) \
+	template<types::EGetParameter P>
+	struct DynamicCount
+	{
+		static constexpr bool dynamic = true;
+		static constexpr types::EGetParameter parameter = P;
+	};
+
+	template<typename CountSpec>
+	struct CountSpecTraits;
+
+	template<std::size_t N>
+	struct CountSpecTraits<FixedCount<N>>
+	{
+		static constexpr bool dynamic = false;
+		static constexpr std::size_t count = N;
+		static constexpr types::EGetParameter dynamic_count_parameter = types::EGetParameter::PATCH_VERTICES;
+	};
+
+	template<types::EGetParameter P>
+	struct CountSpecTraits<DynamicCount<P>>
+	{
+		static constexpr bool dynamic = true;
+		static constexpr std::size_t count = 0;
+		static constexpr types::EGetParameter dynamic_count_parameter = P;
+	};
+
+	#define DECLARE_GET_RESULT(PARAM, GET_TYPE, COUNT_SPEC, INDEXED, ...) \
 		template <> struct GetResult<types::EGetParameter::PARAM> { \
-			using type = std::vector<__VA_ARGS__>; \
+			using count_spec = COUNT_SPEC; \
+			using count_traits = CountSpecTraits<count_spec>; \
+			using value_type = __VA_ARGS__; \
+			using type = std::conditional_t<count_traits::dynamic, std::vector<value_type>, value_type>; \
 			using get_type = GET_TYPE; \
-			static constexpr std::size_t count = 0; \
+			static constexpr std::size_t count = count_traits::count; \
 			static constexpr bool indexed = INDEXED; \
-			static constexpr bool dynamic_count = true; \
-			static constexpr types::EGetParameter dynamic_count_parameter = types::EGetParameter::COUNT_PARAMETER; \
+			static constexpr bool dynamic_count = count_traits::dynamic; \
+			static constexpr types::EGetParameter dynamic_count_parameter = count_traits::dynamic_count_parameter; \
 		};
 
 	BAREGL_GET_RESULTS(DECLARE_GET_RESULT)
-	BAREGL_DYNAMIC_GET_RESULTS(DECLARE_DYNAMIC_GET_RESULT)
 
-	#undef DECLARE_DYNAMIC_GET_RESULT
 	#undef DECLARE_GET_RESULT
 
 	template<auto P>
