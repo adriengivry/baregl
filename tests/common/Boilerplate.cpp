@@ -8,8 +8,39 @@
 
 #include <GLFW/glfw3.h>
 
+#include <format>
 #include <iostream>
 #include <stdexcept>
+
+namespace
+{
+	void LogInfo(const std::string_view p_message)
+	{
+		fprintf(
+			stdout,
+			"[baregl::tests] <info> %s\n",
+			p_message.data()
+		);
+	}
+
+	void LogWarning(const std::string_view p_message)
+	{
+		fprintf(
+			stdout,
+			"[baregl::tests] <warning> %s\n",
+			p_message.data()
+		);
+	}
+
+	void LogError(const std::string_view p_message)
+	{
+		fprintf(
+			stderr,
+			"[baregl::tests] <error> %s\n",
+			p_message.data()
+		);
+	}
+}
 
 namespace tests::common::boilerplate
 {
@@ -18,30 +49,17 @@ namespace tests::common::boilerplate
 	public:
 		virtual void LogInfo(const std::string_view p_message) override
 		{
-			fprintf(
-				stdout,
-				"[baregl] <info> %s\n",
-				p_message.data()
-			);
+			::LogInfo(p_message);
 		}
 
 		virtual void LogWarning(const std::string_view p_message) override
 		{
-			fprintf(
-				stdout,
-				"[baregl] <warning> %s\n",
-				p_message.data()
-			);
+			::LogWarning(p_message);
 		}
 
 		virtual void LogError(const std::string_view p_message) override
 		{
-			fprintf(
-				stderr,
-				"[baregl] <error> %s\n",
-				p_message.data()
-			);
-
+			::LogError(p_message);
 			throw std::runtime_error(std::string{p_message});
 		}
 	};
@@ -50,7 +68,7 @@ namespace tests::common::boilerplate
 	{
 		if (!glfwInit())
 		{
-			std::cerr << "GLFW init failed" << std::endl;
+			::LogError("GLFW init failed");
 		}
 
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -62,7 +80,7 @@ namespace tests::common::boilerplate
 		GLFWwindow* window = glfwCreateWindow(256, 256, "test", nullptr, nullptr);
 		if (!window)
 		{
-			std::cerr << "GLFW window creation failed: " << glfwGetError(nullptr) << std::endl;
+			::LogError(std::format("GLFW window creation failed {}", glfwGetError(nullptr)));
 		}
 
 		glfwMakeContextCurrent(window);
