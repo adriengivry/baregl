@@ -24,8 +24,8 @@ jobs:
             run_tests: true
           - os: windows-latest
             os_name: Windows
-            generate_tests: OFF
-            run_tests: false
+            generate_tests: ON
+            run_tests: true
 
     steps:
       - name: Checkout
