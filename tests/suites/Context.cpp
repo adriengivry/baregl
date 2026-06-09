@@ -28,8 +28,8 @@ TEST_CASE( "Context can be recreated", "[context]" ) {
 	});
 }
 
-#define GET(query, ...) p_context.Get<query>(__VA_ARGS__)
-#define GET_WORKS(query, ...) (GET(query, __VA_ARGS__), true)
+#define GET(getParam, ...) p_context.Get<getParam>(__VA_ARGS__)
+#define GET_WORKS(getParam, ...) (GET(getParam, __VA_ARGS__), true)
 
 TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 	RunInContext([](GLFWwindow* p_window, Context& p_context) {
