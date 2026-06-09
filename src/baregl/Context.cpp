@@ -591,15 +591,13 @@ namespace baregl
 		{
 			using CountGet = data::GetResult<R::dynamic_count_parameter>;
 			using CountElem = typename CountGet::get_type;
-			using FetchGet = data::GetResult<R::dynamic_get_parameter>;
-			using FetchElem = typename FetchGet::get_type;
 
 			std::array<CountElem, CountGet::count> countRaw;
 			GetValue<CountElem>(R::dynamic_count_parameter, countRaw);
 
 			const auto elementCount = static_cast<size_t>(countRaw[0] > 0 ? countRaw[0] : 0);
-			std::vector<FetchElem> raw(elementCount);
-			GetValueIndexed<FetchElem>(R::dynamic_get_parameter, raw, p_index);
+			std::vector<Elem> raw(elementCount);
+			GetValueIndexed<Elem>(PName, raw, p_index);
 
 			if constexpr (std::same_as<typename R::type, std::vector<Elem>>)
 			{
@@ -637,14 +635,14 @@ namespace baregl
 	template data::GetResultType<baregl::types::EGetParameter::PARAM> \
 	Context::Get<baregl::types::EGetParameter::PARAM>();
 
-#define INSTANTIATE_DYNAMIC_GET(PARAM, GET_TYPE, INDEXED, GET_PARAM, COUNT_PARAMETER, ...) \
+#define INSTANTIATE_DYNAMIC_GET(PARAM, GET_TYPE, INDEXED, COUNT_PARAMETER, ...) \
 	template data::GetResultType<baregl::types::EGetParameter::PARAM> \
 	Context::Get<baregl::types::EGetParameter::PARAM>();
 
 #define INSTANTIATE_INDEXED_GET(PARAM, GET_TYPE, COUNT, INDEXED, ...) \
 	INSTANTIATE_INDEXED_GET_##INDEXED(PARAM)
 
-#define INSTANTIATE_INDEXED_DYNAMIC_GET(PARAM, GET_TYPE, INDEXED, GET_PARAM, COUNT_PARAMETER, ...) \
+#define INSTANTIATE_INDEXED_DYNAMIC_GET(PARAM, GET_TYPE, INDEXED, COUNT_PARAMETER, ...) \
 	INSTANTIATE_INDEXED_GET_##INDEXED(PARAM)
 
 #define INSTANTIATE_INDEXED_GET_true(PARAM) \
