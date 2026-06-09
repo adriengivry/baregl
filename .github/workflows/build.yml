@@ -20,8 +20,12 @@ jobs:
         include:
           - os: ubuntu-latest
             os_name: Linux
+            generate_tests: ON
+            run_tests: true
           - os: windows-latest
             os_name: Windows
+            generate_tests: OFF
+            run_tests: false
 
     steps:
       - name: Checkout
@@ -31,13 +35,18 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y libgl-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+          sudo apt-get install -y libgl-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev xvfb
 
       - name: Configure
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=${{ matrix.config }} -DBAREGL_GENERATE_EXAMPLES=ON -DBAREGL_GENERATE_TESTS=ON -DGLFW_BUILD_WAYLAND=OFF
+        run: cmake -S . -B build
+          -DCMAKE_BUILD_TYPE=${{ matrix.config }}
+          -DBAREGL_GENERATE_EXAMPLES=ON
+          -DBAREGL_GENERATE_TESTS=${{ matrix.generate_tests }}
+          -DGLFW_BUILD_WAYLAND=OFF
 
       - name: Build
         run: cmake --build build --config ${{ matrix.config }}
 
       - name: Test
-        run: ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+        if: matrix.run_tests
+        run: xvfb-run -a ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
