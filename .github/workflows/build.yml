@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+env:
+  CMAKE_PRESET: full-ninja
+
 jobs:
   build:
     name: ${{ matrix.os_name }} ${{ matrix.config }}
@@ -34,24 +37,23 @@ jobs:
           sudo apt-get install -y libgl-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev xvfb
 
       - name: Configure
-        run: cmake --preset full-ninja
+        run: cmake --preset ${{ env.CMAKE_PRESET }}
           -DCMAKE_BUILD_TYPE=${{ matrix.config }}
           -DGLFW_BUILD_WAYLAND=OFF
 
       - name: Build
-        run: cmake --build --preset full-ninja
+        run: cmake --build --preset ${{ env.CMAKE_PRESET }}
 
       - name: Install Mesa (Windows)
         if: runner.os == 'Windows'
         uses: f3d-app/install-mesa-windows-action@v1
         with:
-          path: ${{github.workspace}}/build/bin/${{ matrix.config }}/tests
+          path: ${{github.workspace}}/build/${{ env.CMAKE_PRESET }}/bin/${{ matrix.config }}/tests
 
       - name: Test (Linux)
         if: runner.os == 'Linux'
-        run: xvfb-run -a ctest --preset full-ninja
+        run: xvfb-run -a ctest --preset ${{ env.CMAKE_PRESET }}
 
       - name: Test (Windows)
         if: runner.os == 'Windows'
-        run: ctest --preset full-ninja
-
+        run: ctest --preset ${{ env.CMAKE_PRESET }}
