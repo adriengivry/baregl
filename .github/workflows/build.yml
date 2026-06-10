@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        config: [debug, release]
+        config: [Debug, Release]
         include:
           - os: ubuntu-latest
             os_name: Linux

@@ -111,12 +111,14 @@
       "dependsOn": "Build tests (Release)"
     },
     {
-      "label": "Clean",
+      "label": "Clean (Debug)",
       "type": "shell",
-      "command": "cmake",
-      "windows": {
-        "command": "rd /s /q ${workspaceFolder}\\build\\"
-      }
+      "command": "cmake --build --preset full-ninja-multi-debug --target clean"
+    },
+    {
+      "label": "Clean (Release)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-release --target clean"
     }
   ]
 }
