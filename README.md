@@ -84,22 +84,27 @@ program.Unbind();
 | `full-ninja` | Examples and tests enabled, single-config Ninja |
 | `full-ninja-multi` | Examples and tests enabled, multi-config Ninja |
 
-## Building Examples
-**Windows:**
+## Building Examples & Running Unit Tests
+**Windows (Visual Studio):**
 ```powershell
 git clone https://github.com/adriengivry/baregl
 cd baregl
 cmake --preset full
+cmake --build --preset full
+ctest --preset full
 ```
 
-**Linux:**
+**Linux (Ninja Multi-Config):**
 ```powershell
 git clone https://github.com/adriengivry/baregl
 cd baregl
-cmake --preset full
-# or
 cmake --preset full-ninja-multi
+cmake --build --preset full-ninja-multi-debug
+ctest --preset full-ninja-multi-debug
 ```
+
+> [!NOTE]
+> Feel free to adjust the CMake preset according to your setup!
 
 ## CMake Quick Start
 Create a new C++ project with `glfw`, `glm`, and `baregl` in a few seconds with this quick start `CMakeLists.txt`.

@@ -66,6 +66,7 @@
   ],
   "buildPresets": [
     { "name": "full", "configurePreset": "full" },
+    { "name": "full-debug", "configurePreset": "full" },
     { "name": "minimal", "configurePreset": "minimal" },
     { "name": "full-ninja", "configurePreset": "full-ninja" },
     { "name": "minimal-ninja", "configurePreset": "minimal-ninja" },
@@ -80,6 +81,11 @@
       "hidden": true,
       "output": { "outputOnFailure": true },
       "execution": { "noTestsAction": "error", "stopOnFailure": false }
+    },
+    {
+      "name": "full",
+      "inherits": "test-base",
+      "configurePreset": "full"
     },
     {
       "name": "full-ninja",
