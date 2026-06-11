@@ -5,8 +5,8 @@
       "name": "Debug BareGL Project",
       "type": "lldb",
       "request": "launch",
-      "cwd": "${workspaceFolder}/build/full-ninja-multi/bin/${input:buildConfig}/${input:projectName}/",
-      "program": "${workspaceFolder}/build/full-ninja-multi/bin/${input:buildConfig}/${input:projectName}/${input:projectName}",
+      "cwd": "${workspaceFolder}/build/bin/${input:buildConfig}/${input:projectName}/",
+      "program": "${workspaceFolder}/build/bin/${input:buildConfig}/${input:projectName}/${input:projectName}",
       "windows": {
         "type": "cppvsdbg"
       },
