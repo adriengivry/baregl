@@ -74,18 +74,11 @@ program.Unbind();
 | `BAREGL_GENERATE_EXAMPLES` |  `ON` / `OFF` (default) | Generate example projects |
 | `BAREGL_GENERATE_TESTS` |  `ON` / `OFF` (default) | Generate test project |
 
-## CMake Presets
-| Preset | Description |
-| - | - |
-| `minimal` | Examples and tests disabled, default generator |
-| `minimal-ninja` | Examples and tests disabled, single-config Ninja |
-| `minimal-ninja-multi` | Examples and tests disabled, multi-config Ninja |
-| `full` | Examples and tests enabled, default generator |
-| `full-ninja` | Examples and tests enabled, single-config Ninja |
-| `full-ninja-multi` | Examples and tests enabled, multi-config Ninja |
-
 ## Building Examples & Running Unit Tests
-**Windows (Visual Studio):**
+**Default CMake Generator**
+> [!NOTE]
+> Recommended way on Windows for use with Visual Studio.
+
 ```powershell
 git clone https://github.com/adriengivry/baregl
 cd baregl
@@ -94,7 +87,10 @@ cmake --build --preset full
 ctest --preset full
 ```
 
-**Linux (Ninja Multi-Config):**
+**Ninja Multi-Config Generator**
+> [!NOTE]
+> Requires Ninja to be installed.
+
 ```powershell
 git clone https://github.com/adriengivry/baregl
 cd baregl
@@ -103,8 +99,8 @@ cmake --build --preset full-ninja-multi-debug
 ctest --preset full-ninja-multi-debug
 ```
 
-> [!NOTE]
-> Feel free to adjust the CMake preset according to your setup!
+> [!TIP]
+> Find all available presets with `cmake --list-presets all`
 
 ## CMake Quick Start
 Create a new C++ project with `glfw`, `glm`, and `baregl` in a few seconds with this quick start `CMakeLists.txt`.
