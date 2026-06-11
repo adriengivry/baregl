@@ -75,11 +75,10 @@ program.Unbind();
 | `BAREGL_GENERATE_TESTS` |  `ON` / `OFF` (default) | Generate test project |
 
 ## Building Examples & Running Unit Tests
-**Default CMake Generator**
-> [!NOTE]
-> Recommended way on Windows for use with Visual Studio.
+### Default CMake Generator
+*Recommended way to get started on Windows with Visual Studio.*
 
-```powershell
+```bash
 git clone https://github.com/adriengivry/baregl
 cd baregl
 cmake --preset full
@@ -87,11 +86,10 @@ cmake --build --preset full
 ctest --preset full
 ```
 
-**Ninja Multi-Config Generator**
-> [!NOTE]
-> Requires Ninja to be installed.
+### Ninja Multi-Config Generator
+*Requires [Ninja](https://ninja-build.org/) to be installed.*
 
-```powershell
+```bash
 git clone https://github.com/adriengivry/baregl
 cd baregl
 cmake --preset full-ninja-multi
@@ -100,7 +98,10 @@ ctest --preset full-ninja-multi-debug
 ```
 
 > [!TIP]
-> Find all available presets with `cmake --list-presets all`
+> Find all available presets with:
+> ```bash
+> cmake --list-presets all
+> ```
 
 ## CMake Quick Start
 Create a new C++ project with `glfw`, `glm`, and `baregl` in a few seconds with this quick start `CMakeLists.txt`.
