@@ -2,15 +2,15 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Project",
+      "name": "Debug BareGL Project",
       "type": "lldb",
       "request": "launch",
-      "cwd": "${workspaceFolder}/build/bin/Debug/${input:projectName}/",
-      "program": "${workspaceFolder}/build/bin/Debug/${input:projectName}/${input:projectName}",
-      "windows" : {
+      "cwd": "${workspaceFolder}/build/bin/${input:buildConfig}/${input:projectName}/",
+      "program": "${workspaceFolder}/build/bin/${input:buildConfig}/${input:projectName}/${input:projectName}",
+      "windows": {
         "type": "cppvsdbg"
       },
-      "preLaunchTask": "Build ${input:projectName}"
+      "preLaunchTask": "Build ${input:projectName} (${input:buildConfig})"
     }
   ],
   "inputs": [
@@ -28,6 +28,16 @@
         "tests"
       ],
       "default": "1-triangle"
+    },
+    {
+      "id": "buildConfig",
+      "type": "pickString",
+      "description": "Select build configuration",
+      "options": [
+        "Debug",
+        "Release"
+      ],
+      "default": "Debug"
     }
   ]
 }

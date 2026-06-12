@@ -2,71 +2,123 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Generate Projects",
+      "label": "Generate Projects (Ninja Multi-Config)",
       "type": "shell",
-      "command": "./gen_proj_linux.sh",
-      "windows": {
-        "command": ".\\gen_proj_windows.bat"
-      }
+      "command": "cmake --preset full-ninja-multi"
     },
     {
-      "label": "Build all",
+      "label": "Build all (Debug)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug"
+      "command": "cmake --build --preset full-ninja-multi-debug"
     },
     {
-      "label": "Build baregl",
+      "label": "Build all (Release)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug --target baregl"
+      "command": "cmake --build --preset full-ninja-multi-release"
+    },
+
+    {
+      "label": "Build baregl (Debug)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-debug --target baregl"
     },
     {
-      "label": "Build 1-triangle",
+      "label": "Build baregl (Release)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug --target 1-triangle"
+      "command": "cmake --build --preset full-ninja-multi-release --target baregl"
+    },
+
+    {
+      "label": "Build 1-triangle (Debug)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-debug --target 1-triangle"
     },
     {
-      "label": "Build 2-cube",
+      "label": "Build 1-triangle (Release)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug --target 2-cube"
+      "command": "cmake --build --preset full-ninja-multi-release --target 1-triangle"
     },
     {
-      "label": "Build 3-framebuffer",
+      "label": "Build 2-cube (Debug)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug --target 3-framebuffer"
+      "command": "cmake --build --preset full-ninja-multi-debug --target 2-cube"
     },
     {
-      "label": "Build 4-geometry",
+      "label": "Build 2-cube (Release)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug --target 4-geometry"
+      "command": "cmake --build --preset full-ninja-multi-release --target 2-cube"
     },
     {
-      "label": "Build 5-compute",
+      "label": "Build 3-framebuffer (Debug)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug --target 5-compute"
+      "command": "cmake --build --preset full-ninja-multi-debug --target 3-framebuffer"
     },
     {
-      "label": "Build 6-tessellation",
+      "label": "Build 3-framebuffer (Release)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug --target 6-tessellation"
+      "command": "cmake --build --preset full-ninja-multi-release --target 3-framebuffer"
     },
     {
-      "label": "Build tests",
+      "label": "Build 4-geometry (Debug)",
       "type": "shell",
-      "command": "cmake --build ${workspaceFolder}/build --config Debug --target tests"
+      "command": "cmake --build --preset full-ninja-multi-debug --target 4-geometry"
     },
     {
-      "label": "Run tests",
+      "label": "Build 4-geometry (Release)",
       "type": "shell",
-      "command": "ctest --test-dir ${workspaceFolder}/build -C Debug --output-on-failure",
-      "dependsOn": "Build tests"
+      "command": "cmake --build --preset full-ninja-multi-release --target 4-geometry"
     },
     {
-      "label": "Clean",
+      "label": "Build 5-compute (Debug)",
       "type": "shell",
-      "command": "rm -rf ${workspaceFolder}/build/",
-      "windows": {
-        "command": "rd /s /q ${workspaceFolder}\\build\\"
-      }
+      "command": "cmake --build --preset full-ninja-multi-debug --target 5-compute"
+    },
+    {
+      "label": "Build 5-compute (Release)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-release --target 5-compute"
+    },
+    {
+      "label": "Build 6-tessellation (Debug)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-debug --target 6-tessellation"
+    },
+    {
+      "label": "Build 6-tessellation (Release)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-release --target 6-tessellation"
+    },
+    {
+      "label": "Build tests (Debug)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-debug --target tests"
+    },
+    {
+      "label": "Build tests (Release)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-release --target tests"
+    },
+    {
+      "label": "Run tests (Debug)",
+      "type": "shell",
+      "command": "ctest --preset full-ninja-multi-debug",
+      "dependsOn": "Build tests (Debug)"
+    },
+    {
+      "label": "Run tests (Release)",
+      "type": "shell",
+      "command": "ctest --preset full-ninja-multi-release",
+      "dependsOn": "Build tests (Release)"
+    },
+    {
+      "label": "Clean (Debug)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-debug --target clean"
+    },
+    {
+      "label": "Clean (Release)",
+      "type": "shell",
+      "command": "cmake --build --preset full-ninja-multi-release --target clean"
     }
   ]
 }

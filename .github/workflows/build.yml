@@ -8,6 +8,9 @@ on:
     branches:
       - main
 
+env:
+  CMAKE_PRESET: full-ninja
+
 jobs:
   build:
     name: ${{ matrix.os_name }} ${{ matrix.config }}
@@ -34,14 +37,12 @@ jobs:
           sudo apt-get install -y libgl-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev xvfb
 
       - name: Configure
-        run: cmake -S . -B build
+        run: cmake --preset ${{ env.CMAKE_PRESET }}
           -DCMAKE_BUILD_TYPE=${{ matrix.config }}
-          -DBAREGL_GENERATE_EXAMPLES=ON
-          -DBAREGL_GENERATE_TESTS=ON
           -DGLFW_BUILD_WAYLAND=OFF
 
       - name: Build
-        run: cmake --build build --config ${{ matrix.config }}
+        run: cmake --build --preset ${{ env.CMAKE_PRESET }}
 
       - name: Install Mesa (Windows)
         if: runner.os == 'Windows'
@@ -51,9 +52,8 @@ jobs:
 
       - name: Test (Linux)
         if: runner.os == 'Linux'
-        run: xvfb-run -a ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
+        run: xvfb-run -a ctest --preset ${{ env.CMAKE_PRESET }}
 
       - name: Test (Windows)
         if: runner.os == 'Windows'
-        run: ctest --test-dir build -C ${{ matrix.config }} --output-on-failure
-
+        run: ctest --preset ${{ env.CMAKE_PRESET }}

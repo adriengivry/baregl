@@ -1,0 +1,147 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build"
+    },
+    {
+      "name": "ninja",
+      "hidden": true,
+      "inherits": "base",
+      "generator": "Ninja"
+    },
+    {
+      "name": "ninja-multi",
+      "hidden": true,
+      "inherits": "base",
+      "generator": "Ninja Multi-Config"
+    },
+    {
+      "name": "full",
+      "displayName": "Full",
+      "description": "Examples and tests enabled, default generator",
+      "inherits": "base",
+      "cacheVariables": {
+        "BAREGL_GENERATE_EXAMPLES": "ON",
+        "BAREGL_GENERATE_TESTS": "ON"
+      }
+    },
+    {
+      "name": "minimal",
+      "displayName": "Minimal",
+      "description": "Examples and tests disabled, default generator",
+      "inherits": "base",
+      "cacheVariables": {
+        "BAREGL_GENERATE_EXAMPLES": "OFF",
+        "BAREGL_GENERATE_TESTS": "OFF"
+      }
+    },
+    {
+      "name": "full-ninja",
+      "displayName": "Full (Ninja)",
+      "description": "Examples and tests enabled, single-config Ninja",
+      "inherits": ["full", "ninja"]
+    },
+    {
+      "name": "minimal-ninja",
+      "displayName": "Minimal (Ninja)",
+      "description": "Examples and tests disabled, single-config Ninja",
+      "inherits": ["minimal", "ninja"]
+    },
+    {
+      "name": "full-ninja-multi",
+      "displayName": "Full (Ninja Multi-Config)",
+      "description": "Examples and tests enabled, multi-config Ninja",
+      "inherits": ["full", "ninja-multi"]
+    },
+    {
+      "name": "minimal-ninja-multi",
+      "displayName": "Minimal (Ninja Multi-Config)",
+      "description": "Examples and tests disabled, multi-config Ninja",
+      "inherits": ["minimal", "ninja-multi"]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "full",
+      "configurePreset": "full"
+    },
+    {
+      "name": "minimal",
+      "configurePreset": "minimal"
+    },
+    {
+      "name": "full-ninja",
+      "configurePreset": "full-ninja"
+    },
+    {
+      "name": "minimal-ninja",
+      "configurePreset": "minimal-ninja"
+    },
+    {
+      "name": "full-ninja-multi-debug", 
+      "configurePreset": "full-ninja-multi", 
+      "configuration": "Debug"
+    },
+    {
+      "name": "full-ninja-multi-release", 
+      "configurePreset": "full-ninja-multi",
+      "configuration": "Release"
+    },
+    {
+      "name": "minimal-ninja-multi-debug",
+      "configurePreset": "minimal-ninja-multi",
+      "configuration": "Debug"
+    },
+    {
+      "name": "minimal-ninja-multi-release", 
+      "configurePreset": "minimal-ninja-multi", 
+      "configuration": "Release" 
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "test-base",
+      "hidden": true,
+      "output": { "outputOnFailure": true },
+      "execution": { "noTestsAction": "error", "stopOnFailure": false }
+    },
+    {
+      "name": "full",
+      "inherits": "test-base",
+      "configurePreset": "full"
+    },
+    {
+      "name": "full-ninja",
+      "inherits": "test-base",
+      "configurePreset": "full-ninja"
+    },
+    {
+      "name": "full-ninja-multi-debug",
+      "inherits": "test-base",
+      "configurePreset": "full-ninja-multi",
+      "configuration": "Debug"
+    },
+    {
+      "name": "full-ninja-multi-release",
+      "inherits": "test-base",
+      "configurePreset": "full-ninja-multi",
+      "configuration": "Release"
+    },
+    {
+      "name": "minimal-ninja-multi-debug",
+      "inherits": "test-base",
+      "configurePreset": "minimal-ninja-multi",
+      "configuration": "Debug"
+    },
+    {
+      "name": "minimal-ninja-multi-release",
+      "inherits": "test-base",
+      "configurePreset": "minimal-ninja-multi",
+      "configuration": "Release"
+    }
+  ]
+}

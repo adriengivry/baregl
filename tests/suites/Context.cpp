@@ -323,7 +323,9 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET(MAX_VERTEX_ATTRIB_RELATIVE_OFFSET) >= 2047 );
 		REQUIRE( GET(MAX_VERTEX_ATTRIB_BINDINGS) >= 16 );
 		REQUIRE( GET(MAX_VERTEX_ATTRIB_STRIDE) >= 2048 );
-		REQUIRE( GET(NUM_COMPRESSED_TEXTURE_FORMATS) >= 12 ); // Should be 18 according to the specs, but some implementations aren't fully compliant (which is the case for baregl's CI runner)
+		// Should be 18 according to the specs, but some implementations aren't fully compliant,
+		// which is the case for baregl's CI runner, and other niche driver implementations (e.g. Asahi Linux).
+		REQUIRE( GET(NUM_COMPRESSED_TEXTURE_FORMATS) >= 10 );
 		REQUIRE( GET(COMPRESSED_TEXTURE_FORMATS).size() == GET(NUM_COMPRESSED_TEXTURE_FORMATS) );
 		REQUIRE( GET(MAX_TEXTURE_BUFFER_SIZE) >= 65536 );
 		REQUIRE( GET(MAX_RECTANGLE_TEXTURE_SIZE) >= 16384 );
@@ -335,7 +337,7 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET(MIN_MAP_BUFFER_ALIGNMENT) >= 64 ); // Must be power of 2
 		REQUIRE( GET(TEXTURE_BUFFER_OFFSET_ALIGNMENT) <= 256 );
 		REQUIRE( GET(MAJOR_VERSION) == 4 );
-		REQUIRE( GET(MINOR_VERSION) == 5 );
+		REQUIRE( GET(MINOR_VERSION) >= 5 );
 		REQUIRE( GET(CONTEXT_FLAGS) == EContextFlags::DEBUG_BIT );
 		REQUIRE( GET_WORKS(CONTEXT_PROFILE_MASK) );
 		for (int i = 0; i < GET(NUM_EXTENSIONS); ++i)
