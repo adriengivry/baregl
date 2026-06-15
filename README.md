@@ -82,8 +82,8 @@ program.Unbind();
 git clone https://github.com/adriengivry/baregl
 cd baregl
 cmake --preset full
-cmake --build --preset full
-ctest --preset full
+cmake --build --preset full-debug
+ctest --preset debug
 ```
 
 ### Ninja Multi-Config Generator
@@ -94,7 +94,7 @@ git clone https://github.com/adriengivry/baregl
 cd baregl
 cmake --preset full-ninja-multi
 cmake --build --preset full-ninja-multi-debug
-ctest --preset full-ninja-multi-debug
+ctest --preset ninja-multi-debug
 ```
 
 > [!TIP]
