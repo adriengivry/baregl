@@ -10,7 +10,7 @@ on:
 
 env:
   CMAKE_BUILD_PRESET: full-ninja
-  CMAKE_TEST_PRESET: ninja
+  CMAKE_TEST_PRESET: test-ninja
 
 jobs:
   build:
