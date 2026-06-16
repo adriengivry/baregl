@@ -132,8 +132,14 @@
       "configurePreset": "minimal-ninja-release"
     },
     {
-      "name": "minimal-ninja-multi",
-      "configurePreset": "minimal-ninja-multi"
+      "name": "minimal-ninja-multi-debug",
+      "configurePreset": "minimal-ninja-multi",
+      "configuration": "Debug"
+    },
+    {
+      "name": "minimal-ninja-multi-release",
+      "configurePreset": "minimal-ninja-multi",
+      "configuration": "Release"
     },
     {
       "name": "full-debug",
