@@ -12,406 +12,104 @@
       "binaryDir": "${sourceDir}/build"
     },
     {
-      "name": "debug",
-      "hidden": true,
+      "name": "dev",
+      "inherits": "base",
       "cacheVariables": {
+        "BAREGL_GENERATE_EXAMPLES": "ON",
+        "BAREGL_GENERATE_TESTS": "ON",
         "CMAKE_BUILD_TYPE": "Debug"
       }
     },
     {
-      "name": "release",
-      "hidden": true,
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
-      }
-    },
-    {
-      "name": "ninja",
-      "hidden": true,
-      "generator": "Ninja"
-    },
-    {
-      "name": "ninja-multi",
-      "hidden": true,
-      "generator": "Ninja Multi-Config"
-    },
-    {
-      "name": "minimal",
-      "displayName": "Minimal",
-      "description": "Examples and tests disabled, default generator",
+      "name": "lib",
       "inherits": "base",
       "cacheVariables": {
         "BAREGL_GENERATE_EXAMPLES": "OFF",
-        "BAREGL_GENERATE_TESTS": "OFF"
+        "BAREGL_GENERATE_TESTS": "OFF",
+        "CMAKE_BUILD_TYPE": "Release"
       }
-    },
-    {
-      "name": "minimal-debug",
-      "displayName": "Minimal (Debug)",
-      "description": "Examples and tests disabled, debug default generator",
-      "inherits": ["minimal", "debug"]
-    },
-    {
-      "name": "minimal-release",
-      "displayName": "Minimal (Release)",
-      "description": "Examples and tests disabled, release default generator",
-      "inherits": ["minimal", "release"]
-    },
-    {
-      "name": "minimal-ninja-debug",
-      "displayName": "Minimal (Ninja Debug)",
-      "description": "Examples and tests disabled, debug Ninja",
-      "inherits": ["minimal", "ninja", "debug"]
-    },
-    {
-      "name": "minimal-ninja-release",
-      "displayName": "Minimal (Ninja Release)",
-      "description": "Examples and tests disabled, release Ninja",
-      "inherits": ["minimal", "ninja", "release"]
-    },
-    {
-      "name": "minimal-ninja-multi",
-      "displayName": "Minimal (Ninja Multi-Config)",
-      "description": "Examples and tests disabled, multi-config Ninja",
-      "inherits": ["minimal", "ninja-multi"]
-    },
-    {
-      "name": "full",
-      "displayName": "Full",
-      "description": "Examples and tests enabled, default generator",
-      "inherits": "base",
-      "cacheVariables": {
-        "BAREGL_GENERATE_EXAMPLES": "ON",
-        "BAREGL_GENERATE_TESTS": "ON"
-      }
-    },
-    {
-      "name": "full-debug",
-      "displayName": "Full (Debug)",
-      "description": "Examples and tests enabled, debug default generator",
-      "inherits": ["full", "debug"]
-    },
-    {
-      "name": "full-release",
-      "displayName": "Full (Release)",
-      "description": "Examples and tests enabled, release default generator",
-      "inherits": ["full", "release"]
-    },
-    {
-      "name": "full-ninja-debug",
-      "displayName": "Full (Ninja Debug)",
-      "description": "Examples and tests enabled, debug Ninja",
-      "inherits": ["full", "ninja", "debug"]
-    },
-    {
-      "name": "full-ninja-release",
-      "displayName": "Full (Ninja Release)",
-      "description": "Examples and tests enabled, release Ninja",
-      "inherits": ["full", "ninja", "release"]
-    },
-    {
-      "name": "full-ninja-multi",
-      "displayName": "Full (Ninja Multi-Config)",
-      "description": "Examples and tests enabled, multi-config Ninja",
-      "inherits": ["full", "ninja-multi"]
     }
   ],
   "buildPresets": [
     {
-      "name": "minimal-debug",
-      "configurePreset": "minimal-debug"
-    },
-    {
-      "name": "minimal-release",
-      "configurePreset": "minimal-release"
-    },
-    {
-      "name": "minimal-ninja-debug",
-      "configurePreset": "minimal-ninja-debug"
-    },
-    {
-      "name": "minimal-ninja-release",
-      "configurePreset": "minimal-ninja-release"
-    },
-    {
-      "name": "minimal-ninja-multi-debug",
-      "configurePreset": "minimal-ninja-multi",
+      "name": "dev-tests",
+      "targets": "tests",
+      "configurePreset": "dev",
       "configuration": "Debug"
     },
     {
-      "name": "minimal-ninja-multi-release",
-      "configurePreset": "minimal-ninja-multi",
-      "configuration": "Release"
-    },
-    {
-      "name": "full-debug",
-      "configurePreset": "full-debug"
-    },
-    {
-      "name": "full-release",
-      "configurePreset": "full-release"
-    },
-    {
-      "name": "full-ninja-debug",
-      "configurePreset": "full-ninja-debug"
-    },
-    {
-      "name": "full-ninja-release",
-      "configurePreset": "full-ninja-release"
-    },
-    {
-      "name": "full-ninja-multi-debug",
-      "configurePreset": "full-ninja-multi",
+      "name": "dev-examples",
+      "targets": "examples",
+      "configurePreset": "dev",
       "configuration": "Debug"
     },
     {
-      "name": "full-ninja-multi-release",
-      "configurePreset": "full-ninja-multi",
+      "name": "dev-all",
+      "targets": ["examples", "tests"],
+      "configurePreset": "dev",
+      "configuration": "Debug"
+    },
+    {
+      "name": "lib",
+      "configurePreset": "lib",
       "configuration": "Release"
     }
   ],
   "testPresets": [
     {
-      "name": "test-base",
-      "hidden": true,
-      "output": { "outputOnFailure": true },
-      "execution": { "noTestsAction": "error", "stopOnFailure": false }
-    },
-    {
-      "name": "test-debug",
-      "inherits": "test-base",
-      "configurePreset": "full-debug"
-    },
-    {
-      "name": "test-release",
-      "inherits": "test-base",
-      "configurePreset": "full-release"
-    },
-    {
-      "name": "test-ninja-debug",
-      "inherits": "test-base",
-      "configurePreset": "full-ninja-debug"
-    },
-    {
-      "name": "test-ninja-release",
-      "inherits": "test-base",
-      "configurePreset": "full-ninja-release"
-    },
-    {
-      "name": "test-ninja-multi-debug",
-      "inherits": "test-base",
-      "configurePreset": "full-ninja-multi",
+      "name": "test-all",
+      "displayName": "Test All",
+      "configurePreset": "dev",
       "configuration": "Debug"
-    },
-    {
-      "name": "test-ninja-multi-release",
-      "inherits": "test-base",
-      "configurePreset": "full-ninja-multi",
-      "configuration": "Release"
     }
   ],
   "workflowPresets": [
     {
-      "name": "minimal-debug",
-      "displayName": "Minimal (Debug)",
-      "description": "Configure and build without examples or tests",
+      "name": "tests",
+      "displayName": "Tests",
+      "description": "Configure, build, and run tests",
       "steps": [
         {
           "type": "configure",
-          "name": "minimal-debug"
+          "name": "dev"
         },
         {
           "type": "build",
-          "name": "minimal-debug"
-        }
-      ]
-    },
-    {
-      "name": "minimal-release",
-      "displayName": "Minimal (Release)",
-      "description": "Configure and build without examples or tests",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "minimal-release"
-        },
-        {
-          "type": "build",
-          "name": "minimal-release"
-        }
-      ]
-    },
-    {
-      "name": "minimal-ninja-debug",
-      "displayName": "Minimal (Ninja Debug)",
-      "description": "Configure and build without examples or tests using Ninja",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "minimal-ninja-debug"
-        },
-        {
-          "type": "build",
-          "name": "minimal-ninja-debug"
-        }
-      ]
-    },
-    {
-      "name": "minimal-ninja-release",
-      "displayName": "Minimal (Ninja Release)",
-      "description": "Configure and build without examples or tests using Ninja",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "minimal-ninja-release"
-        },
-        {
-          "type": "build",
-          "name": "minimal-ninja-release"
-        }
-      ]
-    },
-    {
-      "name": "minimal-ninja-multi-debug",
-      "displayName": "Minimal (Ninja Multi-Config Debug)",
-      "description": "Configure and build without examples or tests using Ninja Multi-Config",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "minimal-ninja-multi"
-        },
-        {
-          "type": "build",
-          "name": "minimal-ninja-multi-debug"
-        }
-      ]
-    },
-    {
-      "name": "minimal-ninja-multi-release",
-      "displayName": "Minimal (Ninja Multi-Config Release)",
-      "description": "Configure and build without examples or tests using Ninja Multi-Config",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "minimal-ninja-multi"
-        },
-        {
-          "type": "build",
-          "name": "minimal-ninja-multi-release"
-        }
-      ]
-    },
-    {
-      "name": "full-debug",
-      "displayName": "Full (Debug)",
-      "description": "Configure, build, and test with examples",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "full-debug"
-        },
-        {
-          "type": "build",
-          "name": "full-debug"
+          "name": "dev-tests"
         },
         {
           "type": "test",
-          "name": "test-debug"
+          "name": "test-all"
         }
       ]
     },
     {
-      "name": "full-release",
-      "displayName": "Full (Release)",
-      "description": "Configure, build, and test with examples",
+      "name": "examples",
+      "displayName": "Examples",
+      "description": "Configure and build examples",
       "steps": [
         {
           "type": "configure",
-          "name": "full-release"
+          "name": "dev"
         },
         {
           "type": "build",
-          "name": "full-release"
-        },
-        {
-          "type": "test",
-          "name": "test-release"
+          "name": "dev-examples"
         }
       ]
     },
     {
-      "name": "full-ninja-debug",
-      "displayName": "Full (Ninja Debug)",
-      "description": "Configure, build, and test with examples using Ninja",
+      "name": "lib",
+      "displayName": "lib",
+      "description": "Configure and build library",
       "steps": [
         {
           "type": "configure",
-          "name": "full-ninja-debug"
+          "name": "lib"
         },
         {
           "type": "build",
-          "name": "full-ninja-debug"
-        },
-        {
-          "type": "test",
-          "name": "test-ninja-debug"
-        }
-      ]
-    },
-    {
-      "name": "full-ninja-release",
-      "displayName": "Full (Ninja Release)",
-      "description": "Configure, build, and test with examples using Ninja",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "full-ninja-release"
-        },
-        {
-          "type": "build",
-          "name": "full-ninja-release"
-        },
-        {
-          "type": "test",
-          "name": "test-ninja-release"
-        }
-      ]
-    },
-    {
-      "name": "full-ninja-multi-debug",
-      "displayName": "Full (Ninja Multi-Config Debug)",
-      "description": "Configure, build, and test with examples using Ninja Multi-Config",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "full-ninja-multi"
-        },
-        {
-          "type": "build",
-          "name": "full-ninja-multi-debug"
-        },
-        {
-          "type": "test",
-          "name": "test-ninja-multi-debug"
-        }
-      ]
-    },
-    {
-      "name": "full-ninja-multi-release",
-      "displayName": "Full (Ninja Multi-Config Release)",
-      "description": "Configure, build, and test with examples using Ninja Multi-Config",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "full-ninja-multi"
-        },
-        {
-          "type": "build",
-          "name": "full-ninja-multi-release"
-        },
-        {
-          "type": "test",
-          "name": "test-ninja-multi-release"
+          "name": "lib"
         }
       ]
     }
