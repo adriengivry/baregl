@@ -74,23 +74,38 @@ program.Unbind();
 | `BAREGL_GENERATE_EXAMPLES` |  `ON` / `OFF` (default) | Generate example projects |
 | `BAREGL_GENERATE_TESTS` |  `ON` / `OFF` (default) | Generate test project |
 
-## Building Examples
-**Windows:**
-```powershell
+## Building Examples & Running Unit Tests
+
+### Windows
+```bash
 git clone https://github.com/adriengivry/baregl
-cd .\baregl
-.\gen_proj_windows.bat
-.\build\baregl.sln # (optional) open solution in Visual Studio
+cd baregl
+cmake --preset dev
+cmake --build --preset dev-all
+ctest --preset test-all
 ```
 
-**Linux:**
-```powershell
+### Linux 
+```bash
 git clone https://github.com/adriengivry/baregl
-cd ./baregl
-./gen_proj_linux.sh
+cd baregl
+
+# Wayland
+cmake --preset dev
+# X11
+cmake --preset dev-no-wayland
+
+cmake --build --preset dev-all
+ctest --preset test-all
 ```
 
-## CMake Quick Start
+> [!TIP]
+> Find all available presets with:
+> ```bash
+> cmake --list-presets all
+> ```
+
+## CMake Integration Quick Start
 Create a new C++ project with `glfw`, `glm`, and `baregl` in a few seconds with this quick start `CMakeLists.txt`.
 
 **Example project structure:**

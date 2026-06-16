@@ -29,34 +29,6 @@ target_link_libraries(${TARGET_NAME}
         baregl
 )
 
-# Configuration-specific settings
-target_compile_definitions(${TARGET_NAME}
-    PRIVATE
-        $<$<CONFIG:Debug>:DEBUG>
-        $<$<CONFIG:Release>:NDEBUG>
-)
-
-# Platform-specific options
-if(WIN32)
-    target_compile_options(${TARGET_NAME}
-        PRIVATE
-            $<$<CONFIG:Debug>:/Zi /Od /MDd>
-            $<$<CONFIG:Release>:/O2 /MD>
-    )
-else()
-    target_compile_options(${TARGET_NAME}
-        PRIVATE
-            $<$<CONFIG:Debug>:-g -O0>
-            $<$<CONFIG:Release>:-O3>
-    )
-
-    # Add platform-specific libraries
-    if(UNIX AND NOT APPLE)
-        if(DEFINED X11_LIBS)
-            target_link_libraries(${TARGET_NAME} PRIVATE ${X11_LIBS})
-        endif()
-        if(DEFINED WAYLAND_LIBS)
-            target_link_libraries(${TARGET_NAME} PRIVATE ${WAYLAND_LIBS})
-        endif()
-    endif()
-endif()
+# Shared settings between baregl projects
+include(${CMAKE_SOURCE_DIR}/cmake/TargetConfig.cmake)
+baregl_configure_target(${TARGET_NAME})

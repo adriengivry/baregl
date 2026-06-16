@@ -1,4 +1,6 @@
 .vs/
+.vscode/
+.cache/
 /bin/
 /obj/
 /build/
