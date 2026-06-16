@@ -75,26 +75,10 @@ program.Unbind();
 | `BAREGL_GENERATE_TESTS` |  `ON` / `OFF` (default) | Generate test project |
 
 ## Building Examples & Running Unit Tests
-### Default CMake Generator
-*Recommended way to get started on Windows with Visual Studio.*
-
 ```bash
 git clone https://github.com/adriengivry/baregl
 cd baregl
-cmake --preset full
-cmake --build --preset full-debug
-ctest --preset test-debug
-```
-
-### Ninja Multi-Config Generator
-*Requires [Ninja](https://ninja-build.org/) to be installed.*
-
-```bash
-git clone https://github.com/adriengivry/baregl
-cd baregl
-cmake --preset full-ninja-multi
-cmake --build --preset full-ninja-multi-debug
-ctest --preset test-ninja-multi-debug
+cmake --workflow --preset full-debug
 ```
 
 > [!TIP]
