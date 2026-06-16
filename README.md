@@ -75,10 +75,28 @@ program.Unbind();
 | `BAREGL_GENERATE_TESTS` |  `ON` / `OFF` (default) | Generate test project |
 
 ## Building Examples & Running Unit Tests
+
+### Windows
 ```bash
 git clone https://github.com/adriengivry/baregl
 cd baregl
-cmake --workflow --preset tests-and-examples
+cmake --preset dev
+cmake --build --preset dev-all
+ctest --preset test-all
+```
+
+### Linux 
+```bash
+git clone https://github.com/adriengivry/baregl
+cd baregl
+
+# Wayland
+cmake --preset dev
+# X11
+cmake --preset dev-no-wayland
+
+cmake --build --preset dev-all
+ctest --preset test-all
 ```
 
 > [!TIP]

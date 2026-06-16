@@ -21,6 +21,13 @@
       }
     },
     {
+      "name": "dev-no-wayland",
+      "inherits": "dev",
+      "cacheVariables": {
+        "GLFW_BUILD_WAYLAND": "OFF"
+      }
+    },
+    {
       "name": "lib",
       "inherits": "base",
       "cacheVariables": {
@@ -60,76 +67,6 @@
       "displayName": "Test All",
       "configurePreset": "dev",
       "configuration": "Debug"
-    }
-  ],
-  "workflowPresets": [
-    {
-      "name": "tests",
-      "displayName": "Tests",
-      "description": "Configure, build, and run tests",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "dev"
-        },
-        {
-          "type": "build",
-          "name": "dev-tests"
-        },
-        {
-          "type": "test",
-          "name": "test-all"
-        }
-      ]
-    },
-    {
-      "name": "examples",
-      "displayName": "Examples",
-      "description": "Configure and build examples",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "dev"
-        },
-        {
-          "type": "build",
-          "name": "dev-examples"
-        }
-      ]
-    },
-    {
-      "name": "tests-and-examples",
-      "displayName": "Tests & Examples",
-      "description": "Configure and build tests & examples, then run all tests",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "dev"
-        },
-        {
-          "type": "build",
-          "name": "dev-all"
-        },
-        {
-          "type": "test",
-          "name": "test-all"
-        }
-      ]
-    },
-    {
-      "name": "lib",
-      "displayName": "Library",
-      "description": "Configure and build library",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "lib"
-        },
-        {
-          "type": "build",
-          "name": "lib"
-        }
-      ]
     }
   ]
 }
