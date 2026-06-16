@@ -1,4 +1,4 @@
-name: Build
+name: Build & Test
 
 on:
   workflow_dispatch:
@@ -14,7 +14,7 @@ env:
   CMAKE_TEST_PRESET: test-all
 
 jobs:
-  build:
+  build-and-test:
     name: ${{ matrix.os_name }} ${{ matrix.config }}
     runs-on: ${{ matrix.os }}
     strategy:
