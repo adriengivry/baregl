@@ -9,7 +9,8 @@ on:
       - main
 
 env:
-  CMAKE_PRESET: full-ninja
+  CMAKE_BUILD_PRESET: full-ninja
+  CMAKE_TEST_PRESET: ninja
 
 jobs:
   build:
@@ -19,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        config: [Debug, Release]
+        config: [debug, release]
         include:
           - os: ubuntu-latest
             os_name: Linux
@@ -37,12 +38,10 @@ jobs:
           sudo apt-get install -y libgl-dev libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev xvfb
 
       - name: Configure
-        run: cmake --preset ${{ env.CMAKE_PRESET }}
-          -DCMAKE_BUILD_TYPE=${{ matrix.config }}
-          -DGLFW_BUILD_WAYLAND=OFF
+        run: cmake --preset ${{ env.CMAKE_BUILD_PRESET }}-${{ matrix.config }} -DGLFW_BUILD_WAYLAND=OFF
 
       - name: Build
-        run: cmake --build --preset ${{ env.CMAKE_PRESET }}
+        run: cmake --build --preset ${{ env.CMAKE_BUILD_PRESET }}-${{ matrix.config }}
 
       - name: Install Mesa (Windows)
         if: runner.os == 'Windows'
@@ -52,8 +51,8 @@ jobs:
 
       - name: Test (Linux)
         if: runner.os == 'Linux'
-        run: xvfb-run -a ctest --preset ${{ env.CMAKE_PRESET }}
+        run: xvfb-run -a ctest --preset ${{ env.CMAKE_TEST_PRESET }}-${{ matrix.config }}
 
       - name: Test (Windows)
         if: runner.os == 'Windows'
-        run: ctest --preset ${{ env.CMAKE_PRESET }}
+        run: ctest --preset ${{ env.CMAKE_TEST_PRESET }}-${{ matrix.config }}
