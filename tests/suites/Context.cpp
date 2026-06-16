@@ -101,7 +101,7 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET(CULL_FACE_MODE) == ECullFace::FRONT_AND_BACK );
 		REQUIRE( GET_WORKS(FRONT_FACE) );
 		REQUIRE( GET(POLYGON_SMOOTH) == false ); // TODO: How do we enable that??
-		REQUIRE( GET_WORKS(POLYGON_MODE) );
+		REQUIRE( GET(POLYGON_MODE) == ERasterizationMode::FILL );
 		REQUIRE( GET(POLYGON_OFFSET_FACTOR) == 0.0f );
 		REQUIRE( GET(POLYGON_OFFSET_UNITS) == 0.0f );
 		REQUIRE( GET(POLYGON_OFFSET_POINT) == false );

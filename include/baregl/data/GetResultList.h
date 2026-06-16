@@ -47,7 +47,7 @@
 	X(CULL_FACE_MODE, int, baregl::data::FixedCount<1>, NOT_INDEXED, types::ECullFace) \
 	X(FRONT_FACE, int, baregl::data::FixedCount<1>, NOT_INDEXED, int) \
 	X(POLYGON_SMOOTH, bool, baregl::data::FixedCount<1>, NOT_INDEXED, bool) \
-	X(POLYGON_MODE, int, baregl::data::FixedCount<2>, NOT_INDEXED, int) \
+	X(POLYGON_MODE, int, baregl::data::FixedCount<2>, NOT_INDEXED, types::ERasterizationMode) \
 	X(POLYGON_OFFSET_FACTOR, float, baregl::data::FixedCount<1>, NOT_INDEXED, float) \
 	X(POLYGON_OFFSET_UNITS, float, baregl::data::FixedCount<1>, NOT_INDEXED, float) \
 	X(POLYGON_OFFSET_POINT, bool, baregl::data::FixedCount<1>, NOT_INDEXED, bool) \

@@ -30,6 +30,7 @@
 #include <baregl/types/EPixelDataType.h>
 #include <baregl/types/EOperation.h>
 #include <baregl/types/EProvokingVertexConvention.h>
+#include <baregl/types/ERasterizationMode.h>
 
 namespace baregl::data
 {
