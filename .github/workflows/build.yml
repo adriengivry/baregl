@@ -48,7 +48,7 @@ jobs:
         if: runner.os == 'Windows'
         uses: f3d-app/install-mesa-windows-action@v1
         with:
-          path: ${{github.workspace}}/build/${{ env.CMAKE_CONFIGURE_PRESET }}/bin/${{ matrix.config }}/tests
+          path: ${{github.workspace}}/build/bin/${{ matrix.config }}/tests
 
       - name: Test (Linux)
         if: runner.os == 'Linux'
