@@ -9,7 +9,7 @@
     {
       "name": "base",
       "hidden": true,
-      "binaryDir": "${sourceDir}/build"
+      "binaryDir": "${sourceDir}/build/${presetName}"
     },
     {
       "name": "dev",
@@ -45,7 +45,6 @@
     },
     {
       "name": "dev-all",
-      "targets": ["examples", "tests"],
       "configurePreset": "dev",
       "configuration": "Debug"
     },
@@ -99,8 +98,27 @@
       ]
     },
     {
+      "name": "tests-and-examples",
+      "displayName": "Tests & Examples",
+      "description": "Configure and build tests & examples, then run all tests",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "dev"
+        },
+        {
+          "type": "build",
+          "name": "dev-all"
+        },
+        {
+          "type": "test",
+          "name": "test-all"
+        }
+      ]
+    },
+    {
       "name": "lib",
-      "displayName": "lib",
+      "displayName": "Library",
       "description": "Configure and build library",
       "steps": [
         {

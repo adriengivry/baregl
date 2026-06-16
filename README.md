@@ -78,7 +78,7 @@ program.Unbind();
 ```bash
 git clone https://github.com/adriengivry/baregl
 cd baregl
-cmake --workflow --preset full-debug
+cmake --workflow --preset tests-and-examples
 ```
 
 > [!TIP]
@@ -87,7 +87,7 @@ cmake --workflow --preset full-debug
 > cmake --list-presets all
 > ```
 
-## CMake Quick Start
+## CMake Integration Quick Start
 Create a new C++ project with `glfw`, `glm`, and `baregl` in a few seconds with this quick start `CMakeLists.txt`.
 
 **Example project structure:**
