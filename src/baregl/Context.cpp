@@ -290,11 +290,9 @@ namespace baregl
 
 		if (error == 0)
 		{
-			BAREGL_LOG_ERROR("GLAD failed to initialize");
+			BAREGL_LOG_ERROR("GLAD failed to initialize.");
 			return;
 		}
-
-		BAREGL_LOG_INFO("OpenGL context initialized.");
 
 		if (p_desc.debug)
 		{
@@ -302,6 +300,8 @@ namespace baregl
 			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 			glDebugMessageCallback(GLDebugMessageCallback, nullptr);
 		}
+
+		BAREGL_LOG_INFO("BareGL context initialized.");
 	}
 
 	Context::~Context()
