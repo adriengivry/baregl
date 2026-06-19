@@ -280,7 +280,7 @@ namespace
 
 namespace baregl
 {
-	Context::Context(const baregl::data::ContextDesc& p_desc)
+	Context::Context()
 	{
 		BAREGL_ASSERT(g_contextCount == 0, "A context already exists. BareGL currently only supports a single context.");
 
