@@ -536,7 +536,7 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET(COPY_WRITE_BUFFER_BINDING) == 0 );
 		REQUIRE( GET(RESET_NOTIFICATION_STRATEGY) );
 		REQUIRE( GET(TEXTURE_BUFFER_BINDING) == 0 );
-		REQUIRE( GET(TEXTURE_CUBE_MAP_SEAMLESS) == true ); // Always true, since it's enabled in baregl::Context (for now)
+		REQUIRE( GET(TEXTURE_CUBE_MAP_SEAMLESS) == false );
 		REQUIRE( GET_WORKS(TIMESTAMP) );
 	});
 }
