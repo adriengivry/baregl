@@ -20,6 +20,7 @@
 #include <baregl/types/EPrimitiveMode.h>
 #include <baregl/types/ERasterizationMode.h>
 #include <baregl/types/ERenderingCapability.h>
+#include <vector>
 
 namespace baregl
 {
@@ -97,8 +98,9 @@ namespace baregl
 		* @param p_vertexCount The number of vertices to render.
 		* @param p_instances The number of instances to render.
 		*/
-		void DrawArraysInstanced(types::EPrimitiveMode p_primitiveMode, uint32_t p_vertexCount, uint32_t p_instances);
 
+
+		void DrawArraysInstanced(types::EPrimitiveMode p_primitiveMode, uint32_t p_vertexCount, uint32_t p_instances);
 		/**
 		* Dispatches the current active program for execution.
 		* @note only applicable for compute shaders.
@@ -108,11 +110,38 @@ namespace baregl
 		*/
 		void DispatchCompute(uint32_t p_x, uint32_t p_y, uint32_t p_z) const;
 
+				/**
+		* Dispatches the current active program for execution.
+		* @note only applicable for compute shaders.
+		* @param p_x Number of groups in the X dimension
+		* @param p_y Number of groups in the Y dimension
+		* @param p_z Number of groups in the Z dimension
+		*/
+		void DispatchCompute(uint32_t p_x, uint32_t p_y, uint32_t p_z) const;
+
+		/**
+		* Enables OpenGL debug message streams and applies custom filters.
+		* @param p_filteredMessageIds List of OpenGL error/warning IDs to mute
+		*/
+		void EnableDebugMessages(const std::vector<uint32_t>& p_filteredMessageIds = {});
+
+		/**
+		* Disables OpenGL debug message streams entirely.
+		*/
+		void DisableDebugMessages();
+
 		/**
 		* Defines a barrier ordering the memory transactions issued prior to the command
 		* relative to those issued after the barrier.
 		* @param p_barriers
 		*/
+		void MemoryBarrier(types::EMemoryBarrierFlags p_barriers) const;
+
+		/**
+		* Defines a barrier ordering the memory transactions issued prior to the command
+		* relative to those issued after the barrier.
+		* @param p_barriers
+		*/			
 		void MemoryBarrier(types::EMemoryBarrierFlags p_barriers) const;
 
 		/**
