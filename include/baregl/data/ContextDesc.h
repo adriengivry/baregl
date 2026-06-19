@@ -13,7 +13,6 @@ namespace baregl::data
 	*/
 	struct ContextDesc
 	{
-		bool debug = false;
 	};
 }
 

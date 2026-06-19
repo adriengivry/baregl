@@ -294,11 +294,6 @@ namespace baregl
 			return;
 		}
 
-		if (p_desc.debug)
-		{
-           EnableDebugMessages();
-		}
-
 		BAREGL_LOG_INFO("BareGL context initialized.");
 	}
 
@@ -352,23 +347,11 @@ namespace baregl
 		glDispatchCompute(p_x, p_y, p_z);
 	}
 
-	void Context::EnableDebugMessages(const std::vector<uint32_t>& filteredMessageIds)
+	void Context::EnableDebugMessages()
 	{
 		glEnable(GL_DEBUG_OUTPUT);
 		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 		glDebugMessageCallback(GLDebugMessageCallback, nullptr);
-
-    if (!filteredMessageIds.empty())
-    {
-        	glDebugMessageControl(
-				GL_DONT_CARE,
-				GL_DONT_CARE,
-				GL_DONT_CARE,
-				static_cast<GLsizei>(filteredMessageIds.size()),
-				filteredMessageIds.data(),
-				GL_FALSE
-        	);
-    	}
 	}
 
 	void Context::DisableDebugMessages()
@@ -377,7 +360,6 @@ namespace baregl
 		glDisable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 		glDebugMessageCallback(nullptr, nullptr);
 	}
-
 
 	void Context::MemoryBarrier(types::EMemoryBarrierFlags p_barriers) const
 	{

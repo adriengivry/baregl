@@ -12,7 +12,8 @@
 void RunFramebufferExample(GLFWwindow* p_window)
 {
 	// Graphics context
-	baregl::Context context({.debug = true});
+	baregl::Context context;
+	context.EnableDebugMessages();
 
 	// Triangle data
 	const float vertices[] = {

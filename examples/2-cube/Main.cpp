@@ -13,7 +13,8 @@
 void RunCubeExample(GLFWwindow* p_window)
 {
 	// Graphics context
-	baregl::Context context({.debug = true});
+	baregl::Context context;
+	context.EnableDebugMessages();
 	context.SetCapability(baregl::types::ERenderingCapability::DEPTH_TEST, true);
 
 	// Cube vertices (position, uv, normal)
