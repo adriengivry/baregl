@@ -8,6 +8,7 @@ It aims to reduce the boilerplate code required to get your modern OpenGL applic
 ```cpp
 // Creating an OpenGL context
 baregl::Context context;
+context.EnableDebugMessages();
 
 // Creating a vertex buffer
 baregl::Buffer vb;

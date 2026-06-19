@@ -21,7 +21,8 @@ struct Particle
 void RunComputeExample(GLFWwindow* p_window)
 {
 	// Graphics context
-	baregl::Context context({.debug = true});
+	baregl::Context context;
+	context.EnableDebugMessages();
 
 	constexpr uint32_t k_particleCount = 4096;
 	std::vector<Particle> particles(k_particleCount); // Heap allocated, due to its size.

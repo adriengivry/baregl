@@ -11,7 +11,8 @@
 void RunTessellationExample(GLFWwindow* p_window)
 {
 	// Graphics context
-	baregl::Context context({.debug = true});
+	baregl::Context context;
+	context.EnableDebugMessages();
 	context.SetCapability(baregl::types::ERenderingCapability::DEPTH_TEST, true);
 	context.SetRasterizationMode(baregl::types::ERasterizationMode::LINE);
 

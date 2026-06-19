@@ -6,7 +6,6 @@
 
 #pragma once
 
-#include <baregl/data/ContextDesc.h>
 #include <baregl/data/GetResult.h>
 #include <baregl/types/EBlendingEquation.h>
 #include <baregl/types/EBlendingFactor.h>
@@ -32,9 +31,8 @@ namespace baregl
 		/**
 		* Initializes BareGL for the currently active OpenGL context.
 		* A valid OpenGL context must already exist and be current on the calling thread.
-		* @param p_desc Settings to use when creating the context
 		*/
-		Context(const baregl::data::ContextDesc& p_desc = {});
+		Context();
 
 		/**
 		* Cleans up BareGL state associated with the current OpenGL context.
@@ -107,6 +105,16 @@ namespace baregl
 		* @param p_z Number of groups in the Z dimension
 		*/
 		void DispatchCompute(uint32_t p_x, uint32_t p_y, uint32_t p_z) const;
+
+		/**
+		* Enables OpenGL debug message streams.
+		*/
+		void EnableDebugMessages();
+
+		/**
+		* Disables OpenGL debug message streams entirely.
+		*/
+		void DisableDebugMessages();
 
 		/**
 		* Defines a barrier ordering the memory transactions issued prior to the command

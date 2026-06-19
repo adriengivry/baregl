@@ -95,11 +95,8 @@ namespace tests::common::boilerplate
 		RunInWindow([&](GLFWwindow* p_window){
 			baregl::debug::SetLogHandler(std::make_unique<ThrowingLogHandler>());
 
-			baregl::Context context(
-				baregl::data::ContextDesc{
-					.debug = true
-				}
-			);
+			baregl::Context context;
+			context.EnableDebugMessages();
 
 			p_callback(p_window, context);
 		});

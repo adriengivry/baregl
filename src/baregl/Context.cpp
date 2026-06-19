@@ -280,7 +280,7 @@ namespace
 
 namespace baregl
 {
-	Context::Context(const baregl::data::ContextDesc& p_desc)
+	Context::Context()
 	{
 		BAREGL_ASSERT(g_contextCount == 0, "A context already exists. BareGL currently only supports a single context.");
 
@@ -292,13 +292,6 @@ namespace baregl
 		{
 			BAREGL_LOG_ERROR("GLAD failed to initialize.");
 			return;
-		}
-
-		if (p_desc.debug)
-		{
-			glEnable(GL_DEBUG_OUTPUT);
-			glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-			glDebugMessageCallback(GLDebugMessageCallback, nullptr);
 		}
 
 		BAREGL_LOG_INFO("BareGL context initialized.");
@@ -352,6 +345,20 @@ namespace baregl
 		);
 
 		glDispatchCompute(p_x, p_y, p_z);
+	}
+
+	void Context::EnableDebugMessages()
+	{
+		glEnable(GL_DEBUG_OUTPUT);
+		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(GLDebugMessageCallback, nullptr);
+	}
+
+	void Context::DisableDebugMessages()
+	{
+		glDisable(GL_DEBUG_OUTPUT);
+		glDisable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+		glDebugMessageCallback(nullptr, nullptr);
 	}
 
 	void Context::MemoryBarrier(types::EMemoryBarrierFlags p_barriers) const

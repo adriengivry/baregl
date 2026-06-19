@@ -10,7 +10,8 @@
 void RunGeometryExample(GLFWwindow* p_window)
 {
 	// Graphics context
-	baregl::Context context({.debug = true});
+	baregl::Context context;
+	context.EnableDebugMessages();
 
 	// Empty vertex array - the geometry shader will generate all vertices
 	baregl::VertexArray va;
