@@ -21,24 +21,23 @@
 #include <baregl/types/ERasterizationMode.h>
 #include <baregl/types/ERenderingCapability.h>
 
-#include <string>
-
 namespace baregl
 {
 	/**
-	* High-level interface for interacting with the OpenGL context.
+	* Manages BareGL state for the currently active OpenGL context.
 	*/
 	class Context final
 	{
 	public:
 		/**
-		* Initializes the OpenGL context.
+		* Initializes BareGL for the currently active OpenGL context.
+		* A valid OpenGL context must already exist and be current on the calling thread.
 		* @param p_desc Settings to use when creating the context
 		*/
 		Context(const baregl::data::ContextDesc& p_desc = {});
 
 		/**
-		* Destructor for the OpenGL context.
+		* Cleans up BareGL state associated with the current OpenGL context.
 		*/
 		~Context();
 
