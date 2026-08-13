@@ -134,10 +134,9 @@ TEST_CASE( "Context::Get return the expected values", "[context]" ) {
 		REQUIRE( GET(SCISSOR_TEST) == false );
 		p_context.SetCapability(ERenderingCapability::SCISSOR_TEST, true);
 		REQUIRE( GET(SCISSOR_TEST) == true );
-		REQUIRE( GET(SCISSOR_BOX)[0] == 0 );
-		REQUIRE( GET(SCISSOR_BOX)[1] == 0 );
-		REQUIRE( GET(SCISSOR_BOX)[2] == 256 ); // Window width
-		REQUIRE( GET(SCISSOR_BOX)[3] == 256 ); // Window height
+		REQUIRE( GET(SCISSOR_BOX) == std::to_array({0,0,256,256}) );
+		p_context.SetScissor(-1, 1, 2, 3);
+		REQUIRE( GET(SCISSOR_BOX) == std::to_array({-1,1,2,3}) );
 		REQUIRE( GET(STENCIL_TEST) == false );
 		p_context.SetCapability(ERenderingCapability::STENCIL_TEST, true);
 		REQUIRE( GET(STENCIL_TEST) == true );
