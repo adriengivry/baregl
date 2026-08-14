@@ -19,6 +19,8 @@
 #include <baregl/types/EPrimitiveMode.h>
 #include <baregl/types/ERasterizationMode.h>
 #include <baregl/types/ERenderingCapability.h>
+#include <initializer_list>
+#include <unordered_set>
 
 namespace baregl
 {
@@ -115,6 +117,14 @@ namespace baregl
 		* Disables OpenGL debug message streams entirely.
 		*/
 		void DisableDebugMessages();
+
+		/**
+		* Specifies a list of OpenGL debug message IDs to ignore.
+		* By default, some driver-specific messages are ignored to reduce noise.
+		* Pass an empty list to enable all messages.
+		* @param p_ids List of debug message IDs to ignore.
+		*/
+		void SetIgnoredDebugMessages(std::initializer_list<uint32_t> p_ids);
 
 		/**
 		* Defines a barrier ordering the memory transactions issued prior to the command
@@ -263,5 +273,8 @@ namespace baregl
 		template<auto PName>
 			requires (data::GetResult<PName>::indexed)
 		data::GetResultType<PName> Get(uint32_t p_index);
+
+private:
+	std::unordered_set<uint32_t> m_ignoredDebugIds = { 131169, 131185, 131218, 131204 };
 	};
 }
