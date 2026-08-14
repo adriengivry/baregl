@@ -230,6 +230,15 @@ namespace baregl
 		void SetColorWriting(bool p_enableRed, bool p_enableGreen, bool p_enableBlue, bool p_enableAlpha);
 
 		/**
+		* Sets the scissor box used by the scissor test.
+		* @param p_x The lower left x-coordinate of the scissor box.
+		* @param p_y The lower left y-coordinate of the scissor box.
+		* @param p_width The width of the scissor box.
+		* @param p_height The height of the scissor box.
+		*/
+		void SetScissor(int32_t p_x, int32_t p_y, uint32_t p_width, uint32_t p_height);
+
+		/**
 		* Sets the viewport transformation parameters.
 		* @param p_x The lower left x-coordinate of the viewport rectangle.
 		* @param p_y The lower left y-coordinate of the viewport rectangle.

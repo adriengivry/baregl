@@ -445,6 +445,11 @@ namespace baregl
 		glColorMask(p_enableRed, p_enableGreen, p_enableBlue, p_enableAlpha);
 	}
 
+	void Context::SetScissor(int32_t p_x, int32_t p_y, uint32_t p_width, uint32_t p_height)
+	{
+		glScissor(p_x, p_y, p_width, p_height);
+	}
+
 	void Context::SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
 	{
 		glViewport(x, y, width, height);
