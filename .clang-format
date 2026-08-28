@@ -1,0 +1,10 @@
+BasedOnStyle: WebKit
+AlignAfterOpenBracket: BlockIndent
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: Empty
+BinPackParameters: true
+BreakBeforeBraces: Allman
+ColumnLimit: 80
+NamespaceIndentation: All
+TabWidth: 4
+UseTab: Always
